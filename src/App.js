@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import './App.css';
 import Mapper from './components/Mapper/Mapper';
 
-function App () {
+function App() {
   const [coords, setCoords] = useState({
-    location :{
+    location: {
       lat: 42.6976,
-      lng: 2.8954
+      lng: 2.8954,
     },
-    haveUserLocation:false,
+    haveUserLocation: false,
     zoom: 8,
   });
 
-  const position = [coords.location.lat, coords.location.lng]
+  const position = [coords.location.lat, coords.location.lng];
 
   return (
     <div className="App">
