@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Mapper from "./components/Mapper/Mapper";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
