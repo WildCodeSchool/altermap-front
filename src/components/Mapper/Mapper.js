@@ -11,7 +11,7 @@ function Mapper({ position, zoom }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <ZoomControl position="topright" />
+      <ZoomControl position="topright" className="controls" />
 
       <BoxZoomControl
         position="topright"
