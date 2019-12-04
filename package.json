@@ -1,9 +1,10 @@
 {
-  "name": "leaflet-test",
+  "name": "altermap-front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "leaflet": "^1.6.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-leaflet": "^2.6.0",
@@ -16,9 +17,19 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "airbnb"],
+    "extends": [
+      "react-app",
+      "airbnb"
+    ],
     "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js"
+          ]
+        }
+      ]
     }
   },
   "browserslist": {
