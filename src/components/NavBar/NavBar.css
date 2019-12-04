@@ -1,0 +1,51 @@
+/*Creation of variables*/
+:root {
+    --navBar-color: #ada8a8;
+    --green-altermap:#179A38;
+}
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.NavBar {
+    background-color: var(--navBar-color);
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+/* Style the links inside the navigation bar */
+.NavBar__info {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+/* Change the color of links on hover */
+.NavBar__info:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.NavBar__info:active {
+    background-color: var(--green-altermap);
+    color: white;
+  }
+
+/* media query laptops*/
+@media screen and (min-width: 1000px) {
+
+    .NavBar {
+        height: 100%;
+        width: 60px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        padding-top: 60px;
+    }
+}
