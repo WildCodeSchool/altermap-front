@@ -1,0 +1,9 @@
+
+.Logo__wrapper {
+    width: 5rem;
+    height: 3rem;
+    font-size: 14px;
+    background: url('./logo_altermap.png') no-repeat;
+    background-size: contain;
+    margin: 5px;
+}
