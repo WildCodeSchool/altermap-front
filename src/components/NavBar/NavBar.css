@@ -41,11 +41,15 @@
 
     .NavBar {
         height: 100%;
-        width: 60px;
+        width: 40px;
         position: fixed;
         z-index: 1;
-        top: 0;
         left: 0;
         padding-top: 60px;
     }
+
+    .NavBar__info {
+        padding: 14px 17px;
+    }
+
 }
