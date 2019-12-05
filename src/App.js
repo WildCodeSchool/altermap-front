@@ -4,7 +4,10 @@ import { Switch, Route } from 'react-router-dom';
 import Mapper from './components/Mapper/Mapper';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
+<<<<<<< HEAD
 import Info from './components/Info/Info';
+=======
+>>>>>>> Add control bar on right and border buttons
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);

@@ -16,16 +16,28 @@
   border: none !important;
   margin-right: .625rem !important;
   padding: 0 !important;
-  width: 26px !important;
-  height: 26px !important;
+  /* width: 30px !important;
+  height: 30px !important; */
 }
 
 .leaflet-control, .leaflet-bar{
   width: 30px !important;
   border: none !important;
   box-shadow: none !important;
+  z-index: 1 !important;
 }
 
 .leaflet-bottom {
   display: none !important;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-edit-edit {
+  background: url('./pencil-alt-solid.svg') no-repeat center !important;
+  color:red !important;
+  background-color: #FFF !important;
+  background-size: 70% !important;
+}
+
+.leaflet-draw-toolbar, .leaflet-control-zoom, #box-zoom-button {
+  border:#179A38 solid 2px !important;
 }

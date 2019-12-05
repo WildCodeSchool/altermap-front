@@ -18,3 +18,8 @@ html {
   --NavBar-height: 3.125rem;
   --primary-color:#179A38;
 }
+
+
+.sr-only {
+  display: none;
+}
