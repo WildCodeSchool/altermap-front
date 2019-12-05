@@ -1,11 +1,14 @@
 import React from 'react';
 import './NavBar.css';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 function NavBar() {
   return (
     <div className="NavBar">
       <a href="#" className="NavBar__info">
-      <i className="fas fa-info"></i></a>
+        <Icon icon={faInfo} />
+      </a>
     </div>
   );
 }

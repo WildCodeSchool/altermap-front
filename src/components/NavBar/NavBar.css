@@ -1,17 +1,12 @@
-/*Creation of variables*/
-:root {
-    --navBar-color: rgba(237, 235, 235, .5);
-    --green-altermap:#179A38;
-}
-
 /* Place the navbar at the bottom of the page, and make it stick */
 .NavBar {
-    background-color: var(--navBar-color);
+    background-color: var(--NavBar-color);
     overflow: hidden;
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
+    z-index: 1;
+}
 
 /* Style the links inside the navigation bar */
 .NavBar__info {
@@ -19,10 +14,10 @@
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     text-decoration: none;
-    font-size: 17px;
-  }
+    font-size: 1.0625rem;
+}
 
 /* Change the color of links on hover */
 .NavBar__info:hover {
@@ -32,24 +27,22 @@
 
 /* Add a color to the active/current link */
 .NavBar__info:active {
-    background-color: var(--green-altermap);
+    background-color: var(--primary-color);
     color: white;
-  }
+}
 
-/* media query laptops*/
-@media screen and (min-width: 1000px) {
+/* media query laptops */
+@media (min-width: 62em) {
 
     .NavBar {
-        height: 100%;
-        width: 40px;
-        position: fixed;
-        z-index: 1;
+        height: calc(100% - var(--Header-height));
+        width: 2.5rem;
         left: 0;
-        padding-top: 60px;
+        top: var(--Header-height);
     }
 
     .NavBar__info {
-        padding: 14px 17px;
+        padding: 0.875rem 1.0625rem;
     }
 
 }
