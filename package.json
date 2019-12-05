@@ -30,7 +30,8 @@
             ".js"
           ]
         }
-      ]
+      ],
+      "react/prop-types": [0]
     }
   },
   "browserslist": {
