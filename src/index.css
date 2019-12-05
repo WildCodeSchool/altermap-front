@@ -1,13 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import '~normalize.css';
+@import '~leaflet/dist/leaflet.css';
+ 
+html {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+:root {
+  --Logo-height: 3rem;
+  --Logo-margin: .3125rem;
+  --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
+  --NavBar-color: rgba(0, 0, 0, 0.5);
+  --NavBar-height: 3.125rem;
+  --primary-color:#179A38;
 }
