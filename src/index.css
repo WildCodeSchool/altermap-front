@@ -9,3 +9,8 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+:root{
+  --Logo-height: 3rem;
+  --Logo-margin: .3125rem;
+  --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
+}
