@@ -6,7 +6,6 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 
-
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   return (
