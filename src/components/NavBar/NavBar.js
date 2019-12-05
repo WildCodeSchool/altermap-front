@@ -2,13 +2,14 @@ import React from 'react';
 import './NavBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
-function NavBar() {
+function NavBar({ info, setInfo }) {
   return (
     <div className="NavBar">
-      <a href="#" className="NavBar__info">
-        <Icon icon={faInfo} />
-      </a>
+      <Link to="/info" className="NavBar__info" onClick={() => setInfo(!info)}>
+        <Icon icon={faInfo} className="NavBar__icon" />
+      </Link>
     </div>
   );
 }
