@@ -3,9 +3,6 @@
   width: 100vw;
   z-index: 0;
 }
-.leaflet-control{
-  border: none !important;
-}
 
 .leaflet-right{
   margin-top: calc(3rem + 25px);
@@ -18,9 +15,9 @@
   padding: 0 !important;
 }
 
-.controls, #box-zoom-button{
+.leaflet-control{
   width: 30px !important;
-  height: 30px !important;
+  border: none !important;
 }
 .leaflet-bottom{
   display: none !important;
