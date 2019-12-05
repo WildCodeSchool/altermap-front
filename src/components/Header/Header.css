@@ -1,5 +1,5 @@
 .Header {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--NavBar-color);
     display: flex;
     justify-content: space-between;
     align-items: center;

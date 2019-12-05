@@ -1,8 +1,5 @@
 .Info {
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background-color: white;
     align-items: center;
     position: absolute;
     bottom: var(--NavBar-height);
@@ -10,5 +7,35 @@
     z-index: 1;
     overflow-y:scroll;
     overflow-x:hidden;
-    height: calc(50vh - var(--NavBar-height));
+    height: calc(80vh - var(--NavBar-height));
+    font-size: 1rem;
+}
+
+.Info__header {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.9375rem;
+}
+
+.Info__header-title {
+    margin-bottom: 0;
+}
+
+.Info__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 1rem;
+    padding-left: 1rem; 
+    text-align: justify;
+}
+
+.Info__icon {
+    position: absolute;
+    right: 0;
+}
+
+.Info__link {
+    color: #179A38;
+    padding-bottom: 0.9375rem;
 }

@@ -1,6 +1,6 @@
 /* Place the navbar at the bottom of the page, and make it stick */
 .NavBar {
-    background-color: var(--NavBar-color);
+    background-color: rgb(255, 255, 255, .8);
     overflow: hidden;
     position: fixed;
     bottom: 0;
@@ -32,6 +32,9 @@
     color: white;
 }
 
+.NavBar__icon{
+    color: #179A38;
+}
 /* media query laptops */
 @media (min-width: 62em) {
 

@@ -13,7 +13,7 @@ html {
   --Logo-height: 3rem;
   --Logo-margin: .3125rem;
   --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
-  --NavBar-color: rgba(0, 0, 0, 0.2);
+  --NavBar-color: rgba(0, 0, 0, 0.5);
   --NavBar-height: 3.125rem;
   --primary-color:#179A38;
 }

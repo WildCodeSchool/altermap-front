@@ -8,7 +8,7 @@ function NavBar({ info, setInfo }) {
   return (
     <div className="NavBar">
       <Link to="/info" className="NavBar__info" onClick={() => setInfo(!info)}>
-        <Icon icon={faInfo} />
+        <Icon icon={faInfo} className="NavBar__icon" />
       </Link>
     </div>
   );

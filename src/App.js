@@ -17,7 +17,7 @@ function App() {
       <NavBar setInfo={setIsInfoOpen} info={isInfoOpen} />
       {/* Elements to implement into Router */}
       <Switch>
-        <Route exact path={isInfoOpen ? '/info' : '/'}>
+        <Route exact path={isInfoOpen ? '/' : '/info'}>
           <Info />
         </Route>
       </Switch>
