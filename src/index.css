@@ -1,5 +1,4 @@
 @import '~normalize.css';
-
 @import '~leaflet/dist/leaflet.css';
  
 html {
@@ -9,8 +8,11 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-:root{
+
+:root {
   --Logo-height: 3rem;
   --Logo-margin: .3125rem;
   --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
+  --NavBar-color: rgba(0, 0, 0, 0.2);
+  --primary-color:#179A38;
 }
