@@ -16,9 +16,11 @@
   border: none !important;
   margin-right: .625rem !important;
   padding: 0 !important;
+  width: 26px !important;
+  height: 26px !important;
 }
 
-.leaflet-control {
+.leaflet-control, .leaflet-bar{
   width: 30px !important;
   border: none !important;
   box-shadow: none !important;

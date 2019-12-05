@@ -7,7 +7,6 @@ import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 
-
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
