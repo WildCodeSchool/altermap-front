@@ -1,14 +1,14 @@
-import React from "react";
-import "./Info.css";
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import Logo from "../Logo/Logo";
+import React from 'react';
+import './Info.css';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 
-function Info() {
+function Info({ info, setInfo }) {
   return (
     <div className="Info">
-      <Link to="/">
+      <Link to="/" onClick={() => { setInfo(!info); console.log('poire'); }}>
         <Icon className="Info__icon" icon={faWindowClose} />
       </Link>
       <div className="Info__header">
