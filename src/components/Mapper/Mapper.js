@@ -5,8 +5,6 @@ import { EditControl } from "react-leaflet-draw";
 import L from "leaflet";
 import "./Mapper.css";
 
-// Array(Array(localStorage.getItem('polygonCoords').split('/').map((x) => x.split(','))))
-
 function Mapper({ position, zoom }) {
   const getGeoJson = () => ({
     type: "FeatureCollection",
@@ -80,9 +78,6 @@ function Mapper({ position, zoom }) {
                   : ""
               }${coords.join("/")}`
             );
-          }}
-          onDeleteStop={e => {
-            console.log(e);
           }}
           edit={{ remove: true }}
           draw={{
