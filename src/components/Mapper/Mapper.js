@@ -7,8 +7,6 @@ import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
 
-// Array(Array(localStorage.getItem('polygonCoords').split('/').map((x) => x.split(','))))
-
 function Mapper({ position, zoom }) {
   const getGeoJson = () => ({
     type: 'FeatureCollection',
@@ -59,7 +57,7 @@ function Mapper({ position, zoom }) {
         position="topright"
         sticky
       />
-      <FeatureGroup ref={(reactFGref) => { localStorage.getItem('polygonCoords') && featureGroupReady(reactFGref); }}>
+      <FeatureGroup ref={localStorage.getItem('polygonCoords') ? (reactFGref) => featureGroupReady(reactFGref) : ''}>
         <EditControl
           position="topright"
           onEdited={(e) => {
@@ -72,9 +70,6 @@ function Mapper({ position, zoom }) {
           onCreated={(e) => {
             const coords = e.layer.editing.latlngs[0][0].map((x) => [x.lng, x.lat]);
             localStorage.setItem('polygonCoords', `${localStorage.getItem('polygonCoords') ? `${localStorage.getItem('polygonCoords')}#` : ''}${coords.join('/')}`);
-          }}
-          onDeleteStop={(e) => {
-            console.log(e);
           }}
           edit={{ remove: true }}
           draw={{
