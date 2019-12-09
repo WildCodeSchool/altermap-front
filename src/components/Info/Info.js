@@ -8,7 +8,7 @@ import Logo from '../Logo/Logo';
 function Info({ info, setInfo }) {
   return (
     <div className="Info">
-      <Link to="/" onClick={() => { setInfo(!info); console.log('poire'); }}>
+      <Link to="/" onClick={() => {setInfo(!info)}}>
         <Icon className="Info__icon" icon={faWindowClose} />
       </Link>
       <div className="Info__header">
