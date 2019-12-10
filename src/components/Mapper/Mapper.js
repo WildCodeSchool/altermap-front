@@ -16,7 +16,9 @@ function Mapper({ position, zoom }) {
           .split("#")
           .map(polygon => ({
             type: "Feature",
-            properties: {},
+            properties: {
+              id: "1"
+            },
             geometry: {
               type: "Polygon",
               coordinates: [
@@ -34,6 +36,7 @@ function Mapper({ position, zoom }) {
     leafletGeoJSON.eachLayer(layer => {
       leafletFG.addLayer(layer);
     });
+    reactFGref.getLayers();
   };
 
   return (
@@ -51,21 +54,18 @@ function Mapper({ position, zoom }) {
 
       <BoxZoomControl position="topright" sticky />
       <FeatureGroup
-        ref={reactFGref => {
+        ref={
           localStorage.getItem("polygonCoords") &&
-            featureGroupReady(reactFGref);
-        }}
+          (reactFGref => featureGroupReady(reactFGref))
+        }
       >
         <EditControl
           position="topright"
           onEdited={e => {
-            e.layers.eachLayer(a => {
-              this.props.updatePlot({
-                feature: a.toGeoJSON()
-              });
-            });
+            console.log(e);
           }}
           onCreated={e => {
+            console.log(e);
             const coords = e.layer.editing.latlngs[0][0].map(x => [
               x.lng,
               x.lat
@@ -78,6 +78,9 @@ function Mapper({ position, zoom }) {
                   : ""
               }${coords.join("/")}`
             );
+          }}
+          onDeleted={e => {
+            console.log(e);
           }}
           edit={{ remove: true }}
           draw={{
