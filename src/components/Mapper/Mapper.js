@@ -36,7 +36,6 @@ function Mapper({ position, zoom }) {
     leafletGeoJSON.eachLayer(layer => {
       leafletFG.addLayer(layer);
     });
-    reactFGref.getLayers();
   };
 
   return (
