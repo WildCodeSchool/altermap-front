@@ -11,11 +11,9 @@ function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   return (
     <div className="App">
-      {/* Fixed elements */}
       <Header />
       <Mapper position={[42.6976, 2.8954]} zoom={8} />
       <NavBar setInfo={setIsInfoOpen} info={isInfoOpen} />
-      {/* Elements to implement into Router */}
       <Switch>
         <Route exact path="/info">
           <Info setInfo={setIsInfoOpen} info={isInfoOpen} />
