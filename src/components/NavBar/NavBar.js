@@ -10,12 +10,14 @@ function NavBar({ close, info }) {
       <Link
         to={info ? "/" : "/info"}
         className="NavBar__info"
-        onClick={() => close()}
+        onClick={() => setInfo(!info)}
       >
-        <a href="/" className="NavBar__info">
-          <Icon icon={faInfo} />
-        </a>
+        <Icon icon={faInfo} className="NavBar__icon" />
       </Link>
+
+      <a href="#" onClick={() => window.location.reload()}>
+        Change
+      </a>
     </div>
   );
 }
