@@ -4,7 +4,7 @@ import { BoxZoomControl } from 'react-leaflet-box-zoom';
 // import L from 'leaflet';
 import './Mapper.css';
 
-function Mapper({ position, zoom }) {
+function Mapper({ position, zoom, close }) {
   return (
     <Map className="Mapper" center={position} zoom={zoom} zoomControl={false}>
       <TileLayer
