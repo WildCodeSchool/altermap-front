@@ -2,7 +2,6 @@ import React from 'react';
 import './ConstructionSiteForm.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 function ConstructionSiteForm({ close }) {
   return (
