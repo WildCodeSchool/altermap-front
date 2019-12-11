@@ -14,10 +14,10 @@ function Mapper({ position, zoom }) {
         features: localStorage
           .getItem("polygonCoords")
           .split("#")
-          .map(polygon => ({
+          .map((polygon, index) => ({
             type: "Feature",
             properties: {
-              id: "1"
+              id: index
             },
             geometry: {
               type: "Polygon",
@@ -73,13 +73,33 @@ function Mapper({ position, zoom }) {
               "polygonCoords",
               `${
                 localStorage.getItem("polygonCoords")
-                  ? `${localStorage.getItem("polygonCoords")}#`
-                  : ""
-              }${coords.join("/")}`
+                  ? `${localStorage.getItem("polygonCoords")}#${coords.join(
+                      "/"
+                    )}`
+                  : `${coords.join("/")}`
+              }`
             );
           }}
           onDeleted={e => {
+            const polygonsDelete = Object.keys(e.layers._layers);
             console.log(e);
+            polygonsDelete.map(polygon => {
+              const { id } = e.layers._layers[polygon].feature.properties;
+              const { coordinates } = e.layers._layers[
+                polygon
+              ].feature.geometry;
+              const localPolygon = localStorage
+                .getItem("polygonCoords")
+                .split("#");
+              const concernedPolygon = localPolygon.map(item =>
+                item.split("/").map(x => x.split(",").map(y => Number(y)))
+              );
+              console.log(
+                JSON.stringify(concernedPolygon[id]) ===
+                  JSON.stringify(coordinates[0])
+              );
+              console.log("Array polygon before :", concernedPolygon);
+            });
           }}
           edit={{ remove: true }}
           draw={{
