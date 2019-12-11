@@ -10,7 +10,7 @@ function NavBar({ close, info }) {
       <Link
         to={info ? "/" : "/info"}
         className="NavBar__info"
-        onClick={() => setInfo(!info)}
+        onClick={() => close()}
       >
         <Icon icon={faInfo} className="NavBar__icon" />
       </Link>
