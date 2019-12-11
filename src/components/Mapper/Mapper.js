@@ -78,13 +78,13 @@ function Mapper({ position, zoom }) {
                 const { id } = e.layers._layers[polygon].feature.properties;
                 const { coordinates } = e.layers._layers[polygon].feature.geometry;
                 const localPolygon = localStorage.getItem('polygonCoords')
-                  .split('#');
-                const concernedPolygon = localPolygon.map((item) => item.split('/')
-                  .map((x) => (x.split(',')
-                    .map((y) => Number(y))
-                  )));
-                console.log(JSON.stringify(concernedPolygon[id]) === JSON.stringify(coordinates[0]));
-                console.log('Array polygon before :', concernedPolygon);
+                  .split('#').map((item) => item.split('/')
+                    .map((x) => (x.split(',')
+                      .map((y) => Number(y))
+                    )));
+                console.log(JSON.stringify(localPolygon[id]) === JSON.stringify(coordinates[0]));
+                console.log('Array polygon before :', localPolygon);
+                const result = localPolygon.splice(id, 1);
               });
             }
           }
