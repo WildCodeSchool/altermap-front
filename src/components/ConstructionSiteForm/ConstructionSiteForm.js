@@ -4,12 +4,10 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-function ConstructionSiteForm() {
+function ConstructionSiteForm({ close }) {
   return (
     <div className="ConstructionSiteForm">
-      <Link to="/" onClick={() => { console.log('Set state to close'); }}>
-        <Icon className="ConstructionSiteForm__icon" icon={faWindowClose} />
-      </Link>
+      <Icon className="ConstructionSiteForm__icon" icon={faWindowClose} onClick={() => close()} />
       <div className="ConstructionSiteForm__header">
         <h1 className="ConstructionSiteForm__header-title">Édition chantier</h1>
       </div>
