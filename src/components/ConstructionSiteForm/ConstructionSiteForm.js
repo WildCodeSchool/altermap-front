@@ -1,21 +1,25 @@
-import React from 'react';
-import './ConstructionSiteForm.css';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import "./ConstructionSiteForm.css";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 
 function ConstructionSiteForm({ close }) {
   return (
     <div className="ConstructionSiteForm">
-      <Icon className="ConstructionSiteForm__icon" icon={faWindowClose} onClick={() => close()} />
+      <Icon
+        className="ConstructionSiteForm__icon"
+        icon={faWindowClose}
+        onClick={() => window.location.reload()}
+      />
       <div className="ConstructionSiteForm__header">
         <h1 className="ConstructionSiteForm__header-title">Édition chantier</h1>
       </div>
       <div className="ConstructionSiteForm__content">
         <form
           className="ConstructionSiteForm__form"
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
-            console.log('Send data to database');
+            console.log("Send data to database");
           }}
         >
           <label htmlFor="constructionName">Nom du chantier</label>

@@ -4,8 +4,9 @@ import { BoxZoomControl } from "react-leaflet-box-zoom";
 import { EditControl } from "react-leaflet-draw";
 import L from "leaflet";
 import "./Mapper.css";
+import ConstructionSiteForm from "../ConstructionSiteForm/ConstructionSiteForm";
 
-function Mapper({ position, zoom }) {
+function Mapper({ position, zoom, close }) {
   const getGeoJson = () => ({
     type: "FeatureCollection",
     features: [
@@ -69,16 +70,18 @@ function Mapper({ position, zoom }) {
               x.lng,
               x.lat
             ]);
-            localStorage.setItem(
-              "polygonCoords",
-              `${
-                localStorage.getItem("polygonCoords")
-                  ? `${localStorage.getItem("polygonCoords")}#${coords.join(
-                      "/"
-                    )}`
-                  : `${coords.join("/")}`
-              }`
-            );
+
+            // localStorage.setItem(
+            //   "polygonCoords",
+            //   `${
+            //     localStorage.getItem("polygonCoords")
+            //       ? `${localStorage.getItem("polygonCoords")}#${coords.join(
+            //           "/"
+            //         )}`
+            //       : `${coords.join("/")}`
+            //   }`
+            // );
+            return close();
           }}
           onDeleted={e => {
             const polygonsDelete = Object.keys(e.layers._layers);
