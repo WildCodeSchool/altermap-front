@@ -5,6 +5,7 @@ import Mapper from './components/Mapper/Mapper';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
+import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Info setInfo={setIsInfoOpen} info={isInfoOpen} />
         </Route>
       </Switch>
+      <ConstructionSiteForm />
     </div>
   );
 }
