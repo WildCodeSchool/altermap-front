@@ -15,11 +15,11 @@ function Mapper({ position, zoom }) {
         type: 'FeatureCollection',
         features:
           localStorage.getItem('polygonCoords').split('#').map(
-            (polygon) => (
+            (polygon, index) => (
               {
                 type: 'Feature',
                 properties: {
-                  id: '1',
+                  id: index,
                 },
                 geometry: {
                   type: 'Polygon',
@@ -68,11 +68,24 @@ function Mapper({ position, zoom }) {
           onCreated={(e) => {
             console.log(e);
             const coords = e.layer.editing.latlngs[0][0].map((x) => [x.lng, x.lat]);
-            localStorage.setItem('polygonCoords', `${localStorage.getItem('polygonCoords') ? `${localStorage.getItem('polygonCoords')}#` : ''}${coords.join('/')}`);
+            localStorage.setItem('polygonCoords', `${localStorage.getItem('polygonCoords') ? `${localStorage.getItem('polygonCoords')}#${coords.join('/')}` : `${coords.join('/')}`}`);
           }}
           onDeleted={
             (e) => {
+              const polygonsDelete = Object.keys(e.layers._layers);
               console.log(e);
+              polygonsDelete.map((polygon) => {
+                const { id } = e.layers._layers[polygon].feature.properties;
+                const { coordinates } = e.layers._layers[polygon].feature.geometry;
+                const localPolygon = localStorage.getItem('polygonCoords')
+                  .split('#');
+                const concernedPolygon = localPolygon.map((item) => item.split('/')
+                  .map((x) => (x.split(',')
+                    .map((y) => Number(y))
+                  )));
+                console.log(JSON.stringify(concernedPolygon[id]) === JSON.stringify(coordinates[0]));
+                console.log('Array polygon before :', concernedPolygon);
+              });
             }
           }
           edit={{ remove: true }}
