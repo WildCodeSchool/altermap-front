@@ -7,33 +7,29 @@ import L from "leaflet";
 import "./Mapper.css";
 import ConstructionSiteForm from "../ConstructionSiteForm/ConstructionSiteForm";
 
-function Mapper({ position, zoom, close }) {
-  const [constructionSites, setConstructionSites] = useState([]);
+function Mapper({ position, zoom, close, setTempCoords }) {
+  const [constructionSites, setConstructionSites] = useState(null);
   useEffect(() => {
     axios
       .get("/api/v1/construction-sites")
       .then(response => setConstructionSites(response.data));
   }, []);
+
   const getGeoJson = () => ({
     type: "FeatureCollection",
     features: [
       {
         type: "FeatureCollection",
-        features: localStorage
-          .getItem("polygonCoords")
-          .split("#")
-          .map((polygon, index) => ({
-            type: "Feature",
-            properties: {
-              id: index
-            },
-            geometry: {
-              type: "Polygon",
-              coordinates: [
-                polygon.split("/").map(x => x.split(",").map(y => Number(y)))
-              ]
-            }
-          }))
+        features: constructionSites.map((polygon, index) => ({
+          type: "Feature",
+          properties: {
+            id: polygon.id
+          },
+          geometry: {
+            type: "Polygon",
+            coordinates: [polygon.coords]
+          }
+        }))
       }
     ]
   });
@@ -56,15 +52,13 @@ function Mapper({ position, zoom, close }) {
       minZoom={1}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      {console.log(constructionSites && constructionSites.map(x => x.coords))}
 
       <ZoomControl position="topright" />
 
       <BoxZoomControl position="topright" sticky />
       <FeatureGroup
-        ref={
-          localStorage.getItem("polygonCoords") &&
-          (reactFGref => featureGroupReady(reactFGref))
-        }
+        ref={constructionSites && (reactFGref => featureGroupReady(reactFGref))}
       >
         <EditControl
           position="topright"
@@ -77,17 +71,7 @@ function Mapper({ position, zoom, close }) {
               x.lng,
               x.lat
             ]);
-
-            // localStorage.setItem(
-            //   "polygonCoords",
-            //   `${
-            //     localStorage.getItem("polygonCoords")
-            //       ? `${localStorage.getItem("polygonCoords")}#${coords.join(
-            //           "/"
-            //         )}`
-            //       : `${coords.join("/")}`
-            //   }`
-            // );
+            setTempCoords(coords);
             return close();
           }}
           onDeleted={e => {
@@ -104,10 +88,6 @@ function Mapper({ position, zoom, close }) {
                 .map(item =>
                   item.split("/").map(x => x.split(",").map(y => Number(y)))
                 );
-              console.log(
-                JSON.stringify(localPolygon[id]) ===
-                  JSON.stringify(coordinates[0])
-              );
               console.log("Array polygon before :", localPolygon);
               const result = localPolygon.splice(id, 1);
             });
