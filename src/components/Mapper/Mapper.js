@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import { BoxZoomControl } from "react-leaflet-box-zoom";
 import { EditControl } from "react-leaflet-draw";
@@ -7,6 +8,12 @@ import "./Mapper.css";
 import ConstructionSiteForm from "../ConstructionSiteForm/ConstructionSiteForm";
 
 function Mapper({ position, zoom, close }) {
+  const [constructionSites, setConstructionSites] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/v1/construction-sites")
+      .then(response => setConstructionSites(response.data));
+  }, []);
   const getGeoJson = () => ({
     type: "FeatureCollection",
     features: [
