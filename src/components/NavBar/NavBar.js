@@ -14,10 +14,6 @@ function NavBar({ close, info }) {
       >
         <Icon icon={faInfo} className="NavBar__icon" />
       </Link>
-
-      <a href="#" onClick={() => window.location.reload()}>
-        Change
-      </a>
     </div>
   );
 }
