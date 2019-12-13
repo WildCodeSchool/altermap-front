@@ -25,12 +25,9 @@ function App() {
         position={[42.6976, 2.8954]}
         zoom={8}
         close={closeForm}
+        tempCoords={tempCoords}
       />
-      {tempCoords ? (
-        <ConstructionSiteForm tempCoords={tempCoords} close={closeForm} />
-      ) : (
-        ""
-      )}
+
       <NavBar close={closeInfo} info={isInfoOpen} />
       {/* Elements to implement into Router */}
       <Switch>

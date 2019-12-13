@@ -87,6 +87,7 @@ function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
               x.lng,
               x.lat
             ]);
+            console.log(coords);
             setTempCoords(coords);
           }}
           // Delétion des polygons
@@ -118,6 +119,9 @@ function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
           }}
         />
       </FeatureGroup>
+      {tempCoords && (
+        <ConstructionSiteForm tempCoords={tempCoords} close={close} />
+      )}
     </Map>
   );
 }
