@@ -1,37 +1,48 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
-import { BoxZoomControl } from "react-leaflet-box-zoom";
-import { EditControl } from "react-leaflet-draw";
-import L from "leaflet";
-import "./Mapper.css";
-import ConstructionSiteForm from "../ConstructionSiteForm/ConstructionSiteForm";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import {
+  Map, TileLayer, ZoomControl, FeatureGroup,
+} from 'react-leaflet';
+import { BoxZoomControl } from 'react-leaflet-box-zoom';
+import { EditControl } from 'react-leaflet-draw';
+import L from 'leaflet';
+import './Mapper.css';
+import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 
-function Mapper({ position, zoom, close, setTempCoords }) {
+function Mapper({
+  position, zoom, close, setTempCoords, tempCoords,
+}) {
+  // Hook des données des polygons
   const [constructionSites, setConstructionSites] = useState(null);
+
+  // UseEffect similaire à componentDidMount
   useEffect(() => {
     axios
-      .get("/api/v1/construction-sites")
-      .then(response => setConstructionSites(response.data));
+      .get('/api/v1/construction-sites')
+      .then((response) => setConstructionSites(response.data));
   }, []);
 
+  // Fonction pour afficher le GeoJson
   const getGeoJson = () => ({
     type: 'FeatureCollection',
     features: [
       {
-        type: "FeatureCollection",
-        features: constructionSites.map((polygon, index) => ({
-          type: "Feature",
-          properties: {
-            id: polygon.id
-          },
-          geometry: {
-            type: "Polygon",
-            coordinates: [polygon.coords]
-          }
-        }))
-      }
-    ]
+        type: 'FeatureCollection',
+        features: constructionSites.map((polygon, index) => {
+          console.log(polygon);
+          return {
+            type: 'Feature',
+            properties: {
+              id: polygon.id,
+            },
+            geometry: {
+              type: 'Polygon',
+              coordinates: [polygon.coords],
+            },
+          };
+        }),
+      },
+    ],
   });
 
   const featureGroupReady = (reactFGref) => {
@@ -48,30 +59,28 @@ function Mapper({ position, zoom, close, setTempCoords }) {
       center={position}
       zoom={zoom}
       zoomControl={false}
-      maxZoom={17}
-      minZoom={1}
+      maxZoom={17} // Set du zoom max
+      minZoom={6} // Set du zoom min
     >
+      {/* Fond de carte */}
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {console.log(constructionSites && constructionSites.map(x => x.coords))}
 
       <ZoomControl position="topright" />
 
-      <BoxZoomControl position="topright" sticky />
+      <BoxZoomControl position="topright" />
+
+      {/* Feature Group qui rassemble les controles de draw */}
       <FeatureGroup
-<<<<<<< HEAD
-        ref={
-          localStorage.getItem('polygonCoords')
-          && ((reactFGref) => featureGroupReady(reactFGref))
-        }
-=======
-        ref={constructionSites && (reactFGref => featureGroupReady(reactFGref))}
->>>>>>> 55c1c3c5429375474e6d3d1795229b1cbe1a72a5
+
+        ref={constructionSites && ((reactFGref) => featureGroupReady(reactFGref))}
       >
         <EditControl
           position="topright"
+          // Edition des polygons
           onEdited={(e) => {
             console.log(e);
           }}
+          // Création des polygons
           onCreated={(e) => {
             console.log(e);
             const coords = e.layer.editing.latlngs[0][0].map((x) => [
@@ -79,7 +88,6 @@ function Mapper({ position, zoom, close, setTempCoords }) {
               x.lat,
             ]);
             setTempCoords(coords);
-            return close();
           }}
           onDeleted={(e) => {
             const polygonsDelete = Object.keys(e.layers._layers);
@@ -90,23 +98,10 @@ function Mapper({ position, zoom, close, setTempCoords }) {
                 polygon
               ].feature.geometry;
               const localPolygon = localStorage
-<<<<<<< HEAD
                 .getItem('polygonCoords')
                 .split('#')
                 .map((item) => item.split('/').map((x) => x.split(',').map((y) => Number(y))));
-              console.log(
-                JSON.stringify(localPolygon[id])
-                  === JSON.stringify(coordinates[0]),
-              );
               console.log('Array polygon before :', localPolygon);
-=======
-                .getItem("polygonCoords")
-                .split("#")
-                .map(item =>
-                  item.split("/").map(x => x.split(",").map(y => Number(y)))
-                );
-              console.log("Array polygon before :", localPolygon);
->>>>>>> 55c1c3c5429375474e6d3d1795229b1cbe1a72a5
               const result = localPolygon.splice(id, 1);
             });
           }}

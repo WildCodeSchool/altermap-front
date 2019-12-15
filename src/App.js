@@ -11,6 +11,7 @@ function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [tempCoords, setTempCoords] = useState(null);
+  const [isSubmit, setIsSubmit] = useState(0);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => setIsInfoOpen(!isInfoOpen);
 
@@ -25,7 +26,7 @@ function App() {
         zoom={8}
         close={closeForm}
       />
-      {isFormOpen ? (
+      {tempCoords ? (
         <ConstructionSiteForm tempCoords={tempCoords} close={closeForm} />
       ) : (
         ''
