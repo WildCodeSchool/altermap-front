@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import {
   Map, TileLayer, ZoomControl, FeatureGroup,
@@ -10,10 +10,14 @@ import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 
 function Mapper({
-  position, zoom, close, setTempCoords, tempCoords,
+  position, zoom, close,
 }) {
   // Hook des données des polygons
-  const [constructionSites, setConstructionSites] = useState(null);
+  const [constructionSites, setConstructionSites] = useState([]);
+  const [tempCoords, setTempCoords] = useState(null);
+
+  // Hook pour faire référence aux layers
+  const featureGroupRef = useRef();
 
   // UseEffect similaire à componentDidMount
   useEffect(() => {
@@ -28,30 +32,29 @@ function Mapper({
     features: [
       {
         type: 'FeatureCollection',
-        features: constructionSites.map((polygon, index) => {
-          console.log(polygon);
-          return {
-            type: 'Feature',
-            properties: {
-              id: polygon.id,
-            },
-            geometry: {
-              type: 'Polygon',
-              coordinates: [polygon.coords],
-            },
-          };
-        }),
+        features: constructionSites.map((polygon) => ({
+          type: 'Feature',
+          properties: {
+            id: polygon.id,
+          },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [polygon.coords],
+          },
+        })),
       },
     ],
   });
 
-  const featureGroupReady = (reactFGref) => {
+
+  useEffect(() => {
+    if (constructionSites.length === 0) { return; }
     const leafletGeoJSON = new L.GeoJSON(getGeoJson());
-    const leafletFG = reactFGref.leafletElement;
+    const leafletFG = featureGroupRef.current.leafletElement;
     leafletGeoJSON.eachLayer((layer) => {
       leafletFG.addLayer(layer);
     });
-  };
+  }, [constructionSites, getGeoJson]);
 
   return (
     <Map
@@ -70,10 +73,7 @@ function Mapper({
       <BoxZoomControl position="topright" />
 
       {/* Feature Group qui rassemble les controles de draw */}
-      <FeatureGroup
-
-        ref={constructionSites && ((reactFGref) => featureGroupReady(reactFGref))}
-      >
+      <FeatureGroup ref={featureGroupRef}>
         <EditControl
           position="topright"
           // Edition des polygons
@@ -82,7 +82,6 @@ function Mapper({
           }}
           // Création des polygons
           onCreated={(e) => {
-            console.log(e);
             const coords = e.layer.editing.latlngs[0][0].map((x) => [
               x.lng,
               x.lat,
@@ -91,18 +90,12 @@ function Mapper({
           }}
           onDeleted={(e) => {
             const polygonsDelete = Object.keys(e.layers._layers);
-            console.log(e);
             polygonsDelete.map((polygon) => {
               const { id } = e.layers._layers[polygon].feature.properties;
               const { coordinates } = e.layers._layers[
                 polygon
               ].feature.geometry;
-              const localPolygon = localStorage
-                .getItem('polygonCoords')
-                .split('#')
-                .map((item) => item.split('/').map((x) => x.split(',').map((y) => Number(y))));
-              console.log('Array polygon before :', localPolygon);
-              const result = localPolygon.splice(id, 1);
+              return true;
             });
           }}
           edit={{ remove: true }}
@@ -115,6 +108,9 @@ function Mapper({
           }}
         />
       </FeatureGroup>
+      {tempCoords && (
+        <ConstructionSiteForm tempCoords={tempCoords} close={close} />
+      )}
     </Map>
   );
 }

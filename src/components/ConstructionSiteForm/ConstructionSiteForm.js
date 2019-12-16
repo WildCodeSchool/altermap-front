@@ -1,11 +1,10 @@
-import React from "react";
-import "./ConstructionSiteForm.css";
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import React from 'react';
+import './ConstructionSiteForm.css';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 function ConstructionSiteForm({ close }) {
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     // axios.post("/api/v1/construction-sites");
   };
