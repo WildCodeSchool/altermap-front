@@ -6,7 +6,6 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 function ConstructionSiteForm({ close }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // axios.post("/api/v1/construction-sites");
   };
   return (
     <div className="ConstructionSiteForm">
