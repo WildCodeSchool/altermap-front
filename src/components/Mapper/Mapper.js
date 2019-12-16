@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import { BoxZoomControl } from "react-leaflet-box-zoom";
@@ -9,13 +9,13 @@ import ConstructionSiteForm from "../ConstructionSiteForm/ConstructionSiteForm";
 
 function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
   // Hook des données des polygons
-  const [constructionSites, setConstructionSites] = useState(null);
+  const [constructionSites, setConstructionSites] = useState([]);
 
   // UseEffect similaire à componentDidMount
   useEffect(() => {
-    axios
-      .get("/api/v1/construction-sites")
-      .then(response => setConstructionSites(response.data));
+    axios.get("/api/v1/construction-sites").then(response => {
+      setConstructionSites(response.data);
+    });
   }, []);
 
   // Fonction pour afficher le GeoJson
@@ -24,7 +24,7 @@ function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
     features: [
       {
         type: "FeatureCollection",
-        features: constructionSites.map((polygon, index) => {
+        features: constructionSites.map(polygon => {
           console.log(polygon);
           return {
             type: "Feature",
@@ -41,14 +41,31 @@ function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
     ]
   });
 
-  // Fonction à l'éxécution du Feature Group (Container des contrôles de draw)
-  const featureGroupReady = reactFGref => {
+  const featureGroupRef = useRef();
+
+  useEffect(() => {
+    if (constructionSites.length === 0) {
+      return;
+    }
+    console.log(featureGroupRef);
     const leafletGeoJSON = new L.GeoJSON(getGeoJson());
-    const leafletFG = reactFGref.leafletElement;
+    const leafletFG = featureGroupRef.current.leafletElement;
     leafletGeoJSON.eachLayer(layer => {
       leafletFG.addLayer(layer);
     });
-  };
+  }, [constructionSites]);
+
+  // // Fonction à l'éxécution du Feature Group (Container des contrôles de draw)
+  // const featureGroupReady = reactFGref => {
+  //   console.log(reactFGref);
+  //   console.log(constructionSites);
+  //   // if (!constructionSites) {}
+  //   const leafletGeoJSON = new L.GeoJSON(getGeoJson());
+  //   const leafletFG = reactFGref.leafletElement;
+  //   leafletGeoJSON.eachLayer(layer => {
+  //     leafletFG.addLayer(layer);
+  //   });
+  // };
 
   return (
     <Map
@@ -67,13 +84,7 @@ function Mapper({ position, zoom, close, setTempCoords, tempCoords }) {
       <BoxZoomControl position="topright" />
 
       {/* Feature Group qui rassemble les controles de draw */}
-      <FeatureGroup
-        ref={
-          constructionSites &&
-          tempCoords &&
-          (reactFGref => featureGroupReady(reactFGref))
-        }
-      >
+      <FeatureGroup ref={featureGroupRef}>
         <EditControl
           position="topright"
           // Edition des polygons
