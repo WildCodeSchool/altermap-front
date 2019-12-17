@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ConstructionSiteForm.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
-function ConstructionSiteForm({ close }) {
+function ConstructionSiteForm({ close, coords }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // axios.post("/api/v1/construction-sites");
+    axios.post("/api/v1/construction-sites", { name, coords })
   };
+
+  const [name, setName] = useState('');
   return (
     <div className="ConstructionSiteForm">
       <Icon
@@ -20,8 +23,8 @@ function ConstructionSiteForm({ close }) {
       </div>
       <div className="ConstructionSiteForm__content">
         <form className="ConstructionSiteForm__form" onSubmit={handleSubmit}>
-          <label htmlFor="constructionName">Nom du chantier</label>
-          <input type="text" name="constructionName" id="constructionName" />
+          <label htmlFor="name">Nom du chantier</label>
+          <input type="text" name="name" id="name" value={name} onChange={e => setName(e.target.value)} />
           <div>
             <input type="submit" />
           </div>
