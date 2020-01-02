@@ -6,7 +6,6 @@ import axios from 'axios';
 
 function ConstructionSiteForm({ close, coords }) {
   const handleSubmit = (event) => {
-    event.preventDefault();
     axios.post("/api/v1/construction-sites", { name, coords })
   };
 
@@ -24,7 +23,7 @@ function ConstructionSiteForm({ close, coords }) {
       <div className="ConstructionSiteForm__content">
         <form className="ConstructionSiteForm__form" onSubmit={handleSubmit}>
           <label htmlFor="name">Nom du chantier</label>
-          <input type="text" name="name" id="name" value={name} onChange={e => setName(e.target.value)} />
+          <input type="text" name="name" id="name" value={name} onChange={e => setName(e.target.value)} required />
           <div>
             <input type="submit" />
           </div>
