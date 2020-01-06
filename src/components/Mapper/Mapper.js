@@ -87,7 +87,7 @@ function Mapper({
                 const { id } = e.layers._layers[polygon].feature.properties;
                 const number = Object.keys(e.layers._layers);
                 const coords = e.layers._layers[number]._latlngs[0].map((point) => [point.lng, point.lat]);
-                console.log(id)
+                console.log(e)
                 setUpdatingConstructionSite(id)
                 setTempCoords(coords)
                 return true;
