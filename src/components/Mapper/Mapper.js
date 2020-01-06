@@ -10,22 +10,22 @@ import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 
 function Mapper({ position, zoom, close }) {
-  // Hook des données des polygons
+  // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
 
-  // Hook pour faire référence aux layers
+  // Hook for layers
   const featureGroupRef = useRef();
 
-  // UseEffect similaire à componentDidMount
+  // UseEffect like componentDidMount
   useEffect(() => {
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
   }, []);
 
-  // Fonction pour afficher le GeoJson
+  // Function to display GeoJson
   const getGeoJson = () => ({
     type: 'FeatureCollection',
     features: [
@@ -45,7 +45,7 @@ function Mapper({ position, zoom, close }) {
     ],
   });
 
-  // useEffect pour la création de la carte
+  // useEffect for the map
   useEffect(() => {
     if (constructionSites.length === 0) { return; }
     const leafletGeoJSON = new L.GeoJSON(getGeoJson());
@@ -62,57 +62,57 @@ function Mapper({ position, zoom, close }) {
         center={position}
         zoom={zoom}
         zoomControl={false}
-        maxZoom={17} // Set du zoom max
-        minZoom={6} // Set du zoom min
+        maxZoom={17} // Set zoom max
+        minZoom={6} // Set zoom min
       >
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
-        {/* Feature Group qui rassemble les controles de draw */}
+        {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           <EditControl
             position="topright"
-            // Edition des polygons
+            // Edition of polygons
             onEdited={(e) => {
-              // Récupération des numéro de l'object modifié
+              // Recovery numbers of modified polygons
               const polygonsEdit = Object.keys(e.layers._layers);
               polygonsEdit.map((polygon) => {
-                // Récupération de l'id du polygon
+                // Recovery id of polygon
                 const { id } = e.layers._layers[polygon].feature.properties;
-                // Récupération des coordonnées
+                // Recovery of coords
                 const coords = e.layers._layers[polygon]._latlngs[0].map(
                   (point) => [point.lng, point.lat],
                 );
-                // Set de l'id à changer
+                // Set id modified polygons
                 setUpdatingConstructionSite(id);
-                // Création des coordonnées temporaires
+                // Creation of temp coords
                 setTempCoords(coords);
                 return true;
               });
             }}
-            // Création des polygons
+            // Creation of polygons
             onCreated={(e) => {
-              // Récupération des coordonnées du polygon
+              // Recovery of polygon coords
               const coords = e.layer.editing.latlngs[0][0].map((x) => [
                 x.lng,
                 x.lat,
               ]);
-              // Création des coordonnées temporaires
+              // Creation of temp coords
               setTempCoords(coords);
             }}
             onDeleted={(e) => {
-              // Récupération des numéros des objets à supprimer
+              // Recovery number of polygons
               const polygonsDelete = Object.keys(e.layers._layers);
               polygonsDelete.map((polygon) => {
-                // Récupération de l'id du polygon
+                // Recovery id of polygon
                 const { id } = e.layers._layers[polygon].feature.properties;
-                // Récupération des coordonnées
+                // Recovery of coords
                 const { coords } = e.layers._layers[
                   polygon
                 ].feature.geometry;
-                // Affichage de la future popup pour la suppression
-                // Delete du polygon
+                // Display of popup for deletion
+                // Deletion of polygon
                 return axios.delete(`/api/v1/construction-sites/${id}`);
               });
             }}
