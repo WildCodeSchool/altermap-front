@@ -128,10 +128,10 @@ function Mapper({ position, zoom, close }) {
         </FeatureGroup>
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} close={close} />
+        <ConstructionSiteForm coords={tempCoords} />
       )}
       {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} close={close} />
+        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} />
       )}
     </div>
   );

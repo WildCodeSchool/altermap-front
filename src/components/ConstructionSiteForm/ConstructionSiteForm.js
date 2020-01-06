@@ -4,7 +4,8 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-function ConstructionSiteForm({ id, close, coords }) {
+function ConstructionSiteForm({ id, coords }) {
+  const [name, setName] = useState('');
   const addHandleSubmit = (event) => {
     event.preventDefault();
     axios.post('/api/v1/construction-sites', { name, coords })
@@ -18,7 +19,6 @@ function ConstructionSiteForm({ id, close, coords }) {
     // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-  const [name, setName] = useState('');
   return (
     <div className="ConstructionSiteForm">
       {/* Icone to close popup and refresh page */}
@@ -28,7 +28,7 @@ function ConstructionSiteForm({ id, close, coords }) {
         onClick={() => window.location.reload()}
       />
       <div className="ConstructionSiteForm__header">
-        <h1 className="ConstructionSiteForm__header-title">Édition chantier</h1>
+        <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
       </div>
       <div className="ConstructionSiteForm__content">
         <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
