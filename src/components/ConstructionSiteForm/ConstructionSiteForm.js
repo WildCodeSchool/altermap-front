@@ -6,17 +6,24 @@ import axios from 'axios';
 
 function ConstructionSiteForm({ id, close, coords }) {
   const addHandleSubmit = (event) => {
+    // Evite un refresh dont on a pas besoin et permet d'éxécuter les requêtes
     event.preventDefault();
-    axios.post('/api/v1/construction-sites', { name, coords });
+    axios.post('/api/v1/construction-sites', { name, coords })
+    // Refresh de la page si l'envoie à fonctionné
+      .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
 
   const editHandleSubmit = (event) => {
+    // Evite un refresh dont on a pas besoin et permet d'éxécuter les requêtes
     event.preventDefault();
-    axios.put(`/api/v1/construction-sites/${id}`, { name, coords });
+    axios.put(`/api/v1/construction-sites/${id}`, { name, coords })
+    // Refresh de la page si l'envoie à fonctionné
+      .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
   const [name, setName] = useState('');
   return (
     <div className="ConstructionSiteForm">
+      {/* Icone pour fermer la popup et refresh la page au passage */}
       <Icon
         className="ConstructionSiteForm__icon"
         icon={faWindowClose}
@@ -29,9 +36,9 @@ function ConstructionSiteForm({ id, close, coords }) {
         <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
           <label htmlFor="name">Nom du chantier</label>
           <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-          <div>
-            <input type="submit" />
-          </div>
+          <button type="submit">
+            Valider
+          </button>
         </form>
       </div>
     </div>
