@@ -109,7 +109,7 @@ function Mapper({
         />
       </FeatureGroup>
       {tempCoords && (
-        <ConstructionSiteForm tempCoords={tempCoords} close={close} />
+        <ConstructionSiteForm coords={tempCoords} close={close} />
       )}
     </Map>
   );
