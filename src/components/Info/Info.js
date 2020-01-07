@@ -1,19 +1,14 @@
-import React from 'react';
-import './Info.css';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import Logo from '../Logo/Logo';
+import React from "react";
+import "./Info.css";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 
-function Info({ close }) {
+function Info() {
   return (
     <div className="Info">
-      <Link
-        to="/"
-        onClick={() => {
-          close();
-        }}
-      >
+      <Link to="/">
         <Icon className="Info__icon" icon={faWindowClose} />
       </Link>
       <div className="Info__header">
@@ -36,10 +31,7 @@ function Info({ close }) {
           couvertes par servitude d’utilité publique instituée au titre de la
           protection en eau (L211.12) ».
         </p>
-        <a
-          className="Info__link"
-          href="https://www.youtube.com/channel/UCbi5AKrzPtSpDHV73sTcsqQ"
-        >
+        <a className="Info__link" href="https://www.youtube.com/channel/UCbi5AKrzPtSpDHV73sTcsqQ">
           Lien vers nos tutoriels
         </a>
       </div>
