@@ -17,9 +17,11 @@ function Popup({
       const { id } = e.layers._layers[polygon].feature.properties;
       // Display of popup for deletion
       // Deletion of polygon
-      return axios.delete(`/api/v1/construction-sites/${id}`);
+      return axios.delete(`https://altermap.osc-fr1.scalingo.io/api/v1/construction-sites/${id}`);
     });
     resetDeletionEvent({});
+    popupStatus(false);
+    window.location.reload();
   };
   return (
     <div id="Popup">
