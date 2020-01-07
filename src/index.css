@@ -1,6 +1,5 @@
 @import '~normalize.css';
 @import '~leaflet/dist/leaflet.css';
-@import '~leaflet-draw/dist/leaflet.draw.css';
  
 html {
   box-sizing: border-box;
@@ -17,8 +16,4 @@ html {
   --NavBar-color: rgba(0, 0, 0, 0.5);
   --NavBar-height: 3.125rem;
   --primary-color:#179A38;
-}
-
-.sr-only {
-  display: none;
 }
