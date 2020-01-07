@@ -1,9 +1,10 @@
 /* Place the navbar at the bottom of the page, and make it stick */
 .NavBar {
     background-color: rgb(255, 255, 255, .8);
-    overflow: hidden;
-    position: fixed;
+    /* overflow: hidden; */
+    position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
     z-index: 1;
     height: var(--NavBar-height);
@@ -23,7 +24,6 @@
 /* Change the color of links on hover */
 .NavBar__info:hover {
     background-color: #ddd;
-    color: black;
 }
 
 /* Add a color to the active/current link */
@@ -33,7 +33,7 @@
 }
 
 .NavBar__icon{
-    color: #179A38;
+    color: var(--primary-color);
 }
 /* media query laptops */
 @media (min-width: 62em) {
