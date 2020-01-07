@@ -17,6 +17,7 @@ html {
   --NavBar-color: rgba(0, 0, 0, 0.5);
   --NavBar-height: 3.125rem;
   --primary-color:#179A38;
+  --secondary-color:#03030A;
 }
 
 .sr-only {
