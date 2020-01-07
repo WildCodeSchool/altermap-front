@@ -21,7 +21,7 @@ function Mapper({ position, zoom, close }) {
   // UseEffect like componentDidMount
   useEffect(() => {
     axios
-      .get('/api/v1/construction-sites')
+      .get('https://altermap.osc-fr1.scalingo.io/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
   }, []);
 
@@ -113,7 +113,7 @@ function Mapper({ position, zoom, close }) {
                 ].feature.geometry;
                 // Display of popup for deletion
                 // Deletion of polygon
-                return axios.delete(`/api/v1/construction-sites/${id}`);
+                return axios.delete(`https://altermap.osc-fr1.scalingo.io/api/v1/construction-sites/${id}`);
               });
             }}
             edit={{ remove: true }}
