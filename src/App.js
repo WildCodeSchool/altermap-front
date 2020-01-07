@@ -18,7 +18,17 @@ function App() {
   return (
     <div className="App">
       {/* Fixed elements */}
+<<<<<<< HEAD
 
+=======
+      <Header />
+      <Mapper position={[42.6976, 2.8954]} zoom={8} close={closeForm} popup={isPopupOpen} popupStatus={setIsPopupOpen} />
+      {isFormOpen
+        ? <ConstructionSiteForm close={closeForm} />
+        : ''}
+      <NavBar close={closeInfo} info={isInfoOpen} popup={setIsPopupOpen} />
+      {/* Elements to implement into Router */}
+>>>>>>> Implement Popup for deletion
       <Switch>
         <Route exact path="/">
           <Header />
