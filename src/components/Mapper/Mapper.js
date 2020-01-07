@@ -8,12 +8,16 @@ import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
+import Popup from '../Popup/Popup';
 
-function Mapper({ position, zoom, close }) {
+function Mapper({
+  position, zoom, popupStatus, popup,
+}) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
+  const [deletetionEvent, addDeletionEvent] = useState({});
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -102,20 +106,12 @@ function Mapper({ position, zoom, close }) {
               setTempCoords(coords);
             }}
             onDeleted={(e) => {
-              // Recovery number of polygons
-              const polygonsDelete = Object.keys(e.layers._layers);
-              polygonsDelete.map((polygon) => {
-                // Recovery id of polygon
-                const { id } = e.layers._layers[polygon].feature.properties;
-                // Recovery of coords
-                const { coords } = e.layers._layers[
-                  polygon
-                ].feature.geometry;
-                // Display of popup for deletion
-                // Deletion of polygon
-                return axios.delete(`/api/v1/construction-sites/${id}`);
-              });
+              // Open popup
+              popupStatus(true);
+              // store event
+              addDeletionEvent(e);
             }}
+
             edit={{ remove: true }}
             draw={{
               marker: false,
@@ -133,6 +129,11 @@ function Mapper({ position, zoom, close }) {
       {updatingConstructionSite && (
         <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} />
       )}
+      {
+        popup && (
+          <Popup popupStatus={popupStatus} event={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
+        )
+      }
     </div>
   );
 }
