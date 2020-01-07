@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 function NavBar({ close, info }) {
   return (
     <div className="NavBar">
-      <Link to={info ? '/' : '/info'} className="NavBar__info" onClick={() => close()}>
+      <button type="button" className="NavBar__info" onClick={() => close()}>
         <Icon icon={faInfo} className="NavBar__icon" />
-      </Link>
+      </button>
     </div>
   );
 }
