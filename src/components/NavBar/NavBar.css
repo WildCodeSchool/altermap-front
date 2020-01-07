@@ -12,13 +12,13 @@
 
 /* Style the links inside the navigation bar */
 .NavBar__info {
-    float: left;
-    display: block;
     color: #f2f2f2;
     text-align: center;
     padding: 0.875rem 1rem;
-    text-decoration: none;
     font-size: 1.0625rem;
+    background-color: transparent;
+    border:none;
+    outline: none;
 }
 
 /* Change the color of links on hover */
