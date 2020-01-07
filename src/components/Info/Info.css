@@ -36,6 +36,6 @@
 }
 
 .Info__link {
-    color: #179A38;
+    color: var(--primary-color);
     padding-bottom: 0.9375rem;
 }

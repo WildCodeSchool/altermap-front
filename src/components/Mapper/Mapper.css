@@ -45,5 +45,5 @@
 .leaflet-draw-toolbar,
 .leaflet-control-zoom,
 #box-zoom-button {
-  border: #179a38 solid 2px !important;
+  border: var(--primary-color) solid 2px !important;
 }
