@@ -123,6 +123,7 @@ function Mapper({ position, zoom, close }) {
               rectangle: false,
               polygon: true,
               polyline: false,
+              circlemarker: false,
             }}
           />
         </FeatureGroup>
