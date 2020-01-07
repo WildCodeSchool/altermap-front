@@ -7,8 +7,6 @@ import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
-import Popup from './components/Popup/Popup';
-
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -20,10 +18,17 @@ function App() {
   return (
     <div className="App">
       {/* Fixed elements */}
+
       <Switch>
         <Route exact path="/">
           <Header />
-          <Mapper position={[42.6976, 2.8954]} zoom={8} close={closeForm} />
+          <Mapper
+            position={[42.6976, 2.8954]}
+            zoom={8}
+            close={closeForm}
+            popup={isPopupOpen}
+            popupStatus={setIsPopupOpen}
+          />
           {isFormOpen
             ? <ConstructionSiteForm close={closeForm} />
             : ''}
