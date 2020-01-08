@@ -8,14 +8,14 @@ function ConstructionSiteForm({ id, coords }) {
   const [name, setName] = useState('');
   const addHandleSubmit = (event) => {
     event.preventDefault();
-    axios.post('https://altermap.osc-fr1.scalingo.io/api/v1/construction-sites', { name, coords })
+    axios.post('/api/v1/construction-sites', { name, coords })
     // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
 
   const editHandleSubmit = (event) => {
     event.preventDefault();
-    axios.put(`https://altermap.osc-fr1.scalingo.io/api/v1/construction-sites/${id}`, { name, coords })
+    axios.put(`/api/v1/construction-sites/${id}`, { name, coords })
     // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
