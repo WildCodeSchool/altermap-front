@@ -98,6 +98,7 @@ function Mapper({ position, zoom, close }) {
                 x.lng,
                 x.lat,
               ]);
+              console.log(coords)
               // Création des coordonnées temporaires
               setTempCoords(coords);
             }}
