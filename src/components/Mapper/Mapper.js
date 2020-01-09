@@ -3,7 +3,11 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import {
+<<<<<<< HEAD
   Map, TileLayer, ZoomControl, FeatureGroup, withLeaflet, GeoJSON,
+=======
+  Map, TileLayer, ZoomControl, FeatureGroup, GeoJSON,
+>>>>>>> cbbd2e2e2cd0d6c666a63bc9196f0eca8f5bb15c
 } from 'react-leaflet';
 import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
@@ -56,8 +60,11 @@ function Mapper({
     });
   }, [constructionSites, getGeoJson]);
 
+<<<<<<< HEAD
   // wrap `PrintControl` component with `withLeaflet` HOC
   const PrintControl = withLeaflet(PrintControlDefault);
+=======
+>>>>>>> cbbd2e2e2cd0d6c666a63bc9196f0eca8f5bb15c
   useEffect(() => {
     if (displayLayer && !staticLayer) {
       axios.get('/geojson/zones_inondables_66.geojson')
