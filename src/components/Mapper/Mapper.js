@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect, useState, useRef, useCallback,
+} from 'react';
 import axios from 'axios';
 import {
-  Map, TileLayer, ZoomControl, FeatureGroup,
+  Map, TileLayer, ZoomControl, FeatureGroup, GeoJSON,
 } from 'react-leaflet';
 import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
@@ -11,10 +13,11 @@ import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup,
+  position, zoom, setPopupStatus, popup, displayLayer,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
+  const [staticLayer, setStaticLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
@@ -22,20 +25,13 @@ function Mapper({
   // Hook for layers
   const featureGroupRef = useRef();
 
-  // UseEffect like componentDidMount
-  useEffect(() => {
-    axios
-      .get('/api/v1/construction-sites')
-      .then((response) => setConstructionSites(response.data));
-  }, []);
-
   // Function to display GeoJson
-  const getGeoJson = () => ({
+  const getGeoJson = useCallback((coordinates) => ({
     type: 'FeatureCollection',
     features: [
       {
         type: 'FeatureCollection',
-        features: constructionSites.map((polygon) => ({
+        features: coordinates.map((polygon) => ({
           type: 'Feature',
           properties: {
             id: polygon.id,
@@ -47,17 +43,31 @@ function Mapper({
         })),
       },
     ],
-  });
+  }), []);
 
   // useEffect for the map
   useEffect(() => {
     if (constructionSites.length === 0) { return; }
-    const leafletGeoJSON = new L.GeoJSON(getGeoJson());
+    const leafletGeoJSON = new L.GeoJSON(getGeoJson(constructionSites));
     const leafletFG = featureGroupRef.current.leafletElement;
     leafletGeoJSON.eachLayer((layer) => {
       leafletFG.addLayer(layer);
     });
   }, [constructionSites, getGeoJson]);
+
+  useEffect(() => {
+    if (displayLayer && !staticLayer) {
+      axios.get('/geojson/zones_inondables_66.json')
+        .then((response) => setStaticLayer(response.data));
+    }
+  }, [displayLayer, staticLayer]);
+
+  // UseEffect like componentDidMount
+  useEffect(() => {
+    axios
+      .get('/api/v1/construction-sites')
+      .then((response) => setConstructionSites(response.data));
+  }, []);
 
   return (
     <div>
@@ -122,6 +132,7 @@ function Mapper({
             }}
           />
         </FeatureGroup>
+        {displayLayer && staticLayer && <GeoJSON data={staticLayer} />}
       </Map>
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} />
