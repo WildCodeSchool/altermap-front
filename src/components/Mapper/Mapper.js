@@ -77,13 +77,6 @@ function Mapper({
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {/* Print controls
-          1- to img source
-          2- to pdf source
-         */}
-        {/* <PrintControl position="topright"
-          sizeModes={['Current']}
-          hideControlContainer={false} title="Export as PNG" exportOnly /> */}
         <PrintControl position="topright" sizeModes={['Current']} hideControlContainer={false} />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
