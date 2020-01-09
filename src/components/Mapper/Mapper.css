@@ -47,3 +47,17 @@
 #box-zoom-button {
   border: var(--primary-color) solid 2px !important;
 }
+
+/* print controls ==> needs review ;) */
+#leafletEasyPrint {
+  border-radius: 0.25rem;
+  border: var(--primary-color) solid 2px !important;
+
+}
+
+.easyPrintSizeMode {
+  border-radius: 0.25rem;
+  border: var(--primary-color) solid 2px !important;
+  position: relative;
+  right:59px;
+}
