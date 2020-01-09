@@ -60,7 +60,7 @@ function Mapper({
   const PrintControl = withLeaflet(PrintControlDefault);
   useEffect(() => {
     if (displayLayer && !staticLayer) {
-      axios.get('/geojson/zones_inondables_66.json')
+      axios.get('/geojson/zones_inondables_66.geojson')
         .then((response) => setStaticLayer(response.data));
     }
   }, [displayLayer, staticLayer]);
