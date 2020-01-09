@@ -31,6 +31,7 @@ function Mapper({
   }, []);
 
   // Function to display GeoJson
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getGeoJson = () => ({
     type: 'FeatureCollection',
     features: [

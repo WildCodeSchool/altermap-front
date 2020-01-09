@@ -59,5 +59,15 @@
   border-radius: 0.25rem;
   border: var(--primary-color) solid 2px !important;
   position: relative;
-  right:59px;
+  right:28px;
+}
+
+.easyPrintHolder {
+  opacity: 0;
+  right:28px;
+  display: block !important;
+}
+
+.leaflet-control-easyPrint-button {
+  width: 30px  !important;
 }
