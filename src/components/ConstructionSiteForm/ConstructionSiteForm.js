@@ -6,15 +6,15 @@ import axios from 'axios';
 
 function ConstructionSiteForm({ id, coords }) {
   const [name, setName] = useState('');
-  const addHandleSubmit = (event) => {
-    event.preventDefault();
+  const addHandleSubmit = (e) => {
+    e.preventDefault();
     axios.post('/api/v1/construction-sites', { name, coords })
     // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
 
-  const editHandleSubmit = (event) => {
-    event.preventDefault();
+  const editHandleSubmit = (e) => {
+    e.preventDefault();
     axios.put(`/api/v1/construction-sites/${id}`, { name, coords })
     // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));

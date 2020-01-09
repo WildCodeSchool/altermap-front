@@ -25,12 +25,10 @@ function App() {
             zoom={8}
             close={closeForm}
             popup={isPopupOpen}
-            popupStatus={setIsPopupOpen}
+            setPopupStatus={setIsPopupOpen}
           />
-          {isFormOpen
-            ? <ConstructionSiteForm close={closeForm} />
-            : ''}
           <NavBar close={closeInfo} info={isInfoOpen} />
+          {isFormOpen && <ConstructionSiteForm close={closeForm} />}
           {/* Elements to implement into Router */}
           {isInfoOpen && (<Info close={closeInfo} />)}
         </Route>

@@ -11,7 +11,7 @@ import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 
 function Mapper({
-  position, zoom, popupStatus, popup,
+  position, zoom, setPopupStatus, popup,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
@@ -88,9 +88,8 @@ function Mapper({
                 const coords = e.layers._layers[polygon]._latlngs[0].map(
                   (point) => [point.lng, point.lat],
                 );
-                // Set id modified polygons
+                // Set id of modified polygons
                 setUpdatingConstructionSite(id);
-                // Creation of temp coords
                 setTempCoords(coords);
                 return true;
               });
@@ -102,12 +101,12 @@ function Mapper({
                 x.lng,
                 x.lat,
               ]);
-              // Creation of temp coords
               setTempCoords(coords);
             }}
+            // Deletion of polygons
             onDeleted={(e) => {
               // Open popup
-              popupStatus(true);
+              setPopupStatus(true);
               // store event
               addDeletionEvent(e);
             }}
@@ -132,7 +131,7 @@ function Mapper({
       )}
       {
         popup && (
-          <Popup popupStatus={popupStatus} event={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
+          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
     </div>
