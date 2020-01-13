@@ -8,7 +8,7 @@ import Info from './components/Info/Info';
 import Login from './components/Login/Login';
 import Layers from './components/Layers/Layers';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
-import Administrator from './components/Admin/Admin';
+import Administrator from './components/Admin/Administrator';
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
