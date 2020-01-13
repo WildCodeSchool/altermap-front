@@ -42,6 +42,13 @@ function App() {
     };
   }
 
+  if (isAuth) {
+    const token = localStorage.getItem('altermap-token');
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
   return (
     <div className="App">
       {!isAuth && <Redirect to="/login" />}
