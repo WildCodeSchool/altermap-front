@@ -22,6 +22,7 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
+  const [error, setError] = useState(false);
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -140,16 +141,20 @@ function Mapper({
         {displayLayer && staticLayer && <GeoJSON data={staticLayer} />}
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} />
+        <ConstructionSiteForm coords={tempCoords} setError={setError} />
       )}
       {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} />
+        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
       )}
       {
         popup && (
           <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
+
+      <div id="snackbar" className={error ? 'show' : ''}>
+        Vos informations sont incorrectes
+      </div>
     </div>
   );
 }

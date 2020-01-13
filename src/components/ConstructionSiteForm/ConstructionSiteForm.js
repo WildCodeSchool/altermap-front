@@ -7,7 +7,10 @@ import axios from 'axios';
 function ConstructionSiteForm({ id, coords }) {
   const addHandleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/v1/construction-sites', { name, coords })
+    axios.post(
+      '/api/v1/construction-sites',
+      { name, coords },
+    )
       // Refresh de la page si l'envoie à fonctionné
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
