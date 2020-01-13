@@ -1,5 +1,5 @@
 .ConstructionSiteForm {
-  background-color: white;
+  background-color: var(--NavBar-color);
   align-items: center;
   position: absolute;
   bottom: var(--NavBar-height);
@@ -7,8 +7,9 @@
   z-index: 20;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(80vh - var(--NavBar-height));
+  height: calc(100vh - var(--Header-height) - var(--NavBar-height) - 2px);
   font-size: 1rem;
+  animation: scale-up-ver-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000);
 }
 
 .ConstructionSiteForm__header {
@@ -32,14 +33,71 @@
 }
 
 .ConstructionSiteForm__icon {
-  position: absolute;
+  position: fixed;
   right: 0;
 }
 
 .ConstructionSiteForm__form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  border-radius: 8px;
+  line-height: 30px;
+}
+
+.ConstructionSiteForm__form> input {
+  background-color: #e9e8e8;
+}
+
+.ConstructionSiteForm__form> input:focus {
+  transition: all 0.30s ease-in-out;
+  outline: solid var(--primary-color) 2px;
+	box-sizing: border-box;
+	color: #555;
+	font: 95% Arial, Helvetica, sans-serif;
+}
+
+.ConstructionSiteForm__form_submit {
+  margin-top: 15px;
+  position: relative;
+	padding: 19px 39px 18px 39px;
+	color: white;
+	background: var(--primary-color);
+	font-size: 20px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid rgb(13, 102, 35);
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+
+.ConstructionSiteForm__form_submit:hover {
+	background:  rgb(13, 102, 35);
+}
+
+@media (min-width: 1025px) {
+  .ConstructionSiteForm {
+      top:calc(var(--Header-height) + 2px);
+      height: calc(100vh - var(--Header-height));
+      margin-left: 2.5rem;
+      width: calc(50Vw - 2.5rem);
+  }
+  .ConstructionSiteForm__icon {
+    position: fixed;
+    left:  calc(50vw - 2rem);
+  }
+}
+
+@keyframes scale-up-ver-bottom {
+  0% {
+            transform: scaleY(0.4);
+            transform-origin: 0% 100%;
+  }
+  100% {
+            transform: scaleY(1);
+            transform-origin: 0% 100%;
+  }
 }

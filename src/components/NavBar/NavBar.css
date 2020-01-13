@@ -8,6 +8,7 @@
     width: 100%;
     z-index: 1;
     height: var(--NavBar-height);
+    border-top: solid var(--primary-color) 2px;
 }
 
 /* Style the links inside the navigation bar */
