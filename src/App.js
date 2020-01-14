@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      {!localStorage['altermap-token'] && <Redirect to="/login" />}
+      {!isAuth && <Redirect to="/login" />}
       <Switch>
         { isAuth // Condition to escape error from authorization
           && (
