@@ -91,52 +91,55 @@ function Mapper({
         <BoxZoomControl position="topright" />
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          <EditControl
-            position="topright"
+          { Number(localStorage.getItem('altermap-role')) > 1
+            && (
+            <EditControl
+              position="topright"
             // Edition of polygons
-            onEdited={(e) => {
-              // Recovery numbers of modified polygons
-              const polygonsEdit = Object.keys(e.layers._layers);
-              polygonsEdit.map((polygon) => {
-                // Recovery id of polygon
-                const { id } = e.layers._layers[polygon].feature.properties;
-                // Recovery of coords
-                const coords = e.layers._layers[polygon]._latlngs[0].map(
-                  (point) => [point.lng, point.lat],
-                );
-                // Set id of modified polygons
-                setUpdatingConstructionSite(id);
-                setTempCoords(coords);
-                return true;
-              });
-            }}
+              onEdited={(e) => {
+                // Recovery numbers of modified polygons
+                const polygonsEdit = Object.keys(e.layers._layers);
+                polygonsEdit.map((polygon) => {
+                  // Recovery id of polygon
+                  const { id } = e.layers._layers[polygon].feature.properties;
+                  // Recovery of coords
+                  const coords = e.layers._layers[polygon]._latlngs[0].map(
+                    (point) => [point.lng, point.lat],
+                  );
+                  // Set id of modified polygons
+                  setUpdatingConstructionSite(id);
+                  setTempCoords(coords);
+                  return true;
+                });
+              }}
             // Creation of polygons
-            onCreated={(e) => {
-              // Recovery of polygon coords
-              const coords = e.layer.editing.latlngs[0][0].map((x) => [
-                x.lng,
-                x.lat,
-              ]);
-              setTempCoords(coords);
-            }}
+              onCreated={(e) => {
+                // Recovery of polygon coords
+                const coords = e.layer.editing.latlngs[0][0].map((x) => [
+                  x.lng,
+                  x.lat,
+                ]);
+                setTempCoords(coords);
+              }}
             // Deletion of polygons
-            onDeleted={(e) => {
-              // Open popup
-              setPopupStatus(true);
-              // store event
-              addDeletionEvent(e);
-            }}
+              onDeleted={(e) => {
+                // Open popup
+                setPopupStatus(true);
+                // store event
+                addDeletionEvent(e);
+              }}
 
-            edit={{ remove: true }}
-            draw={{
-              marker: false,
-              circle: false,
-              rectangle: false,
-              polygon: true,
-              polyline: false,
-              circlemarker: false,
-            }}
-          />
+              edit={{ remove: true }}
+              draw={{
+                marker: false,
+                circle: false,
+                rectangle: false,
+                polygon: true,
+                polyline: false,
+                circlemarker: false,
+              }}
+            />
+            )}
         </FeatureGroup>
         {displayLayer && staticLayer && <GeoJSON data={staticLayer} />}
       </Map>
