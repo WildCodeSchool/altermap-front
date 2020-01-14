@@ -10,8 +10,8 @@ export const UserList = (props) => (
   <List {...props}>
     <Datagrid>
       <TextField source="id" />
-      <TextField source="nom" />
-      <TextField source="societé" />
+      <TextField source="lastname" />
+      <TextField source="company" />
       <TextField source="email" />
     </Datagrid>
   </List>
@@ -29,8 +29,8 @@ export const UserEdit = (props) => (
   <Edit title={<UserTitle />} {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="nom" />
-      <TextInput source="societé" />
+      <TextInput source="lastname" />
+      <TextInput source="company" />
       <TextInput source="email" />
     </SimpleForm>
   </Edit>
@@ -39,9 +39,10 @@ export const UserEdit = (props) => (
 export const UserCreate = (props) => (
   <Create title="Créer un utilisateur" {...props}>
     <SimpleForm>
-      <TextInput source="nom" />
-      <TextInput source="societé" />
+      <TextInput source="lastname" />
+      <TextInput source="company" />
       <TextInput source="email" />
+      <TextInput source="password" />
     </SimpleForm>
   </Create>
 );
