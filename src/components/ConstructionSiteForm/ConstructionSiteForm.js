@@ -10,22 +10,23 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
   const typeUsageList = ['V1', 'V2', 'V1 ET V2', 'AUTRE'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
   const typeGraveList = ['MACHEFER', 'AUTRE'];
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState(stateConstruction[0]);
-  const [year, setYear] = useState(Number(yearsList[0]));
-  const [buyer, setBuyer] = useState('');
-  const [contact, setContact] = useState('');
-  const [num_conv, setNumConv] = useState('');
-  const [date_sign, setDateSign] = useState('');
-  const [type_grave, setTypeGrave] = useState(typeGraveList[0]);
-  const [type_usage, setTypeUsage] = useState(typeUsageList[0]);
-  const [departement, setDepartement] = useState('');
-  const [project_manager, setProjectManager] = useState('');
-  const [commentary, setCommentary] = useState('');
-  const [area, setArea] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [lots, setLots] = useState('');
-  const [tonnage, setTonnage] = useState('');
+  const [name, setName] = useState(incomingData ? incomingData.name : '');
+  const [status, setStatus] = useState(incomingData ? incomingData.status : stateConstruction[0]);
+  const [year, setYear] = useState(incomingData ? incomingData.year : Number(yearsList[0]));
+  const [buyer, setBuyer] = useState(incomingData ? incomingData.buyer : '');
+  const [contact, setContact] = useState(incomingData ? incomingData.contact : '');
+  const [num_conv, setNumConv] = useState(incomingData ? incomingData.num_conv : '');
+  const [date_sign, setDateSign] = useState(incomingData ? incomingData.date_sign : '');
+  const [type_grave, setTypeGrave] = useState(incomingData ? incomingData.type_grave : typeGraveList[0]);
+  const [type_usage, setTypeUsage] = useState(incomingData ? incomingData.type_usage : typeUsageList[0]);
+  const [departement, setDepartement] = useState(incomingData ? incomingData.departement : '');
+  const [project_manager, setProjectManager] = useState(incomingData ? incomingData.project_manager : '');
+  const [commentary, setCommentary] = useState(incomingData ? incomingData.commentary : '');
+  const [area, setArea] = useState(incomingData ? incomingData.area : '');
+  const [photo, setPhoto] = useState(incomingData ? incomingData.photo : '');
+  const [lots, setLots] = useState(incomingData ? incomingData.lots : '');
+  const [tonnage, setTonnage] = useState(incomingData ? incomingData.tonnage : '');
+  // replace all those useState by a spread
   // useReducer instead of all those useState
   // useEffect on id if yes fetch datas & update state.
   // reenforce back in terms of security (typeOf)

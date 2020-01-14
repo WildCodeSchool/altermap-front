@@ -22,7 +22,7 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
-  const [incomingData, setIncomingData] = useState([])
+  const [incomingData, setIncomingData] = useState(null)
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -153,7 +153,7 @@ function Mapper({
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} />
       )}
-      {updatingConstructionSite && (
+      {updatingConstructionSite && incomingData && (
         <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       )}
       {
