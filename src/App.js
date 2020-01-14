@@ -17,7 +17,8 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
-  const [shouldDisplayLayer, setShouldDisplayLayer] = useState(false);
+  const [shouldDisplayWaterLayer, setShouldDisplayWaterLayer] = useState(false);
+  const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
     setIsVisible(!isVisible);
@@ -29,7 +30,8 @@ function App() {
       setIsInfoOpen(!isInfoOpen);
     }
   };
-  const layerStatus = () => setShouldDisplayLayer(!shouldDisplayLayer);
+  const waterLayerStatus = () => setShouldDisplayWaterLayer(!shouldDisplayWaterLayer);
+  const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
     setIsAuth(false);
@@ -56,10 +58,11 @@ function App() {
               close={closeForm}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
-              displayLayer={shouldDisplayLayer}
+              displayWaterLayer={shouldDisplayWaterLayer}
+              displayLimitsLayer={shouldDisplayLimitsLayer}
             />
             <NavBar close={closeInfo} />
-            <Layers displayLayer={layerStatus} />
+            <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
               {isInfoOpen && (<Info close={closeInfo} />)}
           </Route>

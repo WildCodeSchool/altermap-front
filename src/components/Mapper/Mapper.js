@@ -9,16 +9,18 @@ import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
+import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayLayer,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
-  const [staticLayer, setStaticLayer] = useState(null);
+  const [staticWaterLayer, setStaticWaterLayer] = useState(null);
+  const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
@@ -58,11 +60,15 @@ function Mapper({
   }, [constructionSites, getGeoJson]);
 
   useEffect(() => {
-    if (displayLayer && !staticLayer) {
+    if (displayWaterLayer && !staticWaterLayer) {
       axios.get('/geojson/zones_inondables_66.geojson')
-        .then((response) => setStaticLayer(response.data));
+        .then((response) => setStaticWaterLayer(response.data));
     }
-  }, [displayLayer, staticLayer]);
+    if (displayLimitsLayer && !staticLimitsLayer) {
+      axios.get('/geojson/departement_66.geojson')
+        .then((response) => setStaticLimitsLayer(response.data));
+    }
+  }, [displayLimitsLayer, displayWaterLayer, staticLimitsLayer, staticWaterLayer]);
 
   // UseEffect like componentDidMount
   useEffect(() => {
@@ -139,7 +145,19 @@ function Mapper({
             />
             )}
         </FeatureGroup>
-        {displayLayer && staticLayer && <GeoJSON data={staticLayer} />}
+        {displayWaterLayer && staticWaterLayer && <GeoJSON data={staticWaterLayer} />}
+        {displayLimitsLayer && staticLimitsLayer
+        && (
+        <GeoJSON
+          data={staticLimitsLayer}
+          style={{
+            color: 'black',
+            opacity: 0.5,
+            fill: 'rgba(0,0,0,0)',
+            fillOpacity: 0,
+          }}
+        />
+        )}
       </Map>
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} setError={setError} />
