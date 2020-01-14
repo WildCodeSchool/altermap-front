@@ -15,13 +15,17 @@ function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isAuth, setIsAuth] = useState(localStorage.getItem('altermap-token'));
+  const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
   const [shouldDisplayLayer, setShouldDisplayLayer] = useState(false);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => setIsInfoOpen(!isInfoOpen);
   const layerStatus = () => setShouldDisplayLayer(!shouldDisplayLayer);
+  const disconnect = () => {
+    localStorage.removeItem('altermap-token');
+    setIsAuth(false);
+  };
 
-  if (isAuth) {
+  if (localStorage['altermap-token'] || isAuth) {
     const token = localStorage.getItem('altermap-token');
     axios.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
@@ -30,24 +34,27 @@ function App() {
 
   return (
     <div className="App">
-      {!isAuth && <Redirect to="/login" />}
+      {!localStorage['altermap-token'] && <Redirect to="/login" />}
       <Switch>
-        <Route exact path="/">
-          <Header />
-          <Mapper
-            position={[42.6976, 2.8954]}
-            zoom={8}
-            close={closeForm}
-            popup={isPopupOpen}
-            setPopupStatus={setIsPopupOpen}
-            displayLayer={shouldDisplayLayer}
-          />
-          <NavBar close={closeInfo} info={isInfoOpen} />
-          <Layers displayLayer={layerStatus} />
-          {isFormOpen && <ConstructionSiteForm close={closeForm} />}
-          {/* Elements to implement into Router */}
-          {isInfoOpen && (<Info close={closeInfo} />)}
-        </Route>
+        { isAuth
+          && (
+          <Route exact path="/">
+            <Header />
+            <Mapper
+              position={[42.6976, 2.8954]}
+              zoom={8}
+              close={closeForm}
+              popup={isPopupOpen}
+              setPopupStatus={setIsPopupOpen}
+              displayLayer={shouldDisplayLayer}
+            />
+            <NavBar close={closeInfo} disconnect={disconnect} />
+            <Layers displayLayer={layerStatus} />
+              {isFormOpen && <ConstructionSiteForm close={closeForm} />}
+              {/* Elements to implement into Router */}
+              {isInfoOpen && (<Info close={closeInfo} />)}
+          </Route>
+          )}
         <Route path="/login">
           <Login setIsAuth={setIsAuth} />
         </Route>

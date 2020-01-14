@@ -4,14 +4,14 @@ import { Redirect } from 'react-router-dom';
 import logo from '../Logo/logo-altermap.png';
 import './Login.css';
 
-function Login() {
+function Login({ setIsAuth }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [auth, setAuth] = useState();
   return (
     <div className="Login">
-      {auth && (<Redirect to="/" />)}
+      {auth && <Redirect to="/" />}
       <form
         className="Login__form"
         onSubmit={(e) => {
@@ -19,6 +19,7 @@ function Login() {
           axios.post('/api/v1/login', { email, password })
             .then((res) => {
               localStorage.setItem('altermap-token', res.data);
+              setIsAuth(true);
               setAuth(true);
             })
             .catch(() => {
