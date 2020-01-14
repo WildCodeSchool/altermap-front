@@ -35,7 +35,7 @@ function Login({ setIsAuth }) {
             className="Login__form--input"
             type="email"
             name="email"
-            placeholder="email@example.com"
+            placeholder="alter@map.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"

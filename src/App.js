@@ -44,9 +44,9 @@ function App() {
 
   return (
     <div className="App">
-      {!localStorage['altermap-token'] && <Redirect to="/login" />}
+      {!isAuth && <Redirect to="/login" />}
       <Switch>
-        { isAuth
+        { isAuth // Condition to escape error from authorization
           && (
           <Route exact path="/">
             <Header />
@@ -58,10 +58,9 @@ function App() {
               setPopupStatus={setIsPopupOpen}
               displayLayer={shouldDisplayLayer}
             />
-            <NavBar close={closeInfo} disconnect={disconnect} />
+            <NavBar close={closeInfo} />
             <Layers displayLayer={layerStatus} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
-              {/* Elements to implement into Router */}
               {isInfoOpen && (<Info close={closeInfo} />)}
           </Route>
           )}
