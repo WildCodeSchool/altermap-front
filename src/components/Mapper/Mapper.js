@@ -22,6 +22,7 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
+  const [incomingData, setIncomingData] = useState([])
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -70,7 +71,13 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
+
   }, []);
+
+  const getValue = async (id) => {
+    const response = await axios.get(`/api/v1/construction-sites/${id}`)
+    return response.data
+  }
 
   return (
     <div>
@@ -96,7 +103,7 @@ function Mapper({
             onEdited={(e) => {
               // Recovery numbers of modified polygons
               const polygonsEdit = Object.keys(e.layers._layers);
-              polygonsEdit.map((polygon) => {
+              polygonsEdit.forEach((polygon) => {
                 // Recovery id of polygon
                 const { id } = e.layers._layers[polygon].feature.properties;
                 // Recovery of coords
@@ -106,9 +113,13 @@ function Mapper({
                 // Set id of modified polygons
                 setUpdatingConstructionSite(id);
                 setTempCoords(coords);
-                return true;
+                if (id) {
+                  getValue(id)
+                    .then(setIncomingData)
+                }
               });
             }}
+
             // Creation of polygons
             onCreated={(e) => {
               // Recovery of polygon coords
@@ -143,7 +154,7 @@ function Mapper({
         <ConstructionSiteForm coords={tempCoords} />
       )}
       {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} />
+        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       )}
       {
         popup && (
