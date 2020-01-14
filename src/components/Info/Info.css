@@ -52,8 +52,9 @@
     .Info {
         top:calc(var(--Header-height) + 2px);
         height: calc(100vh - var(--Header-height));
-        margin-left: 2.5rem;
+        border-left: 2.5rem solid rgb(255, 255, 255, .8);
         width: calc(50Vw - 2.5rem);
+        z-index: 0;
     }
     .InfoOpen {
         animation: scale-up-hor-left 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000);    

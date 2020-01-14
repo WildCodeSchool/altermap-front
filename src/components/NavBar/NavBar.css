@@ -40,10 +40,12 @@
 @media (min-width: 62em) {
 
     .NavBar {
-        height: calc(100% - var(--Header-height));
+        /* height: calc(100% - var(--Header-height)); */
         width: 2.5rem;
         left: 0;
         top: var(--Header-height);
+        border-right: var(--primary-color) solid 2px;
+        border-bottom: var(--primary-color) solid 2px;
     }
 
     .NavBar__info {
