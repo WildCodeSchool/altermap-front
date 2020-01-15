@@ -3,15 +3,15 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import {
-  Map, TileLayer, ZoomControl, FeatureGroup, withLeaflet, GeoJSON,
+  Map, TileLayer, ZoomControl, FeatureGroup, GeoJSON,
 } from 'react-leaflet';
 import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
-import PrintControlDefault from 'react-leaflet-easyprint';
 import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
+import PdfExport from '../PdfExport/PdfExport';
 
 function Mapper({
   position, zoom, setPopupStatus, popup, displayLayer,
@@ -57,8 +57,6 @@ function Mapper({
     });
   }, [constructionSites, getGeoJson]);
 
-  // wrap `PrintControl` component with `withLeaflet` HOC
-  const PrintControl = withLeaflet(PrintControlDefault);
   useEffect(() => {
     if (displayLayer && !staticLayer) {
       axios.get('/geojson/zones_inondables_66.geojson')
@@ -72,11 +70,12 @@ function Mapper({
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
   }, []);
-
+  
   return (
     <div>
       <Map
         className="Mapper"
+        id="Map"
         center={position}
         zoom={zoom}
         zoomControl={false}
@@ -85,10 +84,9 @@ function Mapper({
       >
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-        <PrintControl position="topright" sizeModes={['Current']} hideControlContainer={false} />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
+        <PdfExport />
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           { Number(localStorage.getItem('altermap-role')) > 1
