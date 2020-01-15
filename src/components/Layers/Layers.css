@@ -1,0 +1,17 @@
+.Layers{
+  position: absolute;
+  right: 10px;
+  top: calc(var(--Header-height) + 260px);
+  z-index: 50;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border:solid 2px var(--primary-color);
+  border-radius: 5px;
+  text-align: center;
+  outline:none;
+  padding: 0;
+}
+.Layers__icon{
+  margin: auto;
+}
