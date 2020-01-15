@@ -72,7 +72,12 @@
   width: 30px  !important;
 }
 
-.Layers {
-  top: calc(var(--Header-height) + 290px) !important;
-  z-index: 1 !important;
+.Mapper__options{
+  position: absolute;
+  right: 10px;
+  top:var(--Header-height);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
 }

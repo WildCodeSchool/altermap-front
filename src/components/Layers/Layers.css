@@ -1,8 +1,4 @@
 .Layers{
-  position: absolute;
-  right: 10px;
-  top: calc(var(--Header-height) + 260px);
-  z-index: 10;
   min-width: 30px;
   min-height: 30px;
   background-color: #fff;
@@ -13,6 +9,9 @@
   outline:none;
   padding: 0;
   transition: ease .3s;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 .Layers__icon{
   width: 20px;

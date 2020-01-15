@@ -43,21 +43,8 @@ export default function PdfExport() {
       });
   };
 
-  let count = 0;
-
-  Array.from(document.querySelectorAll('.leaflet-right > *'))
-    .map(
-      (x) => (x.children.length === 0 ? 1 : x.children.length)
-      ,
-    ).map(
-      (item) => {
-        count += item;
-        return item;
-      },
-    );
-
   return (
-    <button type="button" onClick={exportPdf} className="PdfExport" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
+    <button type="button" onClick={exportPdf} className="PdfExport">
       <Icon icon={faFilePdf} className="PdfExport__icon" />
     </button>
   );

@@ -13,9 +13,10 @@ import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
+import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
@@ -76,7 +77,20 @@ function Mapper({
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
   }, []);
-  
+
+  let count = 0;
+
+  Array.from(document.querySelectorAll('.leaflet-right > *'))
+    .map(
+      (x) => (x.children.length === 0 ? 1 : x.children.length)
+      ,
+    ).map(
+      (item) => {
+        count += item;
+        return item;
+      },
+    );
+
   return (
     <div>
       <Map
@@ -92,7 +106,10 @@ function Mapper({
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
-        <PdfExport />
+        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
+          <PdfExport />
+          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
+        </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           { Number(localStorage.getItem('altermap-role')) > 1

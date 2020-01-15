@@ -7,7 +7,6 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
-import Layers from './components/Layers/Layers';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 import Administrator from './components/Admin/Administrator';
 
@@ -60,9 +59,10 @@ function App() {
               setPopupStatus={setIsPopupOpen}
               displayWaterLayer={shouldDisplayWaterLayer}
               displayLimitsLayer={shouldDisplayLimitsLayer}
+              waterLayerStatus={waterLayerStatus}
+              limitsLayerStatus={limitsLayerStatus}
             />
             <NavBar close={closeInfo} />
-            <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
               {isInfoOpen && (<Info close={closeInfo} />)}
           </Route>
