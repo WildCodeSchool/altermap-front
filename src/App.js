@@ -75,7 +75,7 @@ function App() {
             Number(localStorage.getItem('altermap-role')) === 3 ? (
               <Administrator />
             )
-              : <Redirect to="/" />
+              : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
           }
         </Route>
       </Switch>
