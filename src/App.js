@@ -68,7 +68,12 @@ function App() {
           <Login setIsAuth={setIsAuth} />
         </Route>
         <Route path="/admin">
-          <Administrator />
+          {
+            Number(localStorage.getItem('altermap-role')) === 3 ? (
+              <Administrator />
+            )
+              : <Redirect to="/" />
+          }
         </Route>
       </Switch>
     </div>
