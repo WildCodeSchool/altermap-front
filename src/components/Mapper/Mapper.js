@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import {
-  Map, TileLayer, ZoomControl, FeatureGroup, withLeaflet,
+  Map, TileLayer, ZoomControl, FeatureGroup,
 } from 'react-leaflet';
 import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
-import PrintControlDefault from 'react-leaflet-easyprint';
 import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
+import PdfExport from '../PdfExport/PdfExport';
 
 function Mapper({
   position, zoom, setPopupStatus, popup,
@@ -61,13 +61,11 @@ function Mapper({
     });
   }, [constructionSites, getGeoJson]);
 
-  // wrap `PrintControl` component with `withLeaflet` HOC
-  const PrintControl = withLeaflet(PrintControlDefault);
-
   return (
     <div>
       <Map
         className="Mapper"
+        id="Map"
         center={position}
         zoom={zoom}
         zoomControl={false}
@@ -76,10 +74,9 @@ function Mapper({
       >
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-        <PrintControl position="topright" sizeModes={['Current']} hideControlContainer={false} />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
+        <PdfExport />
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           <EditControl
