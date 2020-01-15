@@ -12,31 +12,6 @@
   animation: scale-up-ver-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000);
 }
 
-.ConstructionSiteForm__header {
-  display: flex;
-  justify-content: center;
-  padding-top: 0.9375rem;
-  margin-bottom: 1rem;
-}
-
-.ConstructionSiteForm__header-title {
-  margin-bottom: 0;
-}
-
-.ConstructionSiteForm__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  text-align: justify;
-}
-
-.ConstructionSiteForm__icon {
-  position: fixed;
-  right: 0;
-}
-
 .ConstructionSiteForm__form {
   width: 100%;
   display: flex;
@@ -47,47 +22,16 @@
   line-height: 30px;
 }
 
-.ConstructionSiteForm__form> input {
-  background-color: #e9e8e8;
-}
-
-.ConstructionSiteForm__form> input:focus {
-  transition: all 0.30s ease-in-out;
-  outline: solid var(--primary-color) 2px;
-	box-sizing: border-box;
-	color: #555;
-	font: 95% Arial, Helvetica, sans-serif;
-}
-
-.ConstructionSiteForm__form_submit {
-  margin-top: 15px;
-  position: relative;
-	padding: 19px 39px 18px 39px;
-	color: white;
-	background: var(--primary-color);
-	font-size: 20px;
-	text-align: center;
-	font-style: normal;
-	width: 100%;
-	border: 1px solid rgb(13, 102, 35);
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-}
-
-.ConstructionSiteForm__form_submit:hover {
-	background:  rgb(13, 102, 35);
-}
-
-@media (min-width: 1025px) {
+@media (min-width: 62em) {
   .ConstructionSiteForm {
       top:calc(var(--Header-height) + 2px);
       height: calc(100vh - var(--Header-height));
-      margin-left: 2.5rem;
       width: calc(50Vw - 2.5rem);
+      border-left: 2.5rem solid rgb(255, 255, 255, .8);
   }
   .ConstructionSiteForm__icon {
     position: fixed;
-    left:  calc(50vw - 2rem);
+    left:  calc(50vw - 5rem);
   }
 }
 
