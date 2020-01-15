@@ -38,7 +38,7 @@ const UserCreateToolbar = (props) => (
   <Toolbar {...props}>
     <SaveButton
       label="SAVE"
-      redirect={false}
+      redirect="list"
       submitOnEnter={false}
       variant="text"
     />
