@@ -46,6 +46,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
 
+
   return (
     <div className="ConstructionSiteForm">
       {/* Icone to close popup and refresh page */}

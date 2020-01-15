@@ -11,7 +11,7 @@ import ConstructionSiteForm from './components/ConstructionSiteForm/Construction
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [shouldDisplayLayer, setShouldDisplayLayer] = useState(false);
   const closeForm = () => setIsFormOpen(!isFormOpen);
