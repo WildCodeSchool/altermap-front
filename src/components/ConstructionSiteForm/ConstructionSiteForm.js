@@ -23,10 +23,6 @@ function ConstructionSiteForm({ id, coords }) {
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Add auth and redirection if not connected
   const [name, setName] = useState('');
   const [state, setState] = useState('');
   const [buyer, setBuyer] = useState('');
