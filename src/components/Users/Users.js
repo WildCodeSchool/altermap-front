@@ -1,32 +1,30 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, TextInput, DateInput,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput,
 } from 'react-admin';
-import BookIcon from '@material-ui/icons/Book';
-
-export const PostIcon = BookIcon;
 
 export const UserList = (props) => (
-  <List {...props}>
+  <List title="Altermap" {...props}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="lastname" />
       <TextField source="company" />
-      <TextField source="email" />
+      <EmailField source="email" />
+      <EditButton />
     </Datagrid>
   </List>
 );
 
-const UserTitle = ({ record }) => (
-  <span>
-Post
-    {' '}
-    {record ? `"${record.title}"` : ''}
-  </span>
-);
+// const UserTitle = ({ record }) => (
+//   <span>
+// Post
+//     {' '}
+//     {record ? `"${record.title}"` : ''}
+//   </span>
+// );
 
 export const UserEdit = (props) => (
-  <Edit title={<UserTitle />} {...props}>
+  <Edit title="Editer un utilisateur" {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="lastname" />
