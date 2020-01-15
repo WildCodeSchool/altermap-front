@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton,
 } from 'react-admin';
 
 export const UserList = (props) => (
@@ -34,9 +34,20 @@ export const UserEdit = (props) => (
   </Edit>
 );
 
+const UserCreateToolbar = (props) => (
+  <Toolbar {...props}>
+    <SaveButton
+      label="SAVE"
+      redirect={false}
+      submitOnEnter={false}
+      variant="text"
+    />
+  </Toolbar>
+);
+
 export const UserCreate = (props) => (
   <Create title="Créer un utilisateur" {...props}>
-    <SimpleForm>
+    <SimpleForm toolbar={<UserCreateToolbar />}>
       <TextInput source="lastname" />
       <TextInput source="company" />
       <TextInput source="email" />
