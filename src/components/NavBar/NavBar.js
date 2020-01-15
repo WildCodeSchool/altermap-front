@@ -3,7 +3,7 @@ import './NavBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
-function NavBar({ close, info, displayLayer }) {
+function NavBar({ close }) {
   return (
     <div className="NavBar">
       <button type="button" className="NavBar__info" onClick={close}>
