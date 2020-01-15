@@ -5,9 +5,10 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
-function Info({ close }) {
+
+function Info({ close, visible }) {
   return (
-    <div className="Info">
+    <div className={visible ? 'Info InfoOpen' : 'Info InfoClose'}>
       <Link
         to="/"
         onClick={() => {

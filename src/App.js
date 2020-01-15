@@ -12,11 +12,21 @@ import Administrator from './components/Admin/Administrator';
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [shouldDisplayLayer, setShouldDisplayLayer] = useState(false);
   const closeForm = () => setIsFormOpen(!isFormOpen);
-  const closeInfo = () => setIsInfoOpen(!isInfoOpen);
+  const closeInfo = () => {
+    setIsVisible(!isVisible);
+    if (isInfoOpen) {
+      setTimeout(() => {
+        setIsInfoOpen(!isInfoOpen);
+      }, 450);
+    } else {
+      setIsInfoOpen(!isInfoOpen);
+    }
+  };
   const layerStatus = () => setShouldDisplayLayer(!shouldDisplayLayer);
 
   return (
@@ -34,9 +44,9 @@ function App() {
           />
           <NavBar close={closeInfo} info={isInfoOpen} />
           <Layers displayLayer={layerStatus} />
-          {isFormOpen && <ConstructionSiteForm close={closeForm} />}
+          {isFormOpen && <ConstructionSiteForm close={closeForm} visible={isVisible} />}
           {/* Elements to implement into Router */}
-          {isInfoOpen && (<Info close={closeInfo} />)}
+          {isInfoOpen && (<Info close={closeInfo} visible={isVisible} />)}
         </Route>
         <Route path="/login">
           <Login />

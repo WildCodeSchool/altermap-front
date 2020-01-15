@@ -19,7 +19,7 @@ function ConstructionSiteForm({ id, coords }) {
       // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-  
+
   const [name, setName] = useState('');
   const [state, setState] = useState('');
   const [buyer, setBuyer] = useState('');
@@ -82,9 +82,9 @@ function ConstructionSiteForm({ id, coords }) {
           <input type="text" name="tonnage_CUB" id="tonnage_CUB" value={tonnage_CUB} onChange={(e) => setTonnage_CUB(e.target.value)} />
           <label htmlFor="lot">lot</label>
           <input type="text" name="lot" id="lot" value={lot} onChange={(e) => setLot(e.target.value)} />
-          <button type="submit">
+          <button type="submit" className="ConstructionSiteForm__form_submit">
             Valider
-            </button>
+          </button>
         </form>
       </div>
     </div>
