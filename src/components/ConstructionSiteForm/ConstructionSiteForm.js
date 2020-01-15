@@ -11,13 +11,13 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
   const typeGraveList = ['MACHEFER', 'AUTRE'];
   const [name, setName] = useState(incomingData ? incomingData.name : '');
   const [status, setStatus] = useState(incomingData ? incomingData.status : 1);
-  const [year, setYear] = useState(incomingData ? incomingData.year : Number(yearsList[0]));
+  const [year, setYear] = useState(incomingData ? incomingData.year : 1);
   const [buyer, setBuyer] = useState(incomingData ? incomingData.buyer : '');
   const [contact, setContact] = useState(incomingData ? incomingData.contact : '');
   const [num_conv, setNumConv] = useState(incomingData ? incomingData.num_conv : '');
   const [date_sign, setDateSign] = useState(incomingData ? incomingData.date_sign : '');
-  const [type_grave, setTypeGrave] = useState(incomingData ? incomingData.type_grave : typeGraveList[0]);
-  const [type_usage, setTypeUsage] = useState(incomingData ? incomingData.type_usage : typeUsageList[0]);
+  const [type_grave, setTypeGrave] = useState(incomingData ? incomingData.type_grave : 1);
+  const [type_usage, setTypeUsage] = useState(incomingData ? incomingData.type_usage : 1);
   const [departement, setDepartement] = useState(incomingData ? incomingData.departement : '');
   const [project_manager, setProjectManager] = useState(incomingData ? incomingData.project_manager : '');
   const [commentary, setCommentary] = useState(incomingData ? incomingData.commentary : '');
@@ -25,12 +25,8 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
   const [photo, setPhoto] = useState(incomingData ? incomingData.photo : '');
   const [lots, setLots] = useState(incomingData ? incomingData.lots : '');
   const [tonnage, setTonnage] = useState(incomingData ? incomingData.tonnage : '');
-  // replace all those useState by a spread
   // useReducer instead of all those useState
-  // useEffect on id if yes fetch datas & update state.
   // reenforce back in terms of security (typeOf)
-  // table stockage variables names & map on match to store values
-  // need to see which res are send
   const addHandleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/v1/construction-sites', {
@@ -91,43 +87,67 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             <input className="ConstructionSiteForm__input" type="text" name="buyer" id="buyer" placeholder="EDF" value={buyer} onChange={(e) => setBuyer(e.target.value)} />
             <span>Demandeur</span>
           </label>
-          <label className="has-float-label" htmlFor="contact">Contact</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="contact" id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
-          <label className="has-float-label" htmlFor="numConv">Numéro de convention</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="num_conv" id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
-          <label className="has-float-label" htmlFor="dateSign">date de signature</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="date_sign" id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
-          <label className="has-float-label" htmlFor="typeGrave">Type grav</label>
-          <select className="ConstructionSiteForm__form--input" type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
-            {typeGraveList.map((data) => (
-              <option key={data} value={data}>
-                {data}
-              </option>
-            ))}
-          </select>
-          <label className="has-float-label" htmlFor="typeUsage">Type d'usage</label>
-          <select className="ConstructionSiteForm__form--input" type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
-            {typeUsageList.map((data) => (
-              <option key={data} value={data}>
-                {data}
-              </option>
-            ))}
-          </select>
-          <label className="has-float-label" htmlFor="departement">Département</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="departement" id="departement" value={departement} onChange={(e) => setDepartement(e.target.value)} />
-          <label className="has-float-label" htmlFor="projectManager">Maître d'ouvrage</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="project_manager" id="projectManager" value={project_manager} onChange={(e) => setProjectManager(e.target.value)} />
-          <label className="has-float-label" htmlFor="commentary">Commentaire</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="commentary" id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
-          <label className="has-float-label" htmlFor="area">Surface</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="area" id="area" value={area} onChange={(e) => setArea(e.target.value)} />
-          <label className="has-float-label" htmlFor="photo">Photo</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="photo" id="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
-          <label className="has-float-label" htmlFor="lot">lot</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="lots" id="lot" value={lots} onChange={(e) => setLots(e.target.value)} />
-          <label className="has-float-label" htmlFor="tonnage">Tonnage</label>
-          <input className="ConstructionSiteForm__form--input" type="text" name="tonnage" id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
-          <button type="submit">
+          <label className="has-float-label" htmlFor="contact">
+            <input className="ConstructionSiteForm__input" placeholder="M. Thomas" type="text" name="contact" id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
+            <span>Contact</span>
+          </label>
+          <label className="has-float-label" htmlFor="numConv">
+            <input className="ConstructionSiteForm__input" placeholder="21" type="text" name="num_conv" id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
+            <span> Numéro de convention </span>
+          </label>
+          <label className="has-float-label" htmlFor="dateSign">
+            <input className="ConstructionSiteForm__input" placeholder="1964" type="text" name="date_sign" id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
+            <span> date de signature </span>
+          </label>
+          <label className="ConstructionSiteForm__label" htmlFor="typeGrave">
+            <select className="ConstructionSiteForm__select" type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
+              <option value="1" disabled>Type grave</option>
+              {typeGraveList.map((data) => (
+                <option key={data} value={data}>
+                  {data}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="ConstructionSiteForm__label" htmlFor="typeUsage">
+            <select className="ConstructionSiteForm__select" type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
+              <option value="1" disabled>Type d'usage</option>
+              {typeUsageList.map((data) => (
+                <option key={data} value={data}>
+                  {data}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="has-float-label" htmlFor="departement">
+            <input className="ConstructionSiteForm__input" placeholder="66" type="text" name="departement" id="departement" value={departement} onChange={(e) => setDepartement(e.target.value)} />
+            <span> Département</span>
+          </label>
+          <label className="has-float-label" htmlFor="projectManager">
+            <input className="ConstructionSiteForm__input" placeholder="M.Thomas" type="text" name="project_manager" id="projectManager" value={project_manager} onChange={(e) => setProjectManager(e.target.value)} />
+            <span>Maître d'ouvrage</span>
+          </label>
+          <label className="has-float-label" htmlFor="commentary">
+            <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
+            <span>Commentaires</span>
+          </label>
+          <label className="has-float-label" htmlFor="area">
+            <input className="ConstructionSiteForm__input" placeholder="2.3" type="text" name="area" id="area" value={area} onChange={(e) => setArea(e.target.value)} />
+            <span>Surface</span>
+          </label>
+          <label className="has-float-label" htmlFor="photo">
+            <input className="ConstructionSiteForm__input" placeholder="http://google.fr" type="text" name="photo" id="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
+            <span>Photo</span>
+          </label>
+          <label className="has-float-label" htmlFor="lot">
+            <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="lots" id="lot" value={lots} onChange={(e) => setLots(e.target.value)} />
+            <span>lot</span>
+          </label>
+          <label className="has-float-label" htmlFor="tonnage">
+            <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
+            <span>Tonnage</span>
+          </label>
+          <button className="ConstructionSiteForm__submit" type="submit">
             Valider
           </button>
         </form>

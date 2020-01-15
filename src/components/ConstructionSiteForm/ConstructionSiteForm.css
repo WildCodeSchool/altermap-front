@@ -56,6 +56,7 @@
 .has-float-label, .ConstructionSiteForm__label{
   margin-left: 25px;
   margin-right: 25px;
+  
 }
 .ConstructionSiteForm__input{
   width: 100%;
@@ -64,7 +65,7 @@
 .ConstructionSiteForm--input::placeholder{
   color: var(--secondary-color);
 }
-.ConstructionSiteForm--submit{
+.ConstructionSiteForm__submit{
   margin-top: 50px;
   padding: 15px;
   background-color: #fff;
@@ -98,5 +99,7 @@
   appearance: none;
   border-bottom: solid 2px var(--secondary-color);
   outline: none;
-  padding-left: 10px;
+  color: var(--primary-color);
+  font-size: 150%;
+  opacity: 0.5;
 }
