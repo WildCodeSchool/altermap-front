@@ -18,7 +18,7 @@ function Login({ setIsAuth }) {
           e.preventDefault();
           axios.post('/api/v1/login', { email, password })
             .then((res) => {
-              localStorage.setItem('altermap-token', res.data);
+              localStorage.setItem('altermap-token', res.data.token);
               setIsAuth(true);
               setAuth(true);
             })
