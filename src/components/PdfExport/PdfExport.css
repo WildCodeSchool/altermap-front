@@ -8,4 +8,36 @@
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: auto;
+  position: relative;
+  outline: none;
+}
+
+.PdfExport__load{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border: solid 2px var(--primary-color);
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  padding: 0;
+  outline: none;
+}
+.PdfExport__icon--loader{
+  animation: loader 1s forwards infinite;
+}
+
+@keyframes loader {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
 }

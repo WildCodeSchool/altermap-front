@@ -9,7 +9,9 @@ export default function Layers({ displayWaterLayer, displayLimitsLayer }) {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   return (
     <div className={popupIsOpen ? 'Layers expand' : 'Layers'}>
-      <Icon icon={faLayerGroup} className={popupIsOpen ? 'hidden' : 'Layers__icon'} onClick={() => setPopupIsOpen(true)} />
+      <button type="button" className={popupIsOpen ? 'hidden' : 'Layers__icon'} onClick={() => setPopupIsOpen(true)}>
+        <Icon icon={faLayerGroup} className={popupIsOpen ? 'hidden' : 'Layers__icon'} />
+      </button>
       <button type="button" className={popupIsOpen ? 'Layers__button show' : 'Layers__button'} onClick={displayWaterLayer}>
         <Icon icon={faTint} className={!popupIsOpen ? 'hidden' : 'Layers__icon'} />
       </button>
