@@ -9,7 +9,6 @@ import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
