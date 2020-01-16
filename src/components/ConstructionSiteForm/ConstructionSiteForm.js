@@ -65,7 +65,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             <span>Nom du chantier</span>
           </label>
           <label className="ConstructionSiteForm__label" htmlFor="status">
-            <select className="ConstructionSiteForm__select" type="text" name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <select className={status === 1 ? "ConstructionSiteForm__select" : "ConstructionSiteForm__select--value"} type="text" name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
               <option value="1" disabled>Etat du chantier</option>
               {stateConstruction.map((data) => (
                 <option key={data} value={data}>
@@ -75,7 +75,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             </select>
           </label>
           <label className="ConstructionSiteForm__label" htmlFor="year">
-            <select className="ConstructionSiteForm__select" type="text" name="year" id="year" value={year} onChange={(e) => setYear(e.target.value)}>
+            <select className={year === 1 ? "ConstructionSiteForm__select" : "ConstructionSiteForm__select--value"} type="text" name="year" id="year" value={year} onChange={(e) => setYear(e.target.value)}>
               <option value="1" disabled>Année</option>
               {yearsList.map((data) => (
                 <option key={data} value={data}>
@@ -101,7 +101,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             <span> date de signature </span>
           </label>
           <label className="ConstructionSiteForm__label" htmlFor="typeGrave">
-            <select className="ConstructionSiteForm__select" type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
+            <select className={type_grave === 1 ? "ConstructionSiteForm__select" : "ConstructionSiteForm__select--value"} type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
               <option value="1" disabled>Type grave</option>
               {typeGraveList.map((data) => (
                 <option key={data} value={data}>
@@ -111,7 +111,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             </select>
           </label>
           <label className="ConstructionSiteForm__label" htmlFor="typeUsage">
-            <select className="ConstructionSiteForm__select" type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
+            <select className={type_usage === 1 ? "ConstructionSiteForm__select" : "ConstructionSiteForm__select--value"} type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
               <option value="1" disabled>Type d'usage</option>
               {typeUsageList.map((data) => (
                 <option key={data} value={data}>
