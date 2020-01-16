@@ -12,13 +12,15 @@ import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
+import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayLayer,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
-  const [staticLayer, setStaticLayer] = useState(null);
+  const [staticWaterLayer, setStaticWaterLayer] = useState(null);
+  const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
@@ -58,11 +60,15 @@ function Mapper({
   }, [constructionSites, getGeoJson]);
 
   useEffect(() => {
-    if (displayLayer && !staticLayer) {
+    if (displayWaterLayer && !staticWaterLayer) {
       axios.get('/geojson/zones_inondables_66.geojson')
-        .then((response) => setStaticLayer(response.data));
+        .then((response) => setStaticWaterLayer(response.data));
     }
-  }, [displayLayer, staticLayer]);
+    if (displayLimitsLayer && !staticLimitsLayer) {
+      axios.get('/geojson/departement_66.geojson')
+        .then((response) => setStaticLimitsLayer(response.data));
+    }
+  }, [displayLimitsLayer, displayWaterLayer, staticLimitsLayer, staticWaterLayer]);
 
   // UseEffect like componentDidMount
   useEffect(() => {
@@ -70,7 +76,20 @@ function Mapper({
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
   }, []);
-  
+
+  let count = 0;
+
+  Array.from(document.querySelectorAll('.leaflet-right > *'))
+    .map(
+      (x) => (x.children.length === 0 ? 1 : x.children.length)
+      ,
+    ).map(
+      (item) => {
+        count += item;
+        return item;
+      },
+    );
+
   return (
     <div>
       <Map
@@ -86,7 +105,10 @@ function Mapper({
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
-        <PdfExport />
+        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
+          <PdfExport />
+          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
+        </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           { Number(localStorage.getItem('altermap-role')) > 1
@@ -118,6 +140,7 @@ function Mapper({
                   x.lat,
                 ]);
                 setTempCoords(coords);
+                console.log(e);
               }}
             // Deletion of polygons
               onDeleted={(e) => {
@@ -139,7 +162,19 @@ function Mapper({
             />
             )}
         </FeatureGroup>
-        {displayLayer && staticLayer && <GeoJSON data={staticLayer} />}
+        {displayWaterLayer && staticWaterLayer && <GeoJSON data={staticWaterLayer} />}
+        {displayLimitsLayer && staticLimitsLayer
+        && (
+        <GeoJSON
+          data={staticLimitsLayer}
+          style={{
+            color: 'black',
+            opacity: 0.5,
+            fill: 'rgba(0,0,0,0)',
+            fillOpacity: 0,
+          }}
+        />
+        )}
       </Map>
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} setError={setError} />

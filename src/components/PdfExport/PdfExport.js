@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import './PdfExport.css';
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import domtoimage from 'dom-to-image';
 import {
   PDFDocument, rgb,
@@ -9,8 +9,10 @@ import {
 import download from 'downloadjs';
 
 export default function PdfExport() {
-  const exportPdf = () => {
-    domtoimage.toPng(document.getElementById('Map'), { width: window.innerWidth, height: window.innerHeight })
+  const [isLoading, setIsLoading] = useState(false);
+  const exportPdf = async () => {
+    setIsLoading(true);
+    await domtoimage.toPng(document.getElementById('Map'), { width: window.innerWidth, height: window.innerHeight })
       .then(async (dataUrl) => {
         const currentDate = new Date().toISOString().split('T')[0].split('-').map((x) => Number(x)).join('-');
         const pdfDoc = await PDFDocument.create();
@@ -36,6 +38,7 @@ export default function PdfExport() {
         });
         // Download pdf create by-lib
         download(await pdfDoc.save(), `altermap-${currentDate}.pdf`, 'application/pdf');
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -43,22 +46,14 @@ export default function PdfExport() {
       });
   };
 
-  let count = 0;
-
-  Array.from(document.querySelectorAll('.leaflet-right > *'))
-    .map(
-      (x) => (x.children.length === 0 ? 1 : x.children.length)
-      ,
-    ).map(
-      (item) => {
-        count += item;
-        return item;
-      },
-    );
-
   return (
-    <button type="button" onClick={exportPdf} className="PdfExport" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
-      <Icon icon={faFilePdf} className="PdfExport__icon" />
-    </button>
+    <>
+      <button type="button" onClick={exportPdf} className="PdfExport">
+        <Icon icon={faFilePdf} className="PdfExport__icon" />
+      </button>
+      <button type="button" onClick={exportPdf} className={isLoading ? 'PdfExport__load' : 'hidden'}>
+        <Icon icon={faSpinner} className="PdfExport__icon--loader" />
+      </button>
+    </>
   );
 }

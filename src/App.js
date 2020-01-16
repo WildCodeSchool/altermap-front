@@ -7,7 +7,6 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
-import Layers from './components/Layers/Layers';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 import Administrator from './components/Admin/Administrator';
 
@@ -17,7 +16,8 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
-  const [shouldDisplayLayer, setShouldDisplayLayer] = useState(false);
+  const [shouldDisplayWaterLayer, setShouldDisplayWaterLayer] = useState(false);
+  const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
     setIsVisible(!isVisible);
@@ -29,9 +29,11 @@ function App() {
       setIsInfoOpen(!isInfoOpen);
     }
   };
-  const layerStatus = () => setShouldDisplayLayer(!shouldDisplayLayer);
+  const waterLayerStatus = () => setShouldDisplayWaterLayer(!shouldDisplayWaterLayer);
+  const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
+    localStorage.removeItem('altermap-role');
     setIsAuth(false);
   };
 
@@ -56,10 +58,12 @@ function App() {
               close={closeForm}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
-              displayLayer={shouldDisplayLayer}
+              displayWaterLayer={shouldDisplayWaterLayer}
+              displayLimitsLayer={shouldDisplayLimitsLayer}
+              waterLayerStatus={waterLayerStatus}
+              limitsLayerStatus={limitsLayerStatus}
             />
             <NavBar close={closeInfo} />
-            <Layers displayLayer={layerStatus} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
               {isInfoOpen && (<Info close={closeInfo} />)}
           </Route>
@@ -72,7 +76,7 @@ function App() {
             Number(localStorage.getItem('altermap-role')) === 3 ? (
               <Administrator />
             )
-              : <Redirect to="/" />
+              : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
           }
         </Route>
       </Switch>
