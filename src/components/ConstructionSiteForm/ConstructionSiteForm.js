@@ -5,7 +5,7 @@ import axios from 'axios';
 import './ConstructionSiteForm.css';
 
 function ConstructionSiteForm({ id, coords, incomingData }) {
-  const stateConstruction = ['PROSPECTION', 'EN COURS', 'ANNULE', 'TERMINE'];
+  const stateConstruction = ['Prospection', 'En cours', 'Annulé', 'Terminé'];
   const typeUsageList = ['V1', 'V2', 'V1 ET V2', 'AUTRE'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
   const typeGraveList = ['MACHEFER', 'AUTRE'];
@@ -61,7 +61,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       <div className="ConstructionSiteForm__content">
         <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
           <label className="has-float-label" htmlFor="name">
-            <input type="text" name="name" id="name" className="ConstructionSiteForm__input" placeholder="Autoroute A6" onChange={(e) => setName(e.target.value)} required />
+            <input type="text" name="name" id="name" value={name} className="ConstructionSiteForm__input" placeholder="Autoroute A6" onChange={(e) => setName(e.target.value)} required />
             <span>Nom du chantier</span>
           </label>
           <label className="ConstructionSiteForm__label" htmlFor="status">
