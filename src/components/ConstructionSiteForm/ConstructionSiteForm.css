@@ -26,7 +26,7 @@
   .ConstructionSiteForm {
       top:calc(var(--Header-height) + 2px);
       height: calc(100vh - var(--Header-height));
-      width: calc(50Vw - 2.5rem);
+      width: calc(50vw - 2.5rem);
       border-left: 2.5rem solid rgb(255, 255, 255, .8);
   }
   .ConstructionSiteForm__icon {
