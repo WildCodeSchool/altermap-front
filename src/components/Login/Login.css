@@ -1,0 +1,73 @@
+.Login{
+  width: 100vw;
+  height: 100vh;
+}
+.Login__form{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 20px;
+}
+.Login__logo{
+  width: 250px;
+  height: auto;
+  margin-bottom: 50px;
+}
+.has-float-label{
+  width: 250px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  color:var(--primary-color);
+}
+.Login__form--input{
+  width: 100%;
+  padding-left: 5px;
+}
+.Login__form--input::placeholder{
+  color: var(--secondary-color);
+}
+.Login__form--submit{
+  margin-top: 50px;
+  padding: 15px;
+  background-color: #fff;
+  border: none;
+  width: 100%;
+  color: var(--primary-color);
+  font-size: 24px;
+  text-align: center;
+  outline:none;
+}
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

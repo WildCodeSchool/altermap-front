@@ -1,0 +1,49 @@
+.Layers{
+  min-width: 30px;
+  min-height: 30px;
+  background-color: #fff;
+  border:solid 2px var(--primary-color);
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  outline:none;
+  padding: 0;
+  transition: ease .3s;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+}
+.Layers__icon{
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  z-index: 1;
+}
+.Layers__button{
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  padding: 0;
+  margin: 0;
+  border:none;
+  outline: none;
+  transition: inherit;
+  border-radius: 5px;
+  background-color: transparent;
+}
+.expand{
+  min-width: 32px;
+  width: auto;
+  height: auto;
+}
+.show{
+  visibility: visible;
+  width: 26px;
+  height: 26px;
+}

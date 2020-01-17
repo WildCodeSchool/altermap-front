@@ -1,0 +1,47 @@
+.ConstructionSiteForm {
+  background-color: var(--NavBar-color);
+  align-items: center;
+  position: absolute;
+  bottom: var(--NavBar-height);
+  width: 100%;
+  z-index: 20;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - var(--Header-height) - var(--NavBar-height) - 2px);
+  font-size: 1rem;
+  animation: scale-up-ver-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000);
+}
+
+.ConstructionSiteForm__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 30px;
+}
+
+@media (min-width: 62em) {
+  .ConstructionSiteForm {
+      top:calc(var(--Header-height) + 2px);
+      height: calc(100vh - var(--Header-height));
+      width: calc(50Vw - 2.5rem);
+      border-left: 2.5rem solid rgb(255, 255, 255, .8);
+  }
+  .ConstructionSiteForm__icon {
+    position: fixed;
+    left:  calc(50vw - 5rem);
+  }
+}
+
+@keyframes scale-up-ver-bottom {
+  0% {
+            transform: scaleY(0.4);
+            transform-origin: 0% 100%;
+  }
+  100% {
+            transform: scaleY(1);
+            transform-origin: 0% 100%;
+  }
+}
