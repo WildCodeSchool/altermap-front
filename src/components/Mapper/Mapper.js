@@ -140,7 +140,6 @@ function Mapper({
                   x.lat,
                 ]);
                 setTempCoords(coords);
-                console.log(e);
               }}
             // Deletion of polygons
               onDeleted={(e) => {
