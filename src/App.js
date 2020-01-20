@@ -34,6 +34,7 @@ function App() {
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
+    // localStorage.removeItem('altermap-role');
     setIsAuth(false);
   };
 
@@ -73,7 +74,7 @@ function App() {
         </Route>
         <Route path="/admin">
           {
-            Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
+            localStorage.length > 0 && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
               <Administrator />
             )
               : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)

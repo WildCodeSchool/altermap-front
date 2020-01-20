@@ -2,6 +2,7 @@ import React, {
   useEffect, useState, useRef, useCallback,
 } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import {
   Map, TileLayer, ZoomControl, FeatureGroup, GeoJSON,
 } from 'react-leaflet';
@@ -111,7 +112,7 @@ function Mapper({
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          { Number(localStorage.getItem('altermap-role')) > 1
+          { Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
             <EditControl
               position="topright"
