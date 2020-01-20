@@ -6,7 +6,6 @@ import {
 export const UserList = (props) => (
   <List title="Altermap" {...props}>
     <Datagrid>
-      <TextField source="id" />
       <TextField source="lastname" />
       <TextField source="company" />
       <EmailField source="email" />
@@ -26,7 +25,6 @@ export const UserList = (props) => (
 export const UserEdit = (props) => (
   <Edit title="Editer un utilisateur" {...props}>
     <SimpleForm>
-      <TextInput disabled source="id" />
       <TextInput source="lastname" />
       <TextInput source="company" />
       <TextInput source="email" />
