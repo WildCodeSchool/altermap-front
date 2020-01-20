@@ -29,6 +29,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
   // reenforce back in terms of security (typeOf)
   const addHandleSubmit = (e) => {
     e.preventDefault();
+
     axios.post('/api/v1/construction-sites', {
       name, coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
@@ -45,8 +46,6 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-
-
   return (
     <div className="ConstructionSiteForm">
       {/* Icone to close popup and refresh page */}
@@ -149,6 +148,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             <span>Tonnage</span>
           </label>
           <button className="ConstructionSiteForm__submit" type="submit">
+
             Valider
           </button>
         </form>
