@@ -24,8 +24,8 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
+  const [incomingData, setIncomingData] = useState(null)
   const [error, setError] = useState(false);
-
   // Hook for layers
   const featureGroupRef = useRef();
 
@@ -75,8 +75,13 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
+
   }, []);
 
+  const getValue = async (id) => {
+    const response = await axios.get(`/api/v1/construction-sites/${id}`)
+    return response.data
+  }
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -89,7 +94,6 @@ function Mapper({
         return item;
       },
     );
-
   return (
     <div>
       <Map
@@ -116,22 +120,26 @@ function Mapper({
             <EditControl
               position="topright"
             // Edition of polygons
-              onEdited={(e) => {
-                // Recovery numbers of modified polygons
-                const polygonsEdit = Object.keys(e.layers._layers);
-                polygonsEdit.map((polygon) => {
-                  // Recovery id of polygon
-                  const { id } = e.layers._layers[polygon].feature.properties;
-                  // Recovery of coords
-                  const coords = e.layers._layers[polygon]._latlngs[0].map(
-                    (point) => [point.lng, point.lat],
-                  );
-                  // Set id of modified polygons
-                  setUpdatingConstructionSite(id);
-                  setTempCoords(coords);
-                  return true;
-                });
-              }}
+            onEdited={(e) => {
+              // Recovery numbers of modified polygons
+              const polygonsEdit = Object.keys(e.layers._layers);
+              polygonsEdit.forEach((polygon) => {
+                // Recovery id of polygon
+                const { id } = e.layers._layers[polygon].feature.properties;
+                // Recovery of coords
+                const coords = e.layers._layers[polygon]._latlngs[0].map(
+                  (point) => [point.lng, point.lat],
+                );
+                // Set id of modified polygons
+                setUpdatingConstructionSite(id);
+                setTempCoords(coords);
+                if (id) {
+                  getValue(id)
+                    .then(setIncomingData)
+                }
+              });
+            }}
+
             // Creation of polygons
               onCreated={(e) => {
                 // Recovery of polygon coords
@@ -178,6 +186,8 @@ function Mapper({
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} setError={setError} />
       )}
+      {updatingConstructionSite && incomingData && (
+        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       {updatingConstructionSite && (
         <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
       )}
