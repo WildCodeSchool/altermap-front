@@ -29,6 +29,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
   // reenforce back in terms of security (typeOf)
   const addHandleSubmit = (e) => {
     e.preventDefault();
+
     axios.post('/api/v1/construction-sites', {
       name, coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
@@ -45,7 +46,22 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-
+  const [name, setName] = useState('');
+  const [state, setState] = useState('');
+  const [buyer, setBuyer] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setAddress] = useState('');
+  const [num_conv, setNum_conv] = useState('');
+  const [date_sign, setDate_sign] = useState('');
+  const [type_grav, setType_grav] = useState('');
+  const [type_usage, setType_usage] = useState('');
+  const [departement, setDepartement] = useState('');
+  const [project_manager, setProject_manager] = useState('');
+  const [commentary, setCommentary] = useState('');
+  const [surface, setSurface] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [tonnage_CUB, setTonnage_CUB] = useState('');
+  const [lot, setLot] = useState('');
 
   return (
     <div className="ConstructionSiteForm">
@@ -149,6 +165,7 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
             <span>Tonnage</span>
           </label>
           <button className="ConstructionSiteForm__submit" type="submit">
+
             Valider
           </button>
         </form>
