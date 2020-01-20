@@ -3,12 +3,12 @@ import './ShowTable.css';
 import axios from 'axios';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
-  faSpinner, faPencilAlt, faTrashAlt, faSearch,
+  faSpinner, faPencilAlt, faTrashAlt, faSearch, faTimes, faCrosshairs,
 } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../Popup/Popup';
 
 export default function ShowTable({
-  setPopupStatus, popup, setPolygonToUpdate,
+  setPopupStatus, popup, setPolygonToUpdate, tableIsDisplay, setTableIsDisplay, setZoom, setPosition,
 }) {
   const [table, setTable] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,8 +32,16 @@ export default function ShowTable({
     setPopupStatus(true);
   };
 
+  const goToPoint = (coords) => {
+    setPosition(coords.reverse());
+    setZoom(17);
+  };
+
   return (
-    <div className="ShowTable">
+    <div className={tableIsDisplay ? 'ShowTable' : 'slide-down'}>
+      <button type="button" className="Info__close" onClick={() => setTableIsDisplay(false)}>
+        <Icon className="Info__icon" icon={faTimes} />
+      </button>
       {!isLoading && table
         ? (
           <>
@@ -64,6 +72,9 @@ export default function ShowTable({
                       <td className="ShowTable__line--options">
                         <button type="button" className="ShowTable__option--button" onClick={() => setPolygonToUpdate(cs.id)}>
                           <Icon icon={faPencilAlt} className="ShowTable__option--edit" />
+                        </button>
+                        <button type="button" className="ShowTable__option--button" onClick={() => goToPoint(cs.coords[0].map((x) => Number(x)))}>
+                          <Icon icon={faCrosshairs} className="ShowTable__option--delete" />
                         </button>
                         <button type="button" className="ShowTable__option--button" onClick={() => deleteCS(cs.id)}>
                           <Icon icon={faTrashAlt} className="ShowTable__option--delete" />
