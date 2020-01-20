@@ -23,7 +23,7 @@ function Mapper({
   const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
-  const [deletetionEvent, addDeletionEvent] = useState({});
+  const [deletionEvent, addDeletionEvent] = useState(null);
   const [error, setError] = useState(false);
 
   // Hook for layers
@@ -182,8 +182,8 @@ function Mapper({
         <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
       )}
       {
-        popup && (
-          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
+        popup && deletionEvent && (
+          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
 
