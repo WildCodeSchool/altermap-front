@@ -19,6 +19,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
   const [shouldDisplayWaterLayer, setShouldDisplayWaterLayer] = useState(false);
   const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
+  const [polygonToUpdate, setPolygonToUpdate] = useState(null);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
     setIsVisible(!isVisible);
@@ -63,6 +64,7 @@ function App() {
               displayLimitsLayer={shouldDisplayLimitsLayer}
               waterLayerStatus={waterLayerStatus}
               limitsLayerStatus={limitsLayerStatus}
+              polygonToUpdate={polygonToUpdate}
             />
             <NavBar close={closeInfo} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
@@ -70,6 +72,8 @@ function App() {
             <ShowTable
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
+              polygonToUpdate={polygonToUpdate}
+              setPolygonToUpdate={setPolygonToUpdate}
             />
           </Route>
           )}

@@ -4,7 +4,14 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-function ConstructionSiteForm({ id, coords }) {
+function ConstructionSiteForm({ id, coords, refreshCoords }) {
+  const [recieveCoords, setRecieveCoords] = useState(null);
+
+  if (!coords) {
+    axios.get(`/api/v1/construction-sites/${id}`)
+      .then((res) => setRecieveCoords(res.data.coords));
+  }
+
   const addHandleSubmit = (e) => {
     e.preventDefault();
     axios.post(
@@ -12,13 +19,20 @@ function ConstructionSiteForm({ id, coords }) {
       { name, coords },
     )
       // Refresh de la page si l'envoie à fonctionné
-      .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
+      .then((res) => {
+        if (res.status === 200) {
+          refreshCoords(null);
+          window.location.reload();
+        } else {
+          alert('Error on request');
+        }
+      });
   };
 
   const editHandleSubmit = (event) => {
     // Evite un refresh dont on a pas besoin et permet d'éxécuter les requêtes
     event.preventDefault();
-    axios.put(`/api/v1/construction-sites/${id}`, { state, name, coords })
+    axios.put(`/api/v1/construction-sites/${id}`, { state, name, coords: coords || recieveCoords })
       // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
@@ -49,6 +63,7 @@ function ConstructionSiteForm({ id, coords }) {
         onClick={() => window.location.reload()}
       />
       <div className="ConstructionSiteForm__header">
+        <h1>{id}</h1>
         <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
       </div>
       <div className="ConstructionSiteForm__content">

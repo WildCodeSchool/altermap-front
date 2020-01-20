@@ -15,7 +15,7 @@ import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus, polygonToUpdate,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
@@ -176,10 +176,10 @@ function Mapper({
         )}
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} setError={setError} />
+        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} setError={setError} />
       )}
-      {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
+      {(updatingConstructionSite || polygonToUpdate) && (
+      <ConstructionSiteForm id={updatingConstructionSite || polygonToUpdate} coords={tempCoords} setError={setError} />
       )}
       {
         popup && deletionEvent && (
