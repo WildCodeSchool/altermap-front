@@ -129,7 +129,7 @@ function Mapper({
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          { Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
+          {Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
               <EditControl
                 position="topright"
@@ -204,8 +204,8 @@ function Mapper({
         <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       )}
       {
-        popup && (
-          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
+        popup && deletionEvent && (
+          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
     </div>

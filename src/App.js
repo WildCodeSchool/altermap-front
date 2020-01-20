@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
+import ShowTable from './components/ShowTable/ShowTable';
 import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 import Administrator from './components/Admin/Administrator';
 
@@ -69,6 +70,10 @@ function App() {
             <NavBar close={closeInfo} />
               {isFormOpen && <ConstructionSiteForm close={closeForm} />}
               {isInfoOpen && (<Info close={closeInfo} />)}
+            <ShowTable
+              popup={isPopupOpen}
+              setPopupStatus={setIsPopupOpen}
+            />
           </Route>
           )}
         <Route path="/login">
