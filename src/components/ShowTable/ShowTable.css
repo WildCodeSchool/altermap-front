@@ -126,6 +126,9 @@
   .ShowTable__input--icon{
     right: calc(80% + 35px);
   }
+  .ShowTable{
+    bottom: 0;
+  }
 }
 @media(min-width:1024px){
   .ShowTable__input--icon{
