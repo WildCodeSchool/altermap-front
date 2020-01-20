@@ -5,7 +5,9 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../Popup/Popup';
 
-export default function ShowTable({ setPopupStatus, popup }) {
+export default function ShowTable({
+  setPopupStatus, popup, setPolygonToUpdate,
+}) {
   const [table, setTable] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
@@ -52,7 +54,7 @@ export default function ShowTable({ setPopupStatus, popup }) {
                     <td className="ShowTable__line--text">{cs.status}</td>
                     <td className="ShowTable__line--text">{cs.departement}</td>
                     <td className="ShowTable__line--options">
-                      <button type="button" className="ShowTable__option--button">
+                      <button type="button" className="ShowTable__option--button" onClick={() => setPolygonToUpdate(cs.id)}>
                         <Icon icon={faPencilAlt} className="ShowTable__option--edit" />
                       </button>
                       <button type="button" className="ShowTable__option--button" onClick={() => deleteCS(cs.id)}>

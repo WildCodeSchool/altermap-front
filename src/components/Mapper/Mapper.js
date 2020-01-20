@@ -16,7 +16,7 @@ import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus, polygonToUpdate,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
@@ -24,7 +24,7 @@ function Mapper({
   const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
-  const [deletetionEvent, addDeletionEvent] = useState({});
+  const [deletionEvent, addDeletionEvent] = useState({});
   const [waterIsLoading, setWaterIsLoading] = useState(false);
   const [limitsIsLoading, setLimitsIsLoading] = useState(false);
   const [incomingData, setIncomingData] = useState(null)
@@ -198,11 +198,10 @@ function Mapper({
           )}
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} />
+        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
       )}
-      {updatingConstructionSite && incomingData && (
-        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
-      )}
+      {(updatingConstructionSite || polygonToUpdate) && incomingData && (
+        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite || polygonToUpdate} coords={tempCoords} />)}
       {
         popup && deletionEvent && (
           <Popup setPopupStatus={setPopupStatus} deleteEvent={deletionEvent} resetDeletionEvent={addDeletionEvent} />
