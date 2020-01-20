@@ -34,7 +34,6 @@ function App() {
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
-    // localStorage.removeItem('altermap-role');
     setIsAuth(false);
   };
 

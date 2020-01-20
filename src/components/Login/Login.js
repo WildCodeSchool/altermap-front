@@ -21,7 +21,6 @@ function Login({ setIsAuth }) {
           axios.post('/api/v1/login', { email, password })
             .then((res) => {
               localStorage.setItem('altermap-token', res.data.token);
-              console.log(Number(jwtDecode(localStorage.getItem('altermap-token')).role));
               setIsAuth(true);
               setAuth(true);
             })
