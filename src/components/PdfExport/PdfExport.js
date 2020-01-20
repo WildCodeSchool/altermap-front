@@ -41,7 +41,6 @@ export default function PdfExport() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         alert('Une erreur est survenue !');
       });
   };

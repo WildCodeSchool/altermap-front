@@ -70,7 +70,6 @@ function ConstructionSiteForm({ id, coords, incomingData, refreshCoords }) {
         onClick={() => window.location.reload()}
       />
       <div className="ConstructionSiteForm__header">
-        <h1>{id}</h1>
         <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
       </div>
       <div className="ConstructionSiteForm__content">

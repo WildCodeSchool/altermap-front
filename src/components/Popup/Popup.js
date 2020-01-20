@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Popup.css';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 function Popup({
