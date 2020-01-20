@@ -8,12 +8,10 @@ import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
 import ShowTable from './components/ShowTable/ShowTable';
-import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
 import Administrator from './components/Admin/Administrator';
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
@@ -21,16 +19,11 @@ function App() {
   const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
   const [polygonToUpdate, setPolygonToUpdate] = useState(null);
   const [tableIsDisplay, setTableIsDisplay] = useState(false);
+  const [position, setPosition] = useState([42.6976, 2.8954]);
+  const [zoom, setZoom] = useState(8);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
-    setIsVisible(!isVisible);
-    if (isInfoOpen) {
-      setTimeout(() => {
-        setIsInfoOpen(!isInfoOpen);
-      }, 450);
-    } else {
-      setIsInfoOpen(!isInfoOpen);
-    }
+    setIsInfoOpen(!isInfoOpen);
   };
   const waterLayerStatus = () => setShouldDisplayWaterLayer(!shouldDisplayWaterLayer);
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
@@ -57,8 +50,8 @@ function App() {
           <Route exact path="/">
             <Header />
             <Mapper
-              position={[42.6976, 2.8954]}
-              zoom={8}
+              position={position}
+              zoom={zoom}
               close={closeForm}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
@@ -69,16 +62,17 @@ function App() {
               polygonToUpdate={polygonToUpdate}
             />
             <NavBar close={closeInfo} closeTable={closeTable} />
-              {isFormOpen && <ConstructionSiteForm close={closeForm} />}
-              {isInfoOpen && (<Info close={closeInfo} />)}
-            {tableIsDisplay && (
+            <Info close={closeInfo} isInfoOpen={isInfoOpen} />
             <ShowTable
+              tableIsDisplay={tableIsDisplay}
+              setTableIsDisplay={setTableIsDisplay}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
               polygonToUpdate={polygonToUpdate}
               setPolygonToUpdate={setPolygonToUpdate}
+              setPosition={setPosition}
+              setZoom={setZoom}
             />
-            )}
           </Route>
           )}
         <Route path="/login">
