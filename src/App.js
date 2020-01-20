@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import Mapper from './components/Mapper/Mapper';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
@@ -73,7 +74,7 @@ function App() {
         </Route>
         <Route path="/admin">
           {
-            Number(localStorage.getItem('altermap-role')) === 3 ? (
+            Number(jwt_decode(localStorage.getItem('altermap-token')).role) === 3 ? (
               <Administrator />
             )
               : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
