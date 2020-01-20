@@ -6,9 +6,9 @@ import './ConstructionSiteForm.css';
 
 function ConstructionSiteForm({ id, coords, incomingData }) {
   const stateConstruction = ['Prospection', 'En cours', 'Annulé', 'Terminé'];
-  const typeUsageList = ['V1', 'V2', 'V1 ET V2', 'AUTRE'];
+  const typeUsageList = ['V1', 'V2', 'V1 et V2', 'Autre'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
-  const typeGraveList = ['MACHEFER', 'AUTRE'];
+  const typeGraveList = ['Machefer', 'Autre'];
   const [name, setName] = useState(incomingData ? incomingData.name : '');
   const [status, setStatus] = useState(incomingData ? incomingData.status : 1);
   const [year, setYear] = useState(incomingData ? incomingData.year : 1);
