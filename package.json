@@ -20,6 +20,7 @@
     "react-leaflet": "^2.6.0",
     "react-leaflet-box-zoom": "^1.0.2",
     "react-leaflet-draw": "^0.19.0",
+    "react-leaflet-search": "^1.0.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0"
   },

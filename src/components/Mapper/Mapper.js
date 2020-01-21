@@ -9,6 +9,7 @@ import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
+import Search from "react-leaflet-search";
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
@@ -105,6 +106,15 @@ function Mapper({
         maxZoom={17} // Set zoom max
         minZoom={6} // Set zoom min
       >
+        <Search
+          position="topleft"
+          inputPlaceholder="The default text in the search bar"
+          zoom={10} // Default value is 10
+          showMarker={true}
+          showPopup={true}
+          openSearchOnLoad={false}
+          closeResultsOnClick={true}
+        />
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
