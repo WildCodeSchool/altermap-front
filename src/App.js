@@ -42,6 +42,9 @@ function App() {
     axios.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
     };
+    axios.interceptors.response.use((response) => response, (error) => Promise.reject(
+      error.response.status === 401 ? disconnect() : console.log(error),
+    ));
   }
 
   return (
