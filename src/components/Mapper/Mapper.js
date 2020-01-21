@@ -108,7 +108,7 @@ function Mapper({
       >
         <Search
           position="topleft"
-          inputPlaceholder="The default text in the search bar"
+          inputPlaceholder="adresse ou coords :lat,lng"
           zoom={10} // Default value is 10
           showMarker={true}
           showPopup={true}
