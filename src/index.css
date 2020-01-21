@@ -100,3 +100,15 @@ html {
   background-size:8px 10px
 }
 
+.MuiAppBar-colorSecondary, .MuiFab-root, .RaSaveButton-button-401{
+  background-color: var(--primary-color) !important;
+}
+.MuiButton-root, .MuiButton-text,.MuiTypography-subtitle1, .Mui-checked{
+  color:var(--primary-color) !important;
+}
+.column-email a {
+  text-decoration: none !important;
+}
+.RaSaveButton-button-401{
+  color:white !important;
+}
