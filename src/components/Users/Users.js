@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton, email,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton, email, SelectInput,
 } from 'react-admin';
-import { required } from 'ra-core';
 
 const validateEmail = email();
 
@@ -11,6 +10,7 @@ export const UserList = (props) => (
     <Datagrid>
       <TextField source="lastname" />
       <TextField source="company" />
+      <TextField source="role" />
       <EmailField source="email" />
       <EditButton />
     </Datagrid>
@@ -22,6 +22,14 @@ export const UserEdit = (props) => (
     <SimpleForm>
       <TextInput source="lastname" />
       <TextInput source="company" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: '1', name: 'Lecture seul' },
+          { id: '2', name: 'Chef' },
+          { id: '3', name: 'Superadmin' },
+        ]}
+      />
       <TextInput source="email" validate={validateEmail} />
       <TextInput source="password" />
     </SimpleForm>
@@ -44,6 +52,14 @@ export const UserCreate = (props) => (
     <SimpleForm toolbar={<UserCreateToolbar />}>
       <TextInput source="lastname" />
       <TextInput source="company" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: '1', name: 'Lecture seul' },
+          { id: '2', name: 'Chef' },
+          { id: '3', name: 'Super Admin' },
+        ]}
+      />
       <TextInput source="email" validate={validateEmail} />
       <TextInput source="password" />
     </SimpleForm>
