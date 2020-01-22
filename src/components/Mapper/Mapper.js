@@ -25,7 +25,6 @@ function Mapper({
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
   const [incomingData, setIncomingData] = useState(null)
-  const [error, setError] = useState(false);
   // Hook for layers
   const featureGroupRef = useRef();
 
@@ -183,24 +182,14 @@ function Mapper({
             />
           )}
       </Map>
-      {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} setError={setError} />
-      )}
       {updatingConstructionSite && incomingData && (
         <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
-      )}
-      {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
       )}
       {
         popup && (
           <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
-
-      <div id="snackbar" className={error ? 'show' : ''}>
-        Vos informations sont incorrectes
-      </div>
     </div>
   );
 }
