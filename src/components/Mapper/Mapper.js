@@ -24,6 +24,8 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
+  const [waterIsLoading, setWaterIsLoading] = useState(false);
+  const [limitsIsLoading, setLimitsIsLoading] = useState(false);
   const [incomingData, setIncomingData] = useState(null)
   // Hook for layers
   const featureGroupRef = useRef();
@@ -59,13 +61,25 @@ function Mapper({
   }, [constructionSites, getGeoJson]);
 
   useEffect(() => {
+    let Limits;
+    let Water;
     if (displayWaterLayer && !staticWaterLayer) {
-      axios.get('/geojson/zones_inondables_66.geojson')
-        .then((response) => setStaticWaterLayer(response.data));
+      Water = async () => {
+        setWaterIsLoading(true);
+        await axios.get('/geojson/zones_inondables_66.geojson')
+          .then((response) => setStaticWaterLayer(response.data));
+        setWaterIsLoading(false);
+      };
+      Water();
     }
     if (displayLimitsLayer && !staticLimitsLayer) {
-      axios.get('/geojson/departement_66.geojson')
-        .then((response) => setStaticLimitsLayer(response.data));
+      Limits = async () => {
+        setLimitsIsLoading(true);
+        await axios.get('/geojson/departement_66.geojson')
+          .then((response) => setStaticLimitsLayer(response.data));
+        setLimitsIsLoading(false);
+      };
+      Limits();
     }
   }, [displayLimitsLayer, displayWaterLayer, staticLimitsLayer, staticWaterLayer]);
 
@@ -110,7 +124,7 @@ function Mapper({
         <BoxZoomControl position="topright" />
         <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
           <PdfExport />
-          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
+          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>

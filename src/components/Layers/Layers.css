@@ -47,3 +47,40 @@
   width: 26px;
   height: 26px;
 }
+
+.Layers__load{
+  position: absolute;
+  left: 0;
+  top: -5px;
+  z-index: 10;
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  border:none;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  padding: 0;
+  outline: none;
+}
+.Layers__icon--loader{
+  animation: loader 1s forwards infinite;
+}
+.Layers__div{
+  margin: 0;
+  padding: 0;
+  height: 26px;
+  width: 26px;
+  position: relative;
+}
+
+@keyframes loader {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
