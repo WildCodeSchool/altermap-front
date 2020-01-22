@@ -1,7 +1,10 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton, email,
 } from 'react-admin';
+import { required } from 'ra-core';
+
+const validateEmail = email();
 
 export const UserList = (props) => (
   <List title="Altermap" {...props}>
@@ -14,20 +17,13 @@ export const UserList = (props) => (
   </List>
 );
 
-// const UserTitle = ({ record }) => (
-//   <span>
-// Post
-//     {' '}
-//     {record ? `"${record.title}"` : ''}
-//   </span>
-// );
-
 export const UserEdit = (props) => (
   <Edit title="Editer un utilisateur" {...props}>
     <SimpleForm>
       <TextInput source="lastname" />
       <TextInput source="company" />
-      <TextInput source="email" />
+      <TextInput source="email" validate={validateEmail} />
+      <TextInput source="password" />
     </SimpleForm>
   </Edit>
 );
@@ -48,7 +44,7 @@ export const UserCreate = (props) => (
     <SimpleForm toolbar={<UserCreateToolbar />}>
       <TextInput source="lastname" />
       <TextInput source="company" />
-      <TextInput source="email" />
+      <TextInput source="email" validate={validateEmail} />
       <TextInput source="password" />
     </SimpleForm>
   </Create>
