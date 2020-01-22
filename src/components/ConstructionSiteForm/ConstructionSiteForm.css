@@ -26,6 +26,15 @@
 
 }
 
+.ConstructionSiteForm__page--active{
+  display: block ;
+}
+
+.ConstructionSiteForm__page--inactive{
+  display: none;
+}
+
+
 @media (min-width: 62em) {
   .ConstructionSiteForm {
       top:calc(var(--Header-height) + 2px);
