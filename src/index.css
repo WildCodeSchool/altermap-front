@@ -100,7 +100,7 @@ html {
   background-size:8px 10px
 }
 
-.MuiAppBar-colorSecondary, .MuiFab-root, .RaSaveButton-button-401{
+.MuiAppBar-colorSecondary, .MuiFab-root, button[aria-label = "Save"]{
   background-color: var(--primary-color) !important;
 }
 .MuiButton-root, .MuiButton-text,.MuiTypography-subtitle1, .Mui-checked{
@@ -109,6 +109,6 @@ html {
 .column-email a {
   text-decoration: none !important;
 }
-.RaSaveButton-button-401{
+button[aria-label = "Save"]{
   color:white !important;
 }
