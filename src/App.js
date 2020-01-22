@@ -18,6 +18,8 @@ function App() {
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
   const [shouldDisplayWaterLayer, setShouldDisplayWaterLayer] = useState(false);
   const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
+  const [position, setPosition] = useState([42.6976, 2.8954]);
+  const [zoom, setZoom] = useState(8);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
     setIsVisible(!isVisible);
@@ -51,10 +53,10 @@ function App() {
         { isAuth // Condition to escape error from authorization
           && (
           <Route exact path="/">
-            <Header />
+            <Header setPosition={setPosition} setZoom={setZoom} />
             <Mapper
-              position={[42.6976, 2.8954]}
-              zoom={8}
+              position={position}
+              zoom={zoom}
               close={closeForm}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}

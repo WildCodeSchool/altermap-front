@@ -9,7 +9,6 @@ import { BoxZoomControl } from 'react-leaflet-box-zoom';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import './Mapper.css';
-import Search from "react-leaflet-search";
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
 import PdfExport from '../PdfExport/PdfExport';
@@ -25,7 +24,7 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
-  const [incomingData, setIncomingData] = useState(null)
+  const [incomingData, setIncomingData] = useState(null);
   const [error, setError] = useState(false);
   // Hook for layers
   const featureGroupRef = useRef();
@@ -76,13 +75,12 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
-
   }, []);
 
   const getValue = async (id) => {
-    const response = await axios.get(`/api/v1/construction-sites/${id}`)
-    return response.data
-  }
+    const response = await axios.get(`/api/v1/construction-sites/${id}`);
+    return response.data;
+  };
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -106,15 +104,6 @@ function Mapper({
         maxZoom={17} // Set zoom max
         minZoom={6} // Set zoom min
       >
-        <Search
-          position="topleft"
-          inputPlaceholder="adresse ou coords :lat,lng"
-          zoom={10} // Default value is 10
-          showMarker={true}
-          showPopup={true}
-          openSearchOnLoad={false}
-          closeResultsOnClick={true}
-        />
         {/* Fond de carte */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
@@ -145,7 +134,7 @@ function Mapper({
                     setTempCoords(coords);
                     if (id) {
                       getValue(id)
-                        .then(setIncomingData)
+                        .then(setIncomingData);
                     }
                   });
                 }}

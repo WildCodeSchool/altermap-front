@@ -58,12 +58,6 @@
   align-items: right;
 }
 
-/* searchBar button */
-.leaflet-top .leaflet-control {/* 
-  margin-top: calc(var(--Header-height) + (var(--NavBar-height)*2)); */
-  margin-top: var(--Header-height);
-}
-
 .leaflet-left .leaflet-control {
   margin-left: 0;
 }
@@ -71,11 +65,4 @@
   border-right: var(--primary-color) solid 2px !important;
   border-bottom: var(--primary-color) solid 2px !important;
   text-align: center;
-}
-
-/* media query laptops */
-@media (min-width: 62em) {
-  .leaflet-top .leaflet-control {
-    margin-top: calc(var(--Header-height) + (var(--NavBar-height)*2));
-  }
 }
