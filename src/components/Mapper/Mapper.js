@@ -25,8 +25,9 @@ function Mapper({
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
   const [deletetionEvent, addDeletionEvent] = useState({});
-  const [error, setError] = useState(false);
-
+  const [waterIsLoading, setWaterIsLoading] = useState(false);
+  const [limitsIsLoading, setLimitsIsLoading] = useState(false);
+  const [incomingData, setIncomingData] = useState(null)
   // Hook for layers
   const featureGroupRef = useRef();
 
@@ -61,13 +62,25 @@ function Mapper({
   }, [constructionSites, getGeoJson]);
 
   useEffect(() => {
+    let Limits;
+    let Water;
     if (displayWaterLayer && !staticWaterLayer) {
-      axios.get('/geojson/zones_inondables_66.geojson')
-        .then((response) => setStaticWaterLayer(response.data));
+      Water = async () => {
+        setWaterIsLoading(true);
+        await axios.get('/geojson/zones_inondables_66.geojson')
+          .then((response) => setStaticWaterLayer(response.data));
+        setWaterIsLoading(false);
+      };
+      Water();
     }
     if (displayLimitsLayer && !staticLimitsLayer) {
-      axios.get('/geojson/departement_66.geojson')
-        .then((response) => setStaticLimitsLayer(response.data));
+      Limits = async () => {
+        setLimitsIsLoading(true);
+        await axios.get('/geojson/departement_66.geojson')
+          .then((response) => setStaticLimitsLayer(response.data));
+        setLimitsIsLoading(false);
+      };
+      Limits();
     }
   }, [displayLimitsLayer, displayWaterLayer, staticLimitsLayer, staticWaterLayer]);
 
@@ -76,8 +89,13 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
+
   }, []);
 
+  const getValue = async (id) => {
+    const response = await axios.get(`/api/v1/construction-sites/${id}`)
+    return response.data
+  }
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -90,7 +108,6 @@ function Mapper({
         return item;
       },
     );
-
   return (
     <div>
       <Map
@@ -108,89 +125,89 @@ function Mapper({
         <BoxZoomControl position="topright" />
         <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
           <PdfExport />
-          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
+          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
           { Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
-            <EditControl
-              position="topright"
-            // Edition of polygons
-              onEdited={(e) => {
-                // Recovery numbers of modified polygons
-                const polygonsEdit = Object.keys(e.layers._layers);
-                polygonsEdit.map((polygon) => {
-                  // Recovery id of polygon
-                  const { id } = e.layers._layers[polygon].feature.properties;
-                  // Recovery of coords
-                  const coords = e.layers._layers[polygon]._latlngs[0].map(
-                    (point) => [point.lng, point.lat],
-                  );
-                  // Set id of modified polygons
-                  setUpdatingConstructionSite(id);
-                  setTempCoords(coords);
-                  return true;
-                });
-              }}
-            // Creation of polygons
-              onCreated={(e) => {
-                // Recovery of polygon coords
-                const coords = e.layer.editing.latlngs[0][0].map((x) => [
-                  x.lng,
-                  x.lat,
-                ]);
-                setTempCoords(coords);
-              }}
-            // Deletion of polygons
-              onDeleted={(e) => {
-                // Open popup
-                setPopupStatus(true);
-                // store event
-                addDeletionEvent(e);
-              }}
+              <EditControl
+                position="topright"
+                // Edition of polygons
+                onEdited={(e) => {
+                  // Recovery numbers of modified polygons
+                  const polygonsEdit = Object.keys(e.layers._layers);
+                  polygonsEdit.forEach((polygon) => {
+                    // Recovery id of polygon
+                    const { id } = e.layers._layers[polygon].feature.properties;
+                    // Recovery of coords
+                    const coords = e.layers._layers[polygon]._latlngs[0].map(
+                      (point) => [point.lng, point.lat],
+                    );
+                    // Set id of modified polygons
+                    setUpdatingConstructionSite(id);
+                    setTempCoords(coords);
+                    if (id) {
+                      getValue(id)
+                        .then(setIncomingData)
+                    }
+                  });
+                }}
 
-              edit={{ remove: true }}
-              draw={{
-                marker: false,
-                circle: false,
-                rectangle: false,
-                polygon: true,
-                polyline: false,
-                circlemarker: false,
-              }}
-            />
+                // Creation of polygons
+                onCreated={(e) => {
+                  // Recovery of polygon coords
+                  const coords = e.layer.editing.latlngs[0][0].map((x) => [
+                    x.lng,
+                    x.lat,
+                  ]);
+                  setTempCoords(coords);
+                }}
+                // Deletion of polygons
+                onDeleted={(e) => {
+                  // Open popup
+                  setPopupStatus(true);
+                  // store event
+                  addDeletionEvent(e);
+                }}
+
+                edit={{ remove: true }}
+                draw={{
+                  marker: false,
+                  circle: false,
+                  rectangle: false,
+                  polygon: true,
+                  polyline: false,
+                  circlemarker: false,
+                }}
+              />
             )}
         </FeatureGroup>
         {displayWaterLayer && staticWaterLayer && <GeoJSON data={staticWaterLayer} />}
         {displayLimitsLayer && staticLimitsLayer
-        && (
-        <GeoJSON
-          data={staticLimitsLayer}
-          style={{
-            color: 'black',
-            opacity: 0.5,
-            fill: 'rgba(0,0,0,0)',
-            fillOpacity: 0,
-          }}
-        />
-        )}
+          && (
+            <GeoJSON
+              data={staticLimitsLayer}
+              style={{
+                color: 'black',
+                opacity: 0.5,
+                fill: 'rgba(0,0,0,0)',
+                fillOpacity: 0,
+              }}
+            />
+          )}
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} setError={setError} />
+        <ConstructionSiteForm coords={tempCoords} />
       )}
-      {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
+      {updatingConstructionSite && incomingData && (
+        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       )}
       {
         popup && (
           <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
-
-      <div id="snackbar" className={error ? 'show' : ''}>
-        Vos informations sont incorrectes
-      </div>
     </div>
   );
 }
