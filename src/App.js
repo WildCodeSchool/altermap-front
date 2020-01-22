@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import Mapper from './components/Mapper/Mapper';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
@@ -33,7 +34,6 @@ function App() {
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
-    localStorage.removeItem('altermap-role');
     setIsAuth(false);
   };
 
@@ -73,7 +73,7 @@ function App() {
         </Route>
         <Route path="/admin">
           {
-            Number(localStorage.getItem('altermap-role')) === 3 ? (
+            localStorage.length > 0 && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
               <Administrator />
             )
               : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
