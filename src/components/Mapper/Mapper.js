@@ -196,6 +196,9 @@ function Mapper({
             />
           )}
       </Map>
+      {tempCoords && (
+        <ConstructionSiteForm coords={tempCoords} />
+      )}
       {updatingConstructionSite && incomingData && (
         <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
       )}
