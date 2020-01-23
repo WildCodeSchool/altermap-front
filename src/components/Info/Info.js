@@ -1,28 +1,23 @@
 import React from 'react';
 import './Info.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
 
-function Info({ close, visible }) {
+function Info({ close, isInfoOpen }) {
   return (
-    <div className={visible ? 'Info InfoOpen' : 'Info InfoClose'}>
-      <Link
-        to="/"
-        onClick={() => {
-          close();
-        }}
-      >
-        <Icon className="Info__icon" icon={faWindowClose} />
-      </Link>
+    <div className={isInfoOpen ? 'Info' : 'slide'}>
+      <button type="button" onClick={close} className="Info__close">
+        <Icon className="Info__icon" icon={faTimes} />
+      </button>
       <div className="Info__header">
         <Logo />
         <h1 className="Info__header-title">Altermap</h1>
       </div>
       <div className="Info__content">
-        <p>
+        <p className="Info__content--p">
           Carte des contraintes environnementales liées à l'Arrêté du 18.11.11
           relatif à la valorisation des mâchefers d'incinération en technique
           routière. Voir la notice complète du produit et les clauses générales
