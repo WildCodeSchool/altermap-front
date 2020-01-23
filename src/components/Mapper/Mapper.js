@@ -27,7 +27,7 @@ function Mapper({
   const [deletionEvent, addDeletionEvent] = useState({});
   const [waterIsLoading, setWaterIsLoading] = useState(false);
   const [limitsIsLoading, setLimitsIsLoading] = useState(false);
-  const [incomingData, setIncomingData] = useState(null)
+  const [incomingData, setIncomingData] = useState(null);
 
   // Hook for layers
   const featureGroupRef = useRef();
