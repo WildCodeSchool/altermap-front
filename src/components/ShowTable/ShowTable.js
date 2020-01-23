@@ -27,7 +27,6 @@ export default function ShowTable({
   }, []);
 
   const deleteCS = (id) => {
-    // axios.delete(`/api/v1/construction-sites/${id}`);
     setIdToDelete(id);
     setPopupStatus(true);
   };
