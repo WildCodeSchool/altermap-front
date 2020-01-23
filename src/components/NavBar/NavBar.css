@@ -19,7 +19,7 @@
     padding: 0.875rem 1rem;
     font-size: 20px;
     background-color: transparent;
-    border:none;
+    border: none;
     outline: none;
     transition: ease .3s;
     width: 100%;
@@ -41,13 +41,14 @@
     justify-content: center;
 }
 
-.NavBar__icon{
+.NavBar__icon {
     color: var(--primary-color);
 }
 
-.NavBar__info:hover{
+.NavBar__info:hover {
     background-color: #e4e3e3;
 }
+
 /* media query laptops */
 @media (min-width: 62em) {
     .NavBar {
@@ -60,6 +61,7 @@
         border-top: white solid 2px;
         flex-direction: column;
     }
+
     .NavBar__info {
         width: 100%;
     }

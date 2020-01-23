@@ -11,19 +11,19 @@
 }
 
 
-@media(min-width:1024px){
+@media(min-width:1024px) {
     .Header {
         justify-content: flex-start;
     }
 }
 
-.Header__exitButton{
+.Header__exitButton {
     margin-right: 1vw;
     color: var(--primary-color);
     text-align: center;
     padding: 0.875rem 1rem;
     font-size: 1.5rem;
     background-color: transparent;
-    border:none;
+    border: none;
     outline: none;
 }

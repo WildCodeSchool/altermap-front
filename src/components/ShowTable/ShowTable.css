@@ -1,4 +1,4 @@
-.ShowTable{
+.ShowTable {
   position: absolute;
   left: 0;
   width: 100%;
@@ -9,7 +9,8 @@
   overflow: scroll;
   animation: slide-up 0.5s forwards;
 }
-.slide-down{
+
+.slide-down {
   position: absolute;
   left: 0;
   width: 100%;
@@ -21,7 +22,7 @@
   animation: slide-down 0.5s forwards;
 }
 
-.ShowTable__table{
+.ShowTable__table {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -29,51 +30,62 @@
   margin-top: 25px;
 }
 
-.ShowTable__header--row{
+.ShowTable__header--row {
   font-size: 18px;
   border-bottom: 2px solid var(--primary-color);
 }
 
-.ShowTable__header--row, .ShowTable__table--line{
+.ShowTable__header--row,
+.ShowTable__table--line {
   display: flex;
 }
-.ShowTable__header--text, .ShowTable__line--text, .ShowTable__line--options{
+
+.ShowTable__header--text,
+.ShowTable__line--text,
+.ShowTable__line--options {
   padding: 10px;
   width: 20%;
   text-align: center;
 }
-.ShowTable__line--text{
+
+.ShowTable__line--text {
   margin: auto;
   font-size: 16px;
 }
-.ShowTable__table--line{
+
+.ShowTable__table--line {
   border-bottom: 1px solid #000;
 }
-.ShowTable__line--options{
+
+.ShowTable__line--options {
   display: flex;
   justify-content: space-around;
 }
-.ShowTable__option--edit{
+
+.ShowTable__option--edit {
   color: var(--primary-color);
 }
-.ShowTable__option--delete{
-  color:red;
+
+.ShowTable__option--delete {
+  color: red;
 }
-.ShowTable__option--button{
+
+.ShowTable__option--button {
   border: none;
   background-color: transparent;
   padding: 10px;
   font-size: 18px;
   outline: none;
 }
-.ShowTable--noTable{
+
+.ShowTable--noTable {
   display: flex;
   justify-content: center;
   padding: 25px;
   font-size: 24px;
 }
 
-.ShowTable__load{
+.ShowTable__load {
   position: absolute;
   left: 0;
   top: 0;
@@ -90,25 +102,28 @@
   padding: 0;
   outline: none;
 }
-.ShowTable--loader{
+
+.ShowTable--loader {
   animation: loader 1s forwards infinite;
 }
 
-.ShowTable__form{
+.ShowTable__form {
   display: flex;
   align-items: center;
   padding: 10px;
   margin-top: 15px;
   justify-content: center;
 }
-.ShowTable__input--icon{
+
+.ShowTable__input--icon {
   position: absolute;
   right: calc(80%);
   font-size: 1.5rem;
   z-index: 11;
   transition: ease .3s;
 }
-.ShowTable__form--input{
+
+.ShowTable__form--input {
   width: 80%;
   padding: 10px;
   padding-left: 45px;
@@ -118,65 +133,79 @@
   transition: ease .3s;
   font-size: 18px;
 }
-.ShowTable__form--input:focus{
+
+.ShowTable__form--input:focus {
   padding-left: 15px;
 }
-.ShowTable__form--input:focus + .ShowTable__input--icon{
+
+.ShowTable__form--input:focus+.ShowTable__input--icon {
   right: calc(10% + 35px);
 }
 
 @keyframes loader {
-  from{
+  from {
     transform: rotate(0deg);
   }
-  to{
+
+  to {
     transform: rotate(360deg);
   }
 }
-@keyframes slide-up{
-  from{
+
+@keyframes slide-up {
+  from {
     bottom: -50%;
   }
-  to{
+
+  to {
     bottom: var(--NavBar-height);
   }
 }
-@keyframes slide-down{
-  from{
+
+@keyframes slide-down {
+  from {
     bottom: var(--NavBar-height);
   }
-  to{
+
+  to {
     bottom: -50%;
   }
 }
-@media(min-width:640px){
-  .ShowTable__input--icon{
+
+@media(min-width:640px) {
+  .ShowTable__input--icon {
     right: calc(80% + 35px);
   }
-  .ShowTable{
+
+  .ShowTable {
     bottom: 0;
   }
-  @keyframes slide-up{
-    from{
+
+  @keyframes slide-up {
+    from {
       bottom: -50%;
     }
-    to{
+
+    to {
       visibility: visible;
       bottom: 0;
     }
   }
-  @keyframes slide-down{
-    from{
+
+  @keyframes slide-down {
+    from {
       bottom: 0;
     }
-    to{
+
+    to {
       bottom: -50%;
       visibility: hidden;
     }
   }
 }
-@media(min-width:1024px){
-  .ShowTable__input--icon{
+
+@media(min-width:1024px) {
+  .ShowTable__input--icon {
     right: calc(80% + 65px);
   }
 }

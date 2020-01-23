@@ -26,25 +26,26 @@
 
 }
 
-.ConstructionSiteForm__page--active{
-  display: block ;
+.ConstructionSiteForm__page--active {
+  display: block;
 }
 
-.ConstructionSiteForm__page--inactive{
+.ConstructionSiteForm__page--inactive {
   display: none;
 }
 
 
 @media (min-width: 62em) {
   .ConstructionSiteForm {
-      top:calc(var(--Header-height) + 2px);
-      height: calc(100vh - var(--Header-height));
-      width: calc(50vw - 2.5rem);
-      border-left: 2.5rem solid rgb(255, 255, 255, .8);
+    top: calc(var(--Header-height) + 2px);
+    height: calc(100vh - var(--Header-height));
+    width: calc(50vw - 2.5rem);
+    border-left: 2.5rem solid rgb(255, 255, 255, .8);
   }
+
   .ConstructionSiteForm__icon {
     position: fixed;
-    left:  calc(50vw - 5rem);
+    left: calc(50vw - 5rem);
   }
 }
 
@@ -60,25 +61,30 @@
   padding: 20px;
 }
 
-.has-float-label{
+.has-float-label {
   width: 250px;
   margin-bottom: 25px;
   margin-top: 25px;
-  color:var(--primary-color);
+  color: var(--primary-color);
 }
-.has-float-label, .ConstructionSiteForm__label{
+
+.has-float-label,
+.ConstructionSiteForm__label {
   margin-left: 25px;
   margin-right: 25px;
-  
+
 }
-.ConstructionSiteForm__input{
+
+.ConstructionSiteForm__input {
   width: 100%;
   padding-left: 5px;
 }
-.ConstructionSiteForm--input::placeholder{
+
+.ConstructionSiteForm--input::placeholder {
   color: var(--secondary-color);
 }
-.ConstructionSiteForm__submit{
+
+.ConstructionSiteForm__submit {
   margin-top: 50px;
   padding: 15px;
   background-color: #fff;
@@ -88,22 +94,25 @@
   font-size: 24px;
   text-align: center;
 }
-.has-float-label{
+
+.has-float-label {
   width: 250px;
   margin-bottom: 25px;
   margin-top: 25px;
-  color:var(--primary-color);
+  color: var(--primary-color);
 }
-.ConstructionSiteForm__label{
+
+.ConstructionSiteForm__label {
   display: flex;
   flex-direction: column;
   font-size: 18px;
   width: 250px;
   margin-bottom: 25px;
   margin-top: 25px;
-  color:var(--primary-color);
+  color: var(--primary-color);
 }
-.ConstructionSiteForm__select{
+
+.ConstructionSiteForm__select {
   width: 100%;
   height: 100%;
   border: none;
@@ -117,7 +126,7 @@
   opacity: 0.5;
 }
 
-.ConstructionSiteForm__select--value{
+.ConstructionSiteForm__select--value {
   width: 100%;
   height: 100%;
   border: none;
@@ -132,11 +141,12 @@
 
 @keyframes scale-up-ver-bottom {
   0% {
-            transform: scaleY(0.4);
-            transform-origin: 0% 100%;
+    transform: scaleY(0.4);
+    transform-origin: 0% 100%;
   }
+
   100% {
-            transform: scaleY(1);
-            transform-origin: 0% 100%;
+    transform: scaleY(1);
+    transform-origin: 0% 100%;
   }
 }
