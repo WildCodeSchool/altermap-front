@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import logo from '../Logo/logo-altermap.png';
 import './Login.css';
 

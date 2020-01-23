@@ -2,7 +2,6 @@ import React from 'react';
 import './Info.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
 
