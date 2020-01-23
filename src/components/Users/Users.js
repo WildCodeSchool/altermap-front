@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton, email, SelectInput,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar,
+  SaveButton, email, SelectInput, BooleanInput, FormDataConsumer,
 } from 'react-admin';
 
 const validateEmail = email();
@@ -31,7 +32,11 @@ export const UserEdit = (props) => (
         ]}
       />
       <TextInput source="email" validate={validateEmail} />
-      <TextInput source="password" />
+      <BooleanInput source="editPassword" />
+      <FormDataConsumer>
+        {({ formData, ...rest }) => formData.editPassword
+                      && <TextInput source="password" {...rest} />}
+      </FormDataConsumer>
     </SimpleForm>
   </Edit>
 );
