@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
 
-function Info({ close, visible }) {
+function Info({ close, isInfoOpen }) {
   return (
-    <div className={visible ? 'Info InfoOpen' : 'Info InfoClose'}>
-      <Link to="/" onClick={close}>
+    <div className={isInfoOpen ? 'Info' : 'slide'}>
+      <button type="button" onClick={close} className="Info__close">
         <Icon className="Info__icon" icon={faTimes} />
-      </Link>
+      </button>
       <div className="Info__header">
         <Logo />
         <h1 className="Info__header-title">Altermap</h1>

@@ -8,30 +8,27 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
-import ConstructionSiteForm from './components/ConstructionSiteForm/ConstructionSiteForm';
+import ShowTable from './components/ShowTable/ShowTable';
 import Administrator from './components/Admin/Administrator';
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage['altermap-token']);
   const [shouldDisplayWaterLayer, setShouldDisplayWaterLayer] = useState(false);
   const [shouldDisplayLimitsLayer, setShouldDisplayLimitsLayer] = useState(false);
+  const [polygonToUpdate, setPolygonToUpdate] = useState(null);
+  const [tableIsDisplay, setTableIsDisplay] = useState(false);
+  const [position, setPosition] = useState([42.6976, 2.8954]);
+  const [zoom, setZoom] = useState(8);
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
-    setIsVisible(!isVisible);
-    if (isInfoOpen) {
-      setTimeout(() => {
-        setIsInfoOpen(!isInfoOpen);
-      }, 450);
-    } else {
-      setIsInfoOpen(!isInfoOpen);
-    }
+    setIsInfoOpen(!isInfoOpen);
   };
   const waterLayerStatus = () => setShouldDisplayWaterLayer(!shouldDisplayWaterLayer);
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
+  const closeTable = () => setTableIsDisplay(!tableIsDisplay);
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
     setIsAuth(false);
@@ -56,8 +53,8 @@ function App() {
           <Route exact path="/">
             <Header disconnect={disconnect} />
             <Mapper
-              position={[42.6976, 2.8954]}
-              zoom={8}
+              position={position}
+              zoom={zoom}
               close={closeForm}
               popup={isPopupOpen}
               setPopupStatus={setIsPopupOpen}
@@ -65,10 +62,20 @@ function App() {
               displayLimitsLayer={shouldDisplayLimitsLayer}
               waterLayerStatus={waterLayerStatus}
               limitsLayerStatus={limitsLayerStatus}
+              polygonToUpdate={polygonToUpdate}
             />
-            <NavBar close={closeInfo} />
-              {isFormOpen && <ConstructionSiteForm close={closeForm} />}
-              {isInfoOpen && (<Info close={closeInfo} />)}
+            <NavBar close={closeInfo} closeTable={closeTable} />
+            <Info close={closeInfo} isInfoOpen={isInfoOpen} />
+            <ShowTable
+              tableIsDisplay={tableIsDisplay}
+              setTableIsDisplay={setTableIsDisplay}
+              popup={isPopupOpen}
+              setPopupStatus={setIsPopupOpen}
+              polygonToUpdate={polygonToUpdate}
+              setPolygonToUpdate={setPolygonToUpdate}
+              setPosition={setPosition}
+              setZoom={setZoom}
+            />
           </Route>
           )}
         <Route path="/login">
