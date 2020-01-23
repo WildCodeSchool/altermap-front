@@ -63,7 +63,7 @@ export default function SearchBar({ setCitySearch, setZoom, setPosition }) {
                   searchResult.map((city) => (
                     <button
                       type="button"
-                      onClick={() => validDestination(city.coordinates, city.nom)}
+                      onClick={() => validDestination(city.coordinates, `${city.nom} (${city.code.substring(0, 2)})`)}
                       key={`${city.nom} ${Math.random() * 45 + 5}`}
                       className="SearchBar__button"
                     >
