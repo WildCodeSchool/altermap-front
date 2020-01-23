@@ -28,6 +28,7 @@ function Mapper({
   const [waterIsLoading, setWaterIsLoading] = useState(false);
   const [limitsIsLoading, setLimitsIsLoading] = useState(false);
   const [incomingData, setIncomingData] = useState(null)
+
   // Hook for layers
   const featureGroupRef = useRef();
 
@@ -89,13 +90,12 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
-
   }, []);
 
   const getValue = async (id) => {
-    const response = await axios.get(`/api/v1/construction-sites/${id}`)
-    return response.data
-  }
+    const response = await axios.get(`/api/v1/construction-sites/${id}`);
+    return response.data;
+  };
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -149,7 +149,7 @@ function Mapper({
                     setTempCoords(coords);
                     if (id) {
                       getValue(id)
-                        .then(setIncomingData)
+                        .then(setIncomingData);
                     }
                   });
                 }}
