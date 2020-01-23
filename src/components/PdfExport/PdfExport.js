@@ -41,7 +41,6 @@ export default function PdfExport() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         alert('Une erreur est survenue !');
       });
   };
@@ -51,7 +50,7 @@ export default function PdfExport() {
       <button type="button" onClick={exportPdf} className="PdfExport">
         <Icon icon={faFilePdf} className="PdfExport__icon" />
       </button>
-      <button type="button" onClick={exportPdf} className={isLoading ? 'PdfExport__load' : 'hidden'}>
+      <button type="button" className={isLoading ? 'PdfExport__load' : 'hidden'}>
         <Icon icon={faSpinner} className="PdfExport__icon--loader" />
       </button>
     </>

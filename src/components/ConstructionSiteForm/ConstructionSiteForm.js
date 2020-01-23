@@ -5,7 +5,7 @@ import axios from 'axios';
 import './ConstructionSiteForm.css';
 import { Redirect } from 'react-router-dom';
 
-function ConstructionSiteForm({ id, coords, incomingData }) {
+function ConstructionSiteForm({ id, coords, incomingData, refreshCoords }) {
   const stateConstruction = ['Prospection', 'En cours', 'Annulé', 'Terminé'];
   const typeUsageList = ['V1', 'V2', 'V1 et V2', 'Autre'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
@@ -38,6 +38,15 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       setPage(3)
     }
   }
+  const [recieveCoords, setRecieveCoords] = useState(null);
+  // useReducer instead of all those useState
+  // reenforce back in terms of security (typeOf)
+
+  if (!coords) {
+    axios.get(`/api/v1/construction-sites/${id}`)
+      .then((res) => setRecieveCoords(res.data.coords));
+  }
+
   const addHandleSubmit = (e) => {
     redirectField()
     e.preventDefault();
@@ -46,7 +55,14 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
       name, coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
       // Refresh de la page si l'envoie à fonctionné
-      .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
+      .then((res) => {
+        if (res.status === 200) {
+          refreshCoords(null);
+          window.location.reload();
+        } else {
+          alert('Error on request');
+        }
+      });
   };
 
   const editHandleSubmit = (event) => {
@@ -54,8 +70,9 @@ function ConstructionSiteForm({ id, coords, incomingData }) {
     redirectField()
     event.preventDefault();
     axios.put(`/api/v1/construction-sites/${id}`, {
-      name, coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
+      name, coords: coords || recieveCoords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
+
       // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };

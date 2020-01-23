@@ -2,6 +2,7 @@ import React, {
   useEffect, useState, useRef, useCallback,
 } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import {
   Map, TileLayer, ZoomControl, FeatureGroup, GeoJSON,
 } from 'react-leaflet';
@@ -15,7 +16,7 @@ import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus,
+  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus, polygonToUpdate,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
@@ -23,9 +24,11 @@ function Mapper({
   const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
   const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
-  const [deletetionEvent, addDeletionEvent] = useState({});
+  const [deletionEvent, addDeletionEvent] = useState({});
+  const [waterIsLoading, setWaterIsLoading] = useState(false);
+  const [limitsIsLoading, setLimitsIsLoading] = useState(false);
   const [incomingData, setIncomingData] = useState(null)
-  const [error, setError] = useState(false);
+
   // Hook for layers
   const featureGroupRef = useRef();
 
@@ -60,13 +63,25 @@ function Mapper({
   }, [constructionSites, getGeoJson]);
 
   useEffect(() => {
+    let Limits;
+    let Water;
     if (displayWaterLayer && !staticWaterLayer) {
-      axios.get('/geojson/zones_inondables_66.geojson')
-        .then((response) => setStaticWaterLayer(response.data));
+      Water = async () => {
+        setWaterIsLoading(true);
+        await axios.get('/geojson/zones_inondables_66.geojson')
+          .then((response) => setStaticWaterLayer(response.data));
+        setWaterIsLoading(false);
+      };
+      Water();
     }
     if (displayLimitsLayer && !staticLimitsLayer) {
-      axios.get('/geojson/departement_66.geojson')
-        .then((response) => setStaticLimitsLayer(response.data));
+      Limits = async () => {
+        setLimitsIsLoading(true);
+        await axios.get('/geojson/departement_66.geojson')
+          .then((response) => setStaticLimitsLayer(response.data));
+        setLimitsIsLoading(false);
+      };
+      Limits();
     }
   }, [displayLimitsLayer, displayWaterLayer, staticLimitsLayer, staticWaterLayer]);
 
@@ -75,13 +90,12 @@ function Mapper({
     axios
       .get('/api/v1/construction-sites')
       .then((response) => setConstructionSites(response.data));
-
   }, []);
 
   const getValue = async (id) => {
-    const response = await axios.get(`/api/v1/construction-sites/${id}`)
-    return response.data
-  }
+    const response = await axios.get(`/api/v1/construction-sites/${id}`);
+    return response.data;
+  };
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -111,11 +125,11 @@ function Mapper({
         <BoxZoomControl position="topright" />
         <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
           <PdfExport />
-          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} />
+          <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          {Number(localStorage.getItem('altermap-role')) > 1
+          {Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
               <EditControl
                 position="topright"
@@ -135,7 +149,7 @@ function Mapper({
                     setTempCoords(coords);
                     if (id) {
                       getValue(id)
-                        .then(setIncomingData)
+                        .then(setIncomingData);
                     }
                   });
                 }}
@@ -184,23 +198,15 @@ function Mapper({
           )}
       </Map>
       {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} setError={setError} />
+        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
       )}
-      {updatingConstructionSite && incomingData && (
-        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite} coords={tempCoords} />
-      )}
-      {updatingConstructionSite && (
-        <ConstructionSiteForm id={updatingConstructionSite} coords={tempCoords} setError={setError} />
-      )}
+      {(updatingConstructionSite || polygonToUpdate) && incomingData && (
+        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite || polygonToUpdate} coords={tempCoords} />)}
       {
-        popup && (
-          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletetionEvent} resetDeletionEvent={addDeletionEvent} />
+        popup && deletionEvent && (
+          <Popup setPopupStatus={setPopupStatus} deleteEvent={deletionEvent} resetDeletionEvent={addDeletionEvent} />
         )
       }
-
-      <div id="snackbar" className={error ? 'show' : ''}>
-        Vos informations sont incorrectes
-      </div>
     </div>
   );
 }
