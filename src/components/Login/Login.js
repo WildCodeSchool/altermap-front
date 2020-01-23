@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import logo from '../Logo/logo-altermap.png';
 import './Login.css';
+
 
 function Login({ setIsAuth }) {
   const [email, setEmail] = useState('');
@@ -19,7 +21,6 @@ function Login({ setIsAuth }) {
           axios.post('/api/v1/login', { email, password })
             .then((res) => {
               localStorage.setItem('altermap-token', res.data.token);
-              localStorage.setItem('altermap-role', res.data.role.fulfillmentValue.role);
               setIsAuth(true);
               setAuth(true);
             })
