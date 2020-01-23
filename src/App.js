@@ -54,7 +54,7 @@ function App() {
         { isAuth // Condition to escape error from authorization
           && (
           <Route exact path="/">
-            <Header />
+            <Header disconnect={disconnect} />
             <Mapper
               position={[42.6976, 2.8954]}
               zoom={8}
