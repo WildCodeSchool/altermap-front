@@ -20,6 +20,7 @@ export default function SearchBar({ setCitySearch, setZoom, setPosition }) {
     const result = await axios.post('/api/v1/cities', { search: value });
     setSearchResult(result.data);
     setShowResult(true);
+    console.log(result.data);
   };
 
   const latLong = () => {
@@ -62,11 +63,15 @@ export default function SearchBar({ setCitySearch, setZoom, setPosition }) {
                   searchResult.map((city) => (
                     <button
                       type="button"
-                      onClick={() => validDestination(city.coordinates, city.nom)}
+                      onClick={() => validDestination(city.coordinates, `${city.nom} (${city.code.substring(0, 2)})`)}
                       key={`${city.nom} ${Math.random() * 45 + 5}`}
                       className="SearchBar__button"
                     >
                       {city.nom}
+                      {' '}
+                      (
+                      {city.code.substring(0, 2)}
+                      )
                     </button>
                   ))
                 }
