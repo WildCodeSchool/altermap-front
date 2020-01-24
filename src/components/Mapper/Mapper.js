@@ -35,7 +35,7 @@ function Mapper({
   const [deletionEvent, addDeletionEvent] = useState(null);
   const [waterIsLoading, setWaterIsLoading] = useState(false);
   const [limitsIsLoading, setLimitsIsLoading] = useState(false);
-  const [editCoordinates, setEditCoordinates] = useState(null);
+  const [editConstructionSite, setEditConstructionSite] = useState(null);
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -115,10 +115,10 @@ function Mapper({
 
   const coordsOfPolygonUpdate = () => {
     axios.get(`/api/v1/construction-sites/${polygonToUpdate}`)
-      .then((res) => setEditCoordinates(res.data));
+      .then((res) => setEditConstructionSite(res.data));
   };
 
-  if (polygonToUpdate && !editCoordinates) {
+  if (polygonToUpdate && !editConstructionSite) {
     coordsOfPolygonUpdate();
   }
 
@@ -210,8 +210,8 @@ function Mapper({
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
       )}
-      {polygonToUpdate && editCoordinates && (
-        <ConstructionSiteForm id={polygonToUpdate} coords={editCoordinates} />
+      {polygonToUpdate && editConstructionSite && (
+        <ConstructionSiteForm id={polygonToUpdate} constructionSite={editConstructionSite} />
       )}
       {
         popup && deletionEvent && (
