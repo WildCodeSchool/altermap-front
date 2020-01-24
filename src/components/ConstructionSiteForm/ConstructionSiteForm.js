@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './ConstructionSiteForm.css';
 
-function ConstructionSiteForm({ id, coords, refreshCoords }) {
-  console.log(coords);
+function ConstructionSiteForm({
+  id, constructionSite, coords, refreshCoords,
+}) {
   const stateConstruction = ['Prospection', 'En cours', 'Annulé', 'Terminé'];
   const typeUsageList = ['V1', 'V2', 'V1 et V2', 'Autre'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
   const typeGraveList = ['Machefer', 'Autre'];
 
-  const [name, setName] = useState(coords ? coords.name : '');
-  const [status, setStatus] = useState(coords ? coords.status : 1);
-  const [year, setYear] = useState(coords ? coords.year : 1);
-  const [buyer, setBuyer] = useState(coords ? coords.buyer : '');
-  const [contact, setContact] = useState(coords ? coords.contact : '');
-  const [num_conv, setNumConv] = useState(coords ? coords.num_conv : '');
-  const [date_sign, setDateSign] = useState(coords ? coords.date_sign : '');
-  const [type_grave, setTypeGrave] = useState(coords ? coords.type_grave : 1);
-  const [type_usage, setTypeUsage] = useState(coords ? coords.type_usage : 1);
-  const [departement, setDepartement] = useState(coords ? coords.departement : '');
-  const [project_manager, setProjectManager] = useState(coords ? coords.project_manager : '');
-  const [commentary, setCommentary] = useState(coords ? coords.commentary : '');
-  const [area, setArea] = useState(coords ? coords.area : '');
-  const [photo, setPhoto] = useState(coords ? coords.photo : '');
-  const [lots, setLots] = useState(coords ? coords.lots : '');
-  const [tonnage, setTonnage] = useState(coords ? coords.tonnage : '');
+  const [name, setName] = useState(constructionSite ? constructionSite.name : '');
+  const [status, setStatus] = useState(constructionSite ? constructionSite.status : 1);
+  const [year, setYear] = useState(constructionSite ? constructionSite.year : 1);
+  const [buyer, setBuyer] = useState(constructionSite ? constructionSite.buyer : '');
+  const [contact, setContact] = useState(constructionSite ? constructionSite.contact : '');
+  const [num_conv, setNumConv] = useState(constructionSite ? constructionSite.num_conv : '');
+  const [date_sign, setDateSign] = useState(constructionSite ? constructionSite.date_sign : '');
+  const [type_grave, setTypeGrave] = useState(constructionSite ? constructionSite.type_grave : 1);
+  const [type_usage, setTypeUsage] = useState(constructionSite ? constructionSite.type_usage : 1);
+  const [departement, setDepartement] = useState(constructionSite ? constructionSite.departement : '');
+  const [project_manager, setProjectManager] = useState(constructionSite ? constructionSite.project_manager : '');
+  const [commentary, setCommentary] = useState(constructionSite ? constructionSite.commentary : '');
+  const [area, setArea] = useState(constructionSite ? constructionSite.area : '');
+  const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
+  const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
+  const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
 
 
   const [page, setPage] = useState(0);

@@ -40,7 +40,7 @@ function App() {
       Authorization: `Bearer ${token}`,
     };
     axios.interceptors.response.use((response) => response, (error) => Promise.reject(
-      error.response.status === 401 ? disconnect() : console.log(error),
+      error.response.status === 401 ? disconnect() : error,
     ));
   }
 
