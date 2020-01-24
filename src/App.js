@@ -40,7 +40,7 @@ function App() {
       Authorization: `Bearer ${token}`,
     };
     axios.interceptors.response.use((response) => response, (error) => Promise.reject(
-      error.response.status === 401 ? disconnect() : console.log(error),
+      error.response.status === 401 ? disconnect() : error,
     ));
   }
 
@@ -63,6 +63,7 @@ function App() {
               waterLayerStatus={waterLayerStatus}
               limitsLayerStatus={limitsLayerStatus}
               polygonToUpdate={polygonToUpdate}
+              setPolygonToUpdate={setPolygonToUpdate}
             />
             <NavBar close={closeInfo} closeTable={closeTable} />
             <Info close={closeInfo} isInfoOpen={isInfoOpen} />
