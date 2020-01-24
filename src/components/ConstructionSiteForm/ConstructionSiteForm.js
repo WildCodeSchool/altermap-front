@@ -73,7 +73,7 @@ function ConstructionSiteForm({
   };
   const nextPage = () => {
     setPage(page + 1);
-    redirectField();
+    !constructionSite && redirectField();
   };
 
   const prevPage = () => {
