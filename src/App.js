@@ -63,6 +63,7 @@ function App() {
               waterLayerStatus={waterLayerStatus}
               limitsLayerStatus={limitsLayerStatus}
               polygonToUpdate={polygonToUpdate}
+              setPolygonToUpdate={setPolygonToUpdate}
             />
             <NavBar close={closeInfo} closeTable={closeTable} />
             <Info close={closeInfo} isInfoOpen={isInfoOpen} />

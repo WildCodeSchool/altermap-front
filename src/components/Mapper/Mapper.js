@@ -16,18 +16,26 @@ import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
-  position, zoom, setPopupStatus, popup, displayWaterLayer, displayLimitsLayer, waterLayerStatus, limitsLayerStatus, polygonToUpdate,
+  position,
+  zoom,
+  setPopupStatus,
+  popup,
+  displayWaterLayer,
+  displayLimitsLayer,
+  waterLayerStatus,
+  limitsLayerStatus,
+  polygonToUpdate,
+  setPolygonToUpdate,
 }) {
   // Hook of polygons
   const [constructionSites, setConstructionSites] = useState([]);
   const [staticWaterLayer, setStaticWaterLayer] = useState(null);
   const [staticLimitsLayer, setStaticLimitsLayer] = useState(null);
   const [tempCoords, setTempCoords] = useState(null);
-  const [updatingConstructionSite, setUpdatingConstructionSite] = useState(null);
-  const [deletionEvent, addDeletionEvent] = useState({});
+  const [deletionEvent, addDeletionEvent] = useState(null);
   const [waterIsLoading, setWaterIsLoading] = useState(false);
   const [limitsIsLoading, setLimitsIsLoading] = useState(false);
-  const [incomingData, setIncomingData] = useState(null)
+  const [editCoordinates, setEditCoordinates] = useState(null);
 
   // Hook for layers
   const featureGroupRef = useRef();
@@ -92,10 +100,6 @@ function Mapper({
       .then((response) => setConstructionSites(response.data));
   }, []);
 
-  const getValue = async (id) => {
-    const response = await axios.get(`/api/v1/construction-sites/${id}`);
-    return response.data;
-  };
   let count = 0;
 
   Array.from(document.querySelectorAll('.leaflet-right > *'))
@@ -108,6 +112,16 @@ function Mapper({
         return item;
       },
     );
+
+  const coordsOfPolygonUpdate = () => {
+    axios.get(`/api/v1/construction-sites/${polygonToUpdate}`)
+      .then((res) => setEditCoordinates(res.data));
+  };
+
+  if (polygonToUpdate && !editCoordinates) {
+    coordsOfPolygonUpdate();
+  }
+
   return (
     <div>
       <Map
@@ -145,12 +159,8 @@ function Mapper({
                       (point) => [point.lng, point.lat],
                     );
                     // Set id of modified polygons
-                    setUpdatingConstructionSite(id);
+                    setPolygonToUpdate(id);
                     setTempCoords(coords);
-                    if (id) {
-                      getValue(id)
-                        .then(setIncomingData);
-                    }
                   });
                 }}
 
@@ -200,8 +210,9 @@ function Mapper({
       {tempCoords && (
         <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
       )}
-      {(updatingConstructionSite || polygonToUpdate) && incomingData && (
-        <ConstructionSiteForm incomingData={incomingData} id={updatingConstructionSite || polygonToUpdate} coords={tempCoords} />)}
+      {polygonToUpdate && editCoordinates && (
+        <ConstructionSiteForm id={polygonToUpdate} coords={editCoordinates} />
+      )}
       {
         popup && deletionEvent && (
           <Popup setPopupStatus={setPopupStatus} deleteEvent={deletionEvent} resetDeletionEvent={addDeletionEvent} />
