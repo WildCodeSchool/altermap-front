@@ -1,15 +1,14 @@
-.PdfExport{
-  background-color: #fff;
-  width: 30px;
-  height: 30px;
-  border: solid 2px var(--primary-color);
-  border-radius: 5px;
-  font-size: 16px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  position: relative;
-  outline: none;
+.PdfExport{   
+  font-size: 1.45rem;
+  background: white;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1px;
+  border: solid 5px black;
+  margin: 1%;
 }
 
 .PdfExport__load{
