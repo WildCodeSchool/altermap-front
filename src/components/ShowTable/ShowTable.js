@@ -39,9 +39,7 @@ export default function ShowTable({
 
   return (
     <div className={tableIsDisplay ? 'ShowTable' : 'slide-down'}>
-      <button type="button" className="Info__close" onClick={() => setTableIsDisplay(false)}>
-        <Icon className="Info__icon" icon={faTimes} />
-      </button>
+
       {!isLoading && table
         ? (
           <>
@@ -62,7 +60,7 @@ export default function ShowTable({
                           <button type="button" className="ShowTable__option--button" onClick={() => setPolygonToUpdate(cs.id)}>
                             <Icon icon={faPencilAlt} className="ShowTable__option--edit" /> Éditer
                           </button>
-                          <button type="button" className="ShowTable__option--button" onClick={() => deleteCS(cs.id)}>
+                          <button type="button" className="ShowTable__option--button--delete" onClick={() => deleteCS(cs.id)}>
                             <Icon icon={faTrashAlt} className="ShowTable__option--delete" /> Supprimer
                           </button>
                         </td>
@@ -81,7 +79,9 @@ export default function ShowTable({
             </table>
             <form className="ShowTable__form">
               <input type="text" className="ShowTable__form--input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Chantier du lac" />
-              <Icon icon={faSearch} className="ShowTable__input--icon" />
+              <div className="ShowTable__input--icon">
+                <Icon icon={faSearch} className="ShowTable__input--icon" />
+              </div>
             </form>
           </>
         )
