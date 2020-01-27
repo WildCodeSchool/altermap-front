@@ -2,6 +2,7 @@ import React from 'react';
 import './NavBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faInfo, faListUl } from '@fortawesome/free-solid-svg-icons';
+import PdfExport from '../PdfExport/PdfExport';
 
 function NavBar({ close, closeTable }) {
   return (
@@ -12,6 +13,7 @@ function NavBar({ close, closeTable }) {
       <button type="button" className="NavBar__info" onClick={closeTable}>
         <Icon icon={faListUl} className="NavBar__icon" />
       </button>
+      <PdfExport />
     </div>
   );
 }

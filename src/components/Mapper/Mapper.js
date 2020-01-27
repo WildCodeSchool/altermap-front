@@ -12,7 +12,6 @@ import L from 'leaflet';
 import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
-import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
@@ -138,7 +137,6 @@ function Mapper({
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
         <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
-          <PdfExport />
           <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
