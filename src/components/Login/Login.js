@@ -30,33 +30,31 @@ function Login({ setIsAuth }) {
         }}
       >
         <img src={logo} className="Login__logo" alt="Logo Altermap" />
-        <label htmlFor="email" className="has-float-label">
+        <label htmlFor="email" className="Login__form--label">
+          <span>Email</span>
           <input
             id="email"
-            className="Login__form--input"
             type="email"
-            name="email"
-            placeholder="alter@map.com"
+            className="Login__form--input"
+            placeholder="example@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
             required
           />
-          <span>Email</span>
         </label>
-        <label htmlFor="password" className="has-float-label">
+        <label htmlFor="password" className="Login__form--label">
+          <span>Mot de passe</span>
           <input
             id="password"
             type="password"
             className="Login__form--input"
-            name="password"
-            placeholder="*********"
+            placeholder="*****"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required
           />
-          <span>Mot de passe</span>
         </label>
         <button
           type="submit"
