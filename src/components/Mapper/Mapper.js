@@ -137,8 +137,7 @@ function Mapper({
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
-        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
-          <PdfExport />
+        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 37 * (count - 1), transition: 'ease .5s' }}>
           <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
