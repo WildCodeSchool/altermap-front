@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-export default function SearchBar({ setCitySearch, setZoom, setPosition }) {
-  const [search, setSearch] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
-  const [showResult, setShowResult] = useState(false);
-
-  const validDestination = (coords, nom) => {
-    setSearch(nom);
-    setPosition(coords);
-    setZoom(10);
-    setShowResult(false);
-  };
+export default function SearchBar({ setZoom, setPosition, setShowResult, setSearchResult, search, setSearch }) {
 
   const fetchResult = async (value) => {
     const result = await axios.post('/api/v1/cities', { search: value });
     setSearchResult(result.data);
     setShowResult(true);
-    console.log(result.data);
   };
 
   const latLong = () => {
@@ -54,30 +43,7 @@ export default function SearchBar({ setCitySearch, setZoom, setPosition }) {
           }}
           placeholder="Perpignan"
         />
-        <Icon icon={faSearch} className="SearchBar__input--icon" />
-        {
-          searchResult.length > 0 && showResult
-            && (
-              <div className="SearchBar__result">
-                {
-                  searchResult.map((city) => (
-                    <button
-                      type="button"
-                      onClick={() => validDestination(city.coordinates, `${city.nom} (${city.code.substring(0, 2)})`)}
-                      key={`${city.nom} ${Math.random() * 45 + 5}`}
-                      className="SearchBar__button"
-                    >
-                      {city.nom}
-                      {' '}
-                      (
-                      {city.code.substring(0, 2)}
-                      )
-                    </button>
-                  ))
-                }
-              </div>
-            )
-        }
+        <Icon icon={faSearchLocation} className="SearchBar__input--icon" />
       </form>
     </div>
   );

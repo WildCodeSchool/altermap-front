@@ -5,25 +5,75 @@
     align-items: center;
     position: absolute;
     width: 100%;
-    z-index: 1;
-    border-bottom: solid black 2px;
+    z-index: 10;
     margin: auto;
+    height: var(--Header-height);
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, .2);
 }
 
-
-@media(min-width:1024px){
-    .Header {
-        justify-content: flex-start;
-    }
-}
-
-.Header__exitButton{
+.Header__exitButton {
     margin-right: 1vw;
-    color: var(--primary-color);
+    color: black;
     text-align: center;
     padding: 0.875rem 1rem;
     font-size: 1.5rem;
     background-color: transparent;
-    border:none;
+    border: none;
     outline: none;
+}
+
+.SearchBar__result {
+    position: absolute;
+    top: var(--Header-height);
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    left: 0;
+    background-color: var(--NavBar-color);
+    z-index: 5;
+    font-family: 'Rubik', sans-serif;
+}
+
+.SearchBar__button {
+    font-weight: 300;
+    padding: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 16px;
+    background-color: transparent;
+    transition: ease .2s;
+    height: 32px;
+}
+
+.SearchBar__button:hover,
+.SearchBar__button:active {
+    background-color: rgba(23, 154, 56, .1);
+}
+
+.SearchBar__button--postal-code {
+    padding-left: 5px;
+    color: rgb(166, 166, 166);
+}
+
+.Header__logo {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Header__logo-image {
+    width: 60px;
+    height: auto;
+}
+
+@media(min-width:1024px) {
+    .Header {
+        justify-content: flex-start;
+    }
+
+    .SearchBar__result {
+        left: calc(var(--NavBar-height) + 28px);
+        width: 45%;
+    }
 }
