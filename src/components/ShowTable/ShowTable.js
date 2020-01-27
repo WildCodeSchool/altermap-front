@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState, useEffect } from 'react';
 import './ShowTable.css';
 import axios from 'axios';
@@ -44,42 +45,29 @@ export default function ShowTable({
       {!isLoading && table
         ? (
           <>
-            <form className="ShowTable__form">
-              <input type="text" className="ShowTable__form--input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Chantier du lac" />
-              <Icon icon={faSearch} className="ShowTable__input--icon" />
-            </form>
             <table className="ShowTable__table">
-              <thead>
-                <tr className="ShowTable__header--row">
-                  <th className="ShowTable__header--text">Référence</th>
-                  <th className="ShowTable__header--text">Année</th>
-                  <th className="ShowTable__header--text">Chef de chantier</th>
-                  <th className="ShowTable__header--text">Status</th>
-                  <th className="ShowTable__header--text">Département</th>
-                  <th className="ShowTable__header--text">Options</th>
-                </tr>
-              </thead>
               {table.filter((filter) => filter.name.includes(search)).length > 0 ? (
                 <tbody>
                   {table.filter((filter) => filter.name.includes(search)).map((cs) => (
-                    <tr className="ShowTable__table--line" key={`${cs.id} ${cs.name}`}>
-                      <td className="ShowTable__line--text">{cs.name}</td>
-                      <td className="ShowTable__line--text">{cs.year}</td>
-                      <td className="ShowTable__line--text">{cs.project_manager}</td>
-                      <td className="ShowTable__line--text">{cs.status}</td>
-                      <td className="ShowTable__line--text">{cs.departement}</td>
-                      <td className="ShowTable__line--options">
-                        <button type="button" className="ShowTable__option--button" onClick={() => setPolygonToUpdate(cs.id)}>
-                          <Icon icon={faPencilAlt} className="ShowTable__option--edit" />
-                        </button>
-                        <button type="button" className="ShowTable__option--button" onClick={() => goToPoint(cs.coords[0].map((x) => Number(x)))}>
-                          <Icon icon={faCrosshairs} className="ShowTable__option--delete" />
-                        </button>
-                        <button type="button" className="ShowTable__option--button" onClick={() => deleteCS(cs.id)}>
-                          <Icon icon={faTrashAlt} className="ShowTable__option--delete" />
-                        </button>
-                      </td>
-                    </tr>
+                    <div className="ShowTable__table--block">
+                      <tr className="ShowTable__table--line" key={`${cs.id} ${cs.name}`}>
+                        <td className="ShowTable__line--text">{cs.name}</td>
+                        <td className="ShowTable__line--text">{cs.status}</td>
+                        <td className="ShowTable__line--text">Géré par <span>{cs.project_manager}</span></td>
+                        <td className="ShowTable__line--text">Dans le <span>département {cs.departement}</span> en <span>{cs.year}</span></td>
+                        <td className="ShowTable__line--options">
+                          <button type="button" className="ShowTable__option--button" onClick={() => goToPoint(cs.coords[0].map((x) => Number(x)))}>
+                            <Icon icon={faCrosshairs} className="ShowTable__option--delete" /> Voir
+                          </button>
+                          <button type="button" className="ShowTable__option--button" onClick={() => setPolygonToUpdate(cs.id)}>
+                            <Icon icon={faPencilAlt} className="ShowTable__option--edit" /> Éditer
+                          </button>
+                          <button type="button" className="ShowTable__option--button" onClick={() => deleteCS(cs.id)}>
+                            <Icon icon={faTrashAlt} className="ShowTable__option--delete" /> Supprimer
+                          </button>
+                        </td>
+                      </tr>
+                    </div>
                   ))}
                 </tbody>
               )
@@ -91,6 +79,10 @@ export default function ShowTable({
                   </tbody>
                 )}
             </table>
+            <form className="ShowTable__form">
+              <input type="text" className="ShowTable__form--input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Chantier du lac" />
+              <Icon icon={faSearch} className="ShowTable__input--icon" />
+            </form>
           </>
         )
         : <Icon icon={faSpinner} className="ShowTable__icon--loader" />}
