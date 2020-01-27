@@ -23,6 +23,7 @@
     padding: 1px;
     border: solid 5px black;
     margin: 1%;
+    outline: none;
 }
 
 /* Change the color of links on hover */
@@ -33,11 +34,7 @@
 /* Add a color to the active/current link */
 .NavBar__info:active {
     background-color: var(--primary-color);
-    color: white;
-    width: var(--NavBar-height);
-    height: var(--NavBar-height);
-    display: flex;
-    justify-content: center;
+  
 }
 
 .NavBar__icon{
@@ -47,6 +44,15 @@
 .NavBar__info:hover{
     background-color: #e4e3e3;
 }
+
+.NavBar>button.NavBar__infoOpen {
+    border: solid 5px var(--primary-color);
+}
+.NavBar>button.NavBar__infoOpen>svg{
+    color: var(--primary-color);
+}
+
+
 /* media query laptops */
 @media (min-width: 62em) {
     .NavBar {
