@@ -78,7 +78,7 @@ export default function ShowTable({
                 )}
             </table>
             <form className="ShowTable__form">
-              <input type="text" className="ShowTable__form--input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Chantier du lac" />
+              <input type="text" className="ShowTable__form--input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher une référence" />
               <div className="ShowTable__input--icon">
                 <Icon icon={faSearch} className="ShowTable__input--icon" />
               </div>

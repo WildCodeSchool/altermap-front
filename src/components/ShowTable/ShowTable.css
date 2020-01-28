@@ -51,24 +51,28 @@ span{
 }
 
 .ShowTable__form{
-  background: red;
+  background: #179A38;
   width: 60%;
-  border: solid 2px;
   position: fixed;
   bottom: var(--NavBar-height);
   margin-bottom: 8px;
   height: 40px;
   border-radius: 5px;
+  left: 20%;
   display: flex;
-  justify-content: space-between;
 }
 
 .ShowTable__form--input{
   width: 90%;
+  height: 100%;
 }
 
 .ShowTable__input--icon{
   width: 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
