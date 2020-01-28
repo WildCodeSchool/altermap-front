@@ -39,6 +39,11 @@
   background-color: #fff !important;
   color: rgb(2, 3, 10);
   font-size: 14px;
+  transition: ease .3s;
+}
+
+.leaflet-draw-actions a:hover {
+  background-color: rgb(206, 206, 206) !important;
 }
 
 .leaflet-draw-actions li:last-child a {
@@ -63,7 +68,7 @@
 
 .leaflet-draw-draw-polygon {
   padding: 0 !important;
-  background: url("./draw-polygon-solid.svg") no-repeat center !important;
+  background: url("/images/icons/draw-polygon-solid.svg") no-repeat center !important;
   background-size: 60% !important;
   border-bottom: 2px solid rgba(255, 255, 255, .4) !important;
 }
@@ -83,7 +88,7 @@
 }
 
 #box-zoom-button {
-  background: url("./square-regular.svg") no-repeat center !important;
+  background: url("/images/icons/square-regular.svg") no-repeat center !important;
   background-size: 60% !important;
   background-color: rgb(3, 3, 10) !important;
   width: 32px !important;
@@ -96,14 +101,14 @@
 }
 
 .leaflet-draw-edit-remove {
-  background: url("./trash-alt-solid.svg") no-repeat center !important;
+  background: url("/images/icons/trash-alt-solid.svg") no-repeat center !important;
   background-size: 45% !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
 .leaflet-draw-edit-edit {
-  background: url("./pencil-alt-solid.svg") no-repeat center !important;
+  background: url("/images/icons/pencil-alt-solid.svg") no-repeat center !important;
   background-size: 60% !important;
   border-bottom: 2px solid rgba(255, 255, 255, .4) !important;
 }
