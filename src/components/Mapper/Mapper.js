@@ -65,8 +65,11 @@ function Mapper({
     if (constructionSites.length === 0) { return; }
     const leafletGeoJSON = new L.GeoJSON(getGeoJson(constructionSites));
     const leafletFG = featureGroupRef.current.leafletElement;
+    let i = 0;
     leafletGeoJSON.eachLayer((layer) => {
       leafletFG.addLayer(layer);
+      layer.bindTooltip(constructionSites[i].name, { className: "polygon__name" });
+      i++;
     });
   }, [constructionSites, getGeoJson]);
 

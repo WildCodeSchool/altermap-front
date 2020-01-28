@@ -136,9 +136,14 @@
   align-items: right;
 }
 
-
 .search-control-wrap {
   border-right: var(--primary-color) solid 2px !important;
   border-bottom: var(--primary-color) solid 2px !important;
   text-align: center;
+}
+
+.polygon__name {
+  background: white;
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
 }
