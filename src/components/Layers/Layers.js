@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Layers.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
-  faLayerGroup, faTint, faTimes, faBorderStyle, faSpinner,
+  faLayerGroup, faTint, faTimes, faBorderNone, faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Layers({
@@ -24,7 +24,7 @@ export default function Layers({
       </div>
       <div className={popupIsOpen ? 'Layers__div' : 'hidden'}>
         <button type="button" className={popupIsOpen ? 'Layers__button show' : 'Layers__button'} onClick={displayLimitsLayer}>
-          <Icon icon={faBorderStyle} className={!popupIsOpen ? 'hidden' : 'Layers__icon'} />
+          <Icon icon={faBorderNone} className={!popupIsOpen ? 'hidden' : 'Layers__icon'} />
         </button>
         <button type="button" className={limitsIsLoading ? 'Layers__load' : 'hidden'}>
           <Icon icon={faSpinner} className="PdfExport__icon--loader" />

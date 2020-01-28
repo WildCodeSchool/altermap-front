@@ -24,6 +24,10 @@
   margin-right: 10px !important;
 }
 
+.leaflet-bottom {
+  display: none !important;
+}
+
 .leaflet-draw-actions {
   right: 36px !important;
 }
