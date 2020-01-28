@@ -56,14 +56,16 @@
 /* media query laptops */
 @media (min-width: 62em) {
     .NavBar {
-        height: calc(var(--NavBar-height) * 2 + 4px);
+        height: calc(var(--NavBar-height) * 4 );
         width: var(--NavBar-height);
         left: 0;
-        top: calc(var(--Header-height) - 1px);
-        border-right: var(--primary-color) solid 2px;
-        border-bottom: var(--primary-color) solid 2px;
+        top: calc(var(--Header-height));
+        border-right: rgba(3, 3, 10, 0.26) solid 2px;
+        border-bottom: rgba(3, 3, 10, 0.26) solid 2px;
         border-top: white solid 2px;
         flex-direction: column;
+        justify-content:space-evenly;
+        padding-left: 0.4em;
     }
     .NavBar__info {
         width: 100%;
