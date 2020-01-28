@@ -49,10 +49,10 @@ export default function ShowTable({
                   {table.filter((filter) => filter.name.includes(search)).map((cs) => (
                     <div className="ShowTable__table--block">
                       <tr className="ShowTable__table--line" key={`${cs.id} ${cs.name}`}>
-                        <td className="ShowTable__line--text">{cs.name}</td>
+                        <td className="ShowTable__line--text"><h3 className="ShowTable__line--text--title">{cs.name}</h3></td>
                         <td className="ShowTable__line--text">{cs.status}</td>
-                        <td className="ShowTable__line--text">Géré par <span>{cs.project_manager}</span></td>
-                        <td className="ShowTable__line--text">Dans le <span>département {cs.departement}</span> en <span>{cs.year}</span></td>
+                        <td className="ShowTable__line--text">Géré par <span className="ShowTable__line--text--important">{cs.project_manager}</span></td>
+                        <td className="ShowTable__line--text">Dans le <span className="ShowTable__line--text--important">département {cs.departement}</span> en <span className="ShowTable__line--text--important">{cs.year}</span></td>
                         <td className="ShowTable__line--options">
                           <button type="button" className="ShowTable__option--button" onClick={() => goToPoint(cs.coords[0].map((x) => Number(x)))}>
                             <Icon icon={faCrosshairs} className="ShowTable__option--delete" /> Voir
