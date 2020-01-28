@@ -12,6 +12,7 @@
 }
 
 .Header__exitButton {
+    margin-left: auto;
     margin-right: 1vw;
     color: black;
     text-align: center;
