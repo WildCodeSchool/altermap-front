@@ -144,7 +144,7 @@ function Mapper({
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          {Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
+          {localStorage.getItem('altermap-token') && Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
               <EditControl
                 position="topright"

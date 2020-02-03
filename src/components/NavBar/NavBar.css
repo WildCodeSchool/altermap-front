@@ -1,4 +1,5 @@
 /* Place the navbar at the bottom of the page, and make it stick */
+
 .NavBar {
     background-color: rgb(255, 255, 255);
     position: absolute;
@@ -12,7 +13,8 @@
 }
 
 /* Style the links inside the navigation bar */
-.NavBar>button {    
+
+.NavBar>button {
     font-size: 1.45rem;
     background: white;
     width: 3.125rem;
@@ -27,44 +29,46 @@
 }
 
 /* Change the color of links on hover */
+
 .NavBar__info:hover {
     background-color: #ddd;
 }
 
 /* Add a color to the active/current link */
+
 .NavBar__info:active {
     background-color: var(--primary-color);
-  
 }
 
-.NavBar__icon{
+.NavBar__icon {
     color: black;
 }
 
-.NavBar__info:hover{
+.NavBar__info:hover {
     background-color: #e4e3e3;
 }
 
 .NavBar>button.NavBar__infoOpen {
     border: solid 5px var(--primary-color);
 }
-.NavBar>button.NavBar__infoOpen>svg{
+
+.NavBar>button.NavBar__infoOpen>svg {
     color: var(--primary-color);
 }
 
-
 /* media query laptops */
+
 @media (min-width: 62em) {
     .NavBar {
-        height: calc(var(--NavBar-height) * 4 );
-        width: var(--NavBar-height);
+        height: calc(var(--NavBar-height) * 4 + 24px);
+        width: calc(var(--NavBar-height) + 16px);
         left: 0;
         top: calc(var(--Header-height));
         border-right: rgba(3, 3, 10, 0.26) solid 2px;
         border-bottom: rgba(3, 3, 10, 0.26) solid 2px;
         border-top: white solid 2px;
         flex-direction: column;
-        justify-content:space-evenly;
+        justify-content: space-evenly;
         padding-left: 0.4em;
     }
     .NavBar__info {
