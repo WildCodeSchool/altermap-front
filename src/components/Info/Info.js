@@ -2,7 +2,6 @@ import React from 'react';
 import './Info.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import Logo from '../Logo/Logo';
 
 
 function Info({ close, isInfoOpen }) {
@@ -12,7 +11,6 @@ function Info({ close, isInfoOpen }) {
         <Icon className="Info__icon" icon={faTimes} />
       </button>
       <div className="Info__header">
-        <Logo />
         <h1 className="Info__header-title">Altermap</h1>
       </div>
       <div className="Info__content">

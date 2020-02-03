@@ -18,8 +18,8 @@ html {
   --Logo-height: 3rem;
   --Logo-margin: .3125rem;
   --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
-  --NavBar-color: rgb(255, 255, 255, .9);
-  --NavBar-height: 4.125rem;
+  --NavBar-color: white;
+  --NavBar-height: 3.125rem;
   --primary-color: #179A38;
   --secondary-color: #03030A;
 }
@@ -140,25 +140,4 @@ html {
   padding-right: 1em;
   background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .5em bottom .25em;
   background-size: 8px 10px
-}
-
-.MuiAppBar-colorSecondary,
-.MuiFab-root,
-button[aria-label="Save"] {
-  background-color: var(--primary-color) !important;
-}
-
-.MuiButton-root,
-.MuiButton-text,
-.MuiTypography-subtitle1,
-.Mui-checked {
-  color: var(--primary-color) !important;
-}
-
-.column-email a {
-  text-decoration: none !important;
-}
-
-button[aria-label="Save"] {
-  color: white !important;
 }

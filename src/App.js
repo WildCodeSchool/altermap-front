@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -9,7 +9,8 @@ import NavBar from './components/NavBar/NavBar';
 import Info from './components/Info/Info';
 import Login from './components/Login/Login';
 import ShowTable from './components/ShowTable/ShowTable';
-import Administrator from './components/Admin/Administrator';
+
+const LazyAdmin = lazy(() => import('./components/Admin/Administrator'))
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -46,56 +47,53 @@ function App() {
 
   return (
     <div className="App">
-      {!isAuth && <Redirect to="/login" />}
-      <Switch>
-        { isAuth // Condition to escape error from authorization
-          && (
-          <Route exact path="/">
-            <Header disconnect={disconnect} setPosition={setPosition} setZoom={setZoom} />
-            <Mapper
-              position={position}
-              zoom={zoom}
-              close={closeForm}
-              popup={isPopupOpen}
-              setPopupStatus={setIsPopupOpen}
-              displayWaterLayer={shouldDisplayWaterLayer}
-              displayLimitsLayer={shouldDisplayLimitsLayer}
-              waterLayerStatus={waterLayerStatus}
-              limitsLayerStatus={limitsLayerStatus}
-              polygonToUpdate={polygonToUpdate}
-              setPolygonToUpdate={setPolygonToUpdate}
-            />
-            <NavBar
-              close={closeInfo}
-              closeTable={closeTable}
-              isInfoOpen={isInfoOpen}
-              tableIsDisplay={tableIsDisplay}
-            />
-            <Info close={closeInfo} isInfoOpen={isInfoOpen} />
-            <ShowTable
-              tableIsDisplay={tableIsDisplay}
-              setTableIsDisplay={setTableIsDisplay}
-              popup={isPopupOpen}
-              setPopupStatus={setIsPopupOpen}
-              polygonToUpdate={polygonToUpdate}
-              setPolygonToUpdate={setPolygonToUpdate}
-              setPosition={setPosition}
-              setZoom={setZoom}
-            />
+      <Suspense fallback={<div>Loading...</div>}>
+        {!isAuth && <Redirect to="/login" />}
+        <Switch>
+          {isAuth // Condition to escape error from authorization
+            && (
+              <Route exact path="/">
+                <Header disconnect={disconnect} setPosition={setPosition} setZoom={setZoom} />
+                <Mapper
+                  position={position}
+                  zoom={zoom}
+                  close={closeForm}
+                  popup={isPopupOpen}
+                  setPopupStatus={setIsPopupOpen}
+                  displayWaterLayer={shouldDisplayWaterLayer}
+                  displayLimitsLayer={shouldDisplayLimitsLayer}
+                  waterLayerStatus={waterLayerStatus}
+                  limitsLayerStatus={limitsLayerStatus}
+                  polygonToUpdate={polygonToUpdate}
+                  setPolygonToUpdate={setPolygonToUpdate}
+                />
+                <NavBar close={closeInfo} closeTable={closeTable} />
+                <Info close={closeInfo} isInfoOpen={isInfoOpen} />
+                <ShowTable
+                  tableIsDisplay={tableIsDisplay}
+                  setTableIsDisplay={setTableIsDisplay}
+                  popup={isPopupOpen}
+                  setPopupStatus={setIsPopupOpen}
+                  polygonToUpdate={polygonToUpdate}
+                  setPolygonToUpdate={setPolygonToUpdate}
+                  setPosition={setPosition}
+                  setZoom={setZoom}
+                />
+              </Route>
+            )}
+          <Route path="/login">
+            <Login setIsAuth={setIsAuth} />
           </Route>
-          )}
-        <Route path="/login">
-          <Login setIsAuth={setIsAuth} />
-        </Route>
-        <Route path="/admin">
-          {
-            localStorage.length > 0 && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
-              <Administrator />
-            )
-              : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
-          }
-        </Route>
-      </Switch>
+          <Route path="/admin">
+            {
+              localStorage.length > 0 && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
+                <LazyAdmin />
+              )
+                : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
+            }
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
