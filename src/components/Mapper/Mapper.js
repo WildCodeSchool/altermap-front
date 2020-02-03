@@ -12,7 +12,6 @@ import L from 'leaflet';
 import './Mapper.css';
 import ConstructionSiteForm from '../ConstructionSiteForm/ConstructionSiteForm';
 import Popup from '../Popup/Popup';
-import PdfExport from '../PdfExport/PdfExport';
 import Layers from '../Layers/Layers';
 
 function Mapper({
