@@ -39,9 +39,6 @@ function NavBar({
         <Icon icon={faListUl} className="NavBar__icon" />
       </button>
       <PdfExport />
-      <button type="button" className={!tableIsDisplay ? 'NavBar__info' : 'NavBar__infoOpen'} onClick={exportConstructionSites}>
-        <Icon icon={faListUl} className="NavBar__icon" />
-      </button>
     </div>
   );
 }
