@@ -31,7 +31,8 @@
   margin-bottom: 10px;
   display: flex; 
   flex-direction: column;
-  margin: auto;
+  margin-left: 16px;
+  margin-right: 16px;
   margin-top: 20px;
   margin-bottom: 50px;
 }
@@ -51,13 +52,14 @@
 }
 
 .ShowTable__table--block{
-  border: solid 1px;
-  margin-bottom: 5px;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.24);
+  width: 100%;
+  margin-bottom: 8px;
 }
 
 .ShowTable__line--options{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .ShowTable__table--line {
@@ -66,28 +68,41 @@
 }
 
 .ShowTable__form{
-  background: #179A38;
   width: 60%;
   position: fixed;
   bottom: var(--NavBar-height);
   margin-bottom: 8px;
   height: 40px;
-  border-radius: 5px;
-  left: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
+
 }
 
 .ShowTable__form--input{
-  width: 90%;
+  width: 100%;
   height: 100%;
+  padding-right: 40px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.12);
+
 }
 
 .ShowTable__input--icon{
   width: 40px;
+  position: absolute;
+  height: 100%;
+  right: 0;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+  background: #179A38;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.12);
+
+
 }
 
 
@@ -97,6 +112,8 @@
   background: #F2F2F2;
   margin-top: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.12);
+  border: none;
 }
 
 .ShowTable__option--button--delete{
@@ -106,98 +123,9 @@
   color: white;
   margin-bottom: 10px;
   margin-top: 10px;
-}
-
-/*.ShowTable__header--row, .ShowTable__table--line{
-  display: flex;
-}
-.ShowTable__header--text, .ShowTable__line--text, .ShowTable__line--options{
-  padding: 10px;
-  width: 20%;
-  text-align: center;
-}
-.ShowTable__line--text{
-  margin: auto;
-  font-size: 16px;
-}
-.ShowTable__table--line{
-  border-bottom: 1px solid #000;
-}
-.ShowTable__line--options{
-  display: flex;
-  justify-content: space-around;
-}
-.ShowTable__option--edit{
-  color: var(--primary-color);
-}
-.ShowTable__option--delete{
-  color:red;
-}
-.ShowTable__option--button{
   border: none;
-  background-color: transparent;
-  padding: 10px;
-  font-size: 18px;
-  outline: none;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.12);
 }
-.ShowTable--noTable{
-  display: flex;
-  justify-content: center;
-  padding: 25px;
-  font-size: 24px;
-}
-
-.ShowTable__load{
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  background-color: #fff;
-  width: 30px;
-  height: 30px;
-  border: solid 2px var(--primary-color);
-  border-radius: 5px;
-  font-size: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  padding: 0;
-  outline: none;
-}
-.ShowTable--loader{
-  animation: loader 1s forwards infinite;
-}
-
-.ShowTable__form{
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  margin-top: 15px;
-  justify-content: center;
-}
-.ShowTable__input--icon{
-  position: absolute;
-  right: calc(80%);
-  font-size: 1.5rem;
-  z-index: 11;
-  transition: ease .3s;
-}
-.ShowTable__form--input{
-  width: 80%;
-  padding: 10px;
-  padding-left: 45px;
-  border: none;
-  border-bottom: 2px solid var(--primary-color);
-  outline: none;
-  transition: ease .3s;
-  font-size: 18px;
-}
-.ShowTable__form--input:focus{
-  padding-left: 15px;
-}
-.ShowTable__form--input:focus + .ShowTable__input--icon{
-  right: calc(10% + 35px);
-} */
 
 @keyframes loader {
   from{
