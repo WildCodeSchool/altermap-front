@@ -10,7 +10,6 @@ export const UserList = (props) => (
   <List title="Altermap" {...props}>
     <Datagrid>
       <TextField source="lastname" />
-      <TextField source="company" />
       <TextField source="role" />
       <EmailField source="email" />
       <EditButton />
@@ -22,7 +21,6 @@ export const UserEdit = (props) => (
   <Edit title="Editer un utilisateur" {...props}>
     <SimpleForm>
       <TextInput source="lastname" />
-      <TextInput source="company" />
       <SelectInput
         source="role"
         choices={[
@@ -35,7 +33,7 @@ export const UserEdit = (props) => (
       <BooleanInput source="editPassword" />
       <FormDataConsumer>
         {({ formData, ...rest }) => formData.editPassword
-                      && <TextInput source="password" {...rest} />}
+          && <TextInput source="password" {...rest} />}
       </FormDataConsumer>
     </SimpleForm>
   </Edit>
@@ -56,7 +54,6 @@ export const UserCreate = (props) => (
   <Create title="Créer un utilisateur" {...props}>
     <SimpleForm toolbar={<UserCreateToolbar />}>
       <TextInput source="lastname" />
-      <TextInput source="company" />
       <SelectInput
         source="role"
         choices={[

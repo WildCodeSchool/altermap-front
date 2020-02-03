@@ -40,7 +40,7 @@ function App() {
       Authorization: `Bearer ${token}`,
     };
     axios.interceptors.response.use((response) => response, (error) => Promise.reject(
-      error.response.status === 401 ? disconnect() : error,
+      error ? disconnect() : console.log(error),
     ));
   }
 
@@ -48,48 +48,48 @@ function App() {
     <div className="App">
       {!isAuth && <Redirect to="/login" />}
       <Switch>
-        { isAuth // Condition to escape error from authorization
+        {isAuth // Condition to escape error from authorization
           && (
-          <Route exact path="/">
-            <Header disconnect={disconnect} setPosition={setPosition} setZoom={setZoom} />
-            <Mapper
-              position={position}
-              zoom={zoom}
-              close={closeForm}
-              popup={isPopupOpen}
-              setPopupStatus={setIsPopupOpen}
-              displayWaterLayer={shouldDisplayWaterLayer}
-              displayLimitsLayer={shouldDisplayLimitsLayer}
-              waterLayerStatus={waterLayerStatus}
-              limitsLayerStatus={limitsLayerStatus}
-              polygonToUpdate={polygonToUpdate}
-              setPolygonToUpdate={setPolygonToUpdate}
-            />
-            <NavBar
-              close={closeInfo}
-              closeTable={closeTable}
-              isInfoOpen={isInfoOpen}
-              tableIsDisplay={tableIsDisplay}
-            />
-            <Info close={closeInfo} isInfoOpen={isInfoOpen} />
-            <ShowTable
-              tableIsDisplay={tableIsDisplay}
-              setTableIsDisplay={setTableIsDisplay}
-              popup={isPopupOpen}
-              setPopupStatus={setIsPopupOpen}
-              polygonToUpdate={polygonToUpdate}
-              setPolygonToUpdate={setPolygonToUpdate}
-              setPosition={setPosition}
-              setZoom={setZoom}
-            />
-          </Route>
+            <Route exact path="/">
+              <Header disconnect={disconnect} setPosition={setPosition} setZoom={setZoom} />
+              <Mapper
+                position={position}
+                zoom={zoom}
+                close={closeForm}
+                popup={isPopupOpen}
+                setPopupStatus={setIsPopupOpen}
+                displayWaterLayer={shouldDisplayWaterLayer}
+                displayLimitsLayer={shouldDisplayLimitsLayer}
+                waterLayerStatus={waterLayerStatus}
+                limitsLayerStatus={limitsLayerStatus}
+                polygonToUpdate={polygonToUpdate}
+                setPolygonToUpdate={setPolygonToUpdate}
+              />
+              <NavBar
+                close={closeInfo}
+                closeTable={closeTable}
+                isInfoOpen={isInfoOpen}
+                tableIsDisplay={tableIsDisplay}
+              />
+              <Info close={closeInfo} isInfoOpen={isInfoOpen} />
+              <ShowTable
+                tableIsDisplay={tableIsDisplay}
+                setTableIsDisplay={setTableIsDisplay}
+                popup={isPopupOpen}
+                setPopupStatus={setIsPopupOpen}
+                polygonToUpdate={polygonToUpdate}
+                setPolygonToUpdate={setPolygonToUpdate}
+                setPosition={setPosition}
+                setZoom={setZoom}
+              />
+            </Route>
           )}
         <Route path="/login">
           <Login setIsAuth={setIsAuth} />
         </Route>
         <Route path="/admin">
           {
-            localStorage.length > 0 && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
+            localStorage.length > 0 && localStorage.getItem('altermap-token') && Number(jwtDecode(localStorage.getItem('altermap-token')).role) === 3 ? (
               <Administrator />
             )
               : (<Redirect to={localStorage.getItem('altermap-token') ? '/' : '/login'} />)
