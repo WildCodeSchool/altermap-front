@@ -47,7 +47,7 @@ export default function PdfExport() {
 
   return (
     <>
-      <button type="button" onClick={exportPdf} className="PdfExport">
+      <button type="button" onClick={exportPdf} className={!isLoading ? 'PdfExport' : 'hidden'}>
         <Icon icon={faFilePdf} className="PdfExport__icon" />
       </button>
       <button type="button" className={isLoading ? 'PdfExport__load' : 'hidden'}>
