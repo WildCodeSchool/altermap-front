@@ -67,7 +67,7 @@ export default function ShowTable({
         {!isLoading && table
           ? (
             <>
-              <button type="button" className="ShowTable__export" onClick={exportConstructionSites}>
+              <button type="button" className={table.length > 0 ? "ShowTable__export" : "hidden"} onClick={exportConstructionSites}>
                 Exporter les chantiers (.csv) <Icon icon={faDownload} className="ShowTable__export-icon" />
               </button>
               <div className="ShowTable__table">
