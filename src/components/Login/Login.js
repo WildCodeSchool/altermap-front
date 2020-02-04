@@ -68,7 +68,7 @@ function Login({ setIsAuth }) {
         </button>
       </form>
       <div id="snackbar" className={error ? 'show' : ''}>
-        Vos informations sont incorrectes
+        <span>Vos informations sont incorrectes</span>
       </div>
     </div>
   );

@@ -3,8 +3,6 @@ import './NavBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faMap, faInfo, faListUl } from '@fortawesome/free-solid-svg-icons';
 import PdfExport from '../PdfExport/PdfExport';
-import axios from 'axios';
-import download from 'downloadjs';
 
 function NavBar({
   close, closeTable, isInfoOpen, tableIsDisplay,
@@ -19,13 +17,6 @@ function NavBar({
       closeTable();
     }
   };
-
-  const exportConstructionSites = () => {
-    axios.get('/api/v1/construction-sites/export')
-      .then(response => {
-        download(response.data, `export-chantier.csv`, 'application/csv');
-      })
-  }
 
   return (
     <div className="NavBar">

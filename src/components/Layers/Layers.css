@@ -25,6 +25,7 @@
   border: none;
   z-index: 1;
   color: white;
+  cursor: pointer;
 }
 
 .Layers__button {
@@ -87,7 +88,6 @@
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
