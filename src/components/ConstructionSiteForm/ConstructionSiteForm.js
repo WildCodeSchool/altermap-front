@@ -28,18 +28,23 @@ function ConstructionSiteForm({
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
   const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
   const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
-
+  const [isCompleted, setIsCompleted] = useState('')
+  const [precPage, setPrecPage] = useState(1)
 
   const [page, setPage] = useState(0);
   const redirectField = () => {
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
+      setIsCompleted('show')
     } else if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
       setPage(1);
+      setIsCompleted('show')
     } else if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
       setPage(2);
+      setIsCompleted('show')
     } else {
       setPage(3);
+      setIsCompleted('show')
     }
   };
 
@@ -73,10 +78,17 @@ function ConstructionSiteForm({
   };
   const nextPage = () => {
     setPage(page + 1);
-    !constructionSite && redirectField();
+    if (precPage === page) {
+      setIsCompleted('')
+      setPrecPage(page - 1)
+    } else {
+      !constructionSite && redirectField()
+    }
+
   };
 
   const prevPage = () => {
+    setIsCompleted('')
     setPage(page - 1);
   };
   return (
@@ -127,8 +139,8 @@ function ConstructionSiteForm({
               <span>Demandeur</span>
               <input className="ConstructionSiteForm__input" type="text" name="buyer" id="buyer" placeholder="EDF" required value={buyer} onChange={(e) => setBuyer(e.target.value)} />
             </label>
-            <div>
-
+            <div className="ConstructionSiteForm__arrowContainer">
+              <span>1/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 < Icon icon={faCaretRight} ></Icon>
@@ -167,6 +179,7 @@ function ConstructionSiteForm({
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>2/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 <Icon icon={faCaretRight} ></Icon>
@@ -203,6 +216,7 @@ function ConstructionSiteForm({
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>3/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 <Icon icon={faCaretRight} ></Icon>
@@ -220,18 +234,19 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="http://google.fr" type="text" name="photo" required id="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="lot">
-              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="lots" id="lot" required value={lots} onChange={(e) => setLots(e.target.value)} />
               <span>lot</span>
+              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="lots" id="lot" required value={lots} onChange={(e) => setLots(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="tonnage">
-              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
               <span>Tonnage</span>
+              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
-            <div>
+            <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>4/4</span>
             </div>
             <button className="ConstructionSiteForm__submit" type="submit">
               Valider
@@ -239,6 +254,9 @@ function ConstructionSiteForm({
 
           </div>
         </form>
+        <div id="snackbar" className={isCompleted}>
+          Remplissez tous les champs
+      </div>
       </div>
     </div >
   );
