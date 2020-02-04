@@ -67,7 +67,7 @@ function App() {
                   polygonToUpdate={polygonToUpdate}
                   setPolygonToUpdate={setPolygonToUpdate}
                 />
-                <NavBar close={closeInfo} closeTable={closeTable} />
+                <NavBar close={closeInfo} closeTable={closeTable} isInfoOpen={isInfoOpen} tableIsDisplay={tableIsDisplay} />
                 <Info close={closeInfo} isInfoOpen={isInfoOpen} />
                 <ShowTable
                   tableIsDisplay={tableIsDisplay}

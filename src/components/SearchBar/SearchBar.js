@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SearchBar.css';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';

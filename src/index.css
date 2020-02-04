@@ -2,7 +2,6 @@
 @import '~leaflet/dist/leaflet.css';
 @import '~leaflet-draw/dist/leaflet.draw.css';
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400&display=swap');
-
 html {
   box-sizing: border-box;
 }
@@ -16,7 +15,7 @@ html {
   --Logo-margin: .3125rem;
   --Header-height: calc(var(--Logo-height) + var(--Logo-margin) * 2);
   --NavBar-color: white;
-  --NavBar-height: 3.125rem;
+  --NavBar-height: 3.75rem;
   --primary-color: #179A38;
   --secondary-color: #03030A;
 }
