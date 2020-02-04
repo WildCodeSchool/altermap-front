@@ -64,8 +64,11 @@ function Mapper({
     if (constructionSites.length === 0) { return; }
     const leafletGeoJSON = new L.GeoJSON(getGeoJson(constructionSites));
     const leafletFG = featureGroupRef.current.leafletElement;
+    let i = 0;
     leafletGeoJSON.eachLayer((layer) => {
       leafletFG.addLayer(layer);
+      layer.bindTooltip(constructionSites[i].name, { className: "polygon__name" });
+      i++;
     });
   }, [constructionSites, getGeoJson]);
 
@@ -136,12 +139,12 @@ function Mapper({
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topright" />
         <BoxZoomControl position="topright" />
-        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 38 * (count - 1), transition: 'ease .5s' }}>
+        <div className="Mapper__options" style={{ marginTop: count > 4 ? 37 * count : 37 * (count - 1), transition: 'ease .5s' }}>
           <Layers displayWaterLayer={waterLayerStatus} displayLimitsLayer={limitsLayerStatus} waterIsLoading={waterIsLoading} limitsIsLoading={limitsIsLoading} />
         </div>
         {/* Feature Group for draw controls */}
         <FeatureGroup ref={featureGroupRef}>
-          {Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
+          {localStorage.getItem('altermap-token') && Number(jwtDecode(localStorage.getItem('altermap-token')).role) > 1
             && (
               <EditControl
                 position="topright"

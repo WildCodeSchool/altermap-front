@@ -17,6 +17,7 @@ function NavBar({
       closeTable();
     }
   };
+
   return (
     <div className="NavBar">
       <button type="button" className={(isInfoOpen || tableIsDisplay) ? 'NavBar__info' : 'NavBar__infoOpen'} onClick={showMap}>

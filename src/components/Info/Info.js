@@ -1,18 +1,11 @@
 import React from 'react';
 import './Info.css';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import Logo from '../Logo/Logo';
 
 
-function Info({ close, isInfoOpen }) {
+function Info({ isInfoOpen }) {
   return (
     <div className={isInfoOpen ? 'Info' : 'slide'}>
-      <button type="button" onClick={close} className="Info__close">
-        <Icon className="Info__icon" icon={faTimes} />
-      </button>
       <div className="Info__header">
-        <Logo />
         <h1 className="Info__header-title">Altermap</h1>
       </div>
       <div className="Info__content">
@@ -34,6 +27,7 @@ function Info({ close, isInfoOpen }) {
         <a
           className="Info__link"
           href="https://www.youtube.com/channel/UCbi5AKrzPtSpDHV73sTcsqQ"
+          target="_blanck"
         >
           Lien vers nos tutoriels
         </a>
