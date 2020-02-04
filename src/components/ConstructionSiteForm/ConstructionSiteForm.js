@@ -36,15 +36,19 @@ function ConstructionSiteForm({
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
       setIsCompleted('show')
+      setTimeout(() => setIsCompleted(''), 3000);
     } else if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
       setPage(1);
       setIsCompleted('show')
+      setTimeout(() => setIsCompleted(''), 3000);
     } else if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
       setPage(2);
       setIsCompleted('show')
+      setTimeout(() => setIsCompleted(''), 3000);
     } else {
       setPage(3);
       setIsCompleted('show')
+      setTimeout(() => setIsCompleted(''), 3000);
     }
   };
 
@@ -254,9 +258,9 @@ function ConstructionSiteForm({
 
           </div>
         </form>
-        <div id="snackbar" className={isCompleted}>
-          Remplissez tous les champs
-      </div>
+        <div id="ConstructionSiteForm__snackbar" className={isCompleted}>
+          <span>Remplissez tous les champs</span>
+        </div>
       </div>
     </div >
   );

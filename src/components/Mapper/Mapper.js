@@ -194,7 +194,10 @@ function Mapper({
               />
             )}
         </FeatureGroup>
-        {displayWaterLayer && staticWaterLayer && <GeoJSON data={staticWaterLayer} />}
+        {displayWaterLayer && staticWaterLayer && <GeoJSON data={staticWaterLayer} style={{
+          color: 'red',
+          opacity: 0.5,
+        }} />}
         {displayLimitsLayer && staticLimitsLayer
           && (
             <GeoJSON
