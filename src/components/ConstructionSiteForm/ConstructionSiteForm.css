@@ -35,6 +35,11 @@ flex-direction: column;
   display: none;
 }
 
+.ConstructionSiteForm__arrowContainer {
+  display: flex;
+  justify-content: space-between;
+  font-size:20px
+}
 .ConstructionSiteForm__arrowSizePrev {
   font-size: 20px;
   float: left;

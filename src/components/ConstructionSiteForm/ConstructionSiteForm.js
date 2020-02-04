@@ -139,8 +139,8 @@ function ConstructionSiteForm({
               <span>Demandeur</span>
               <input className="ConstructionSiteForm__input" type="text" name="buyer" id="buyer" placeholder="EDF" required value={buyer} onChange={(e) => setBuyer(e.target.value)} />
             </label>
-            <div>
-
+            <div className="ConstructionSiteForm__arrowContainer">
+              <span>1/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 < Icon icon={faCaretRight} ></Icon>
@@ -179,6 +179,7 @@ function ConstructionSiteForm({
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>2/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 <Icon icon={faCaretRight} ></Icon>
@@ -215,6 +216,7 @@ function ConstructionSiteForm({
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>3/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
                 <Icon icon={faCaretRight} ></Icon>
@@ -239,11 +241,12 @@ function ConstructionSiteForm({
               <span>Tonnage</span>
               <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
-            <div>
+            <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
                 <Icon icon={faCaretLeft} ></Icon>
                 {` Précédent`}
               </span>
+              <span>4/4</span>
             </div>
             <button className="ConstructionSiteForm__submit" type="submit">
               Valider
