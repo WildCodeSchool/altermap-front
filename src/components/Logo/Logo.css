@@ -1,0 +1,5 @@
+.Logo__image {
+    height: var(--Logo-height);
+    margin: var(--Logo-margin);
+    display: block;
+}

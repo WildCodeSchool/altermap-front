@@ -17,16 +17,18 @@
   padding: 0;
   outline: none;
 }
-.PdfExport__icon--loader{
+
+.PdfExport__icon--loader {
   animation: loader 1s forwards infinite;
 }
 
 
 @keyframes loader {
-  from{
+  from {
     transform: rotate(0deg);
   }
-  to{
+
+  to {
     transform: rotate(360deg);
   }
 }

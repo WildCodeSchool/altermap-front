@@ -31,7 +31,7 @@ display: flex;
 flex-direction: column;
 }
 
-.ConstructionSiteForm__page--inactive{
+.ConstructionSiteForm__page--inactive {
   display: none;
 }
 
@@ -79,9 +79,10 @@ flex-direction: column;
       border-left: 2.5rem solid rgb(255, 255, 255, .8);
       margin-left: 66px;
   }
+
   .ConstructionSiteForm__icon {
     position: fixed;
-    left:  calc(50vw - 5rem);
+    left: calc(50vw - 5rem);
   }
   .ConstructionSiteForm__form {
     margin-top : 0;
@@ -171,12 +172,13 @@ flex-direction: column;
 
 @keyframes scale-up-ver-bottom {
   0% {
-            transform: scaleY(0.4);
-            transform-origin: 0% 100%;
+    transform: scaleY(0.4);
+    transform-origin: 0% 100%;
   }
+
   100% {
-            transform: scaleY(1);
-            transform-origin: 0% 100%;
+    transform: scaleY(1);
+    transform-origin: 0% 100%;
   }
 }
 

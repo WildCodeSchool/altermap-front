@@ -102,6 +102,7 @@
 }
 
 /* media query laptops */
+
 @media (min-width: 1024px) {
   .Info {
     top: calc(var(--Header-height) + 2px);
