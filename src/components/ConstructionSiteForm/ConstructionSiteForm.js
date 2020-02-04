@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './ConstructionSiteForm.css';
 
@@ -82,24 +82,29 @@ function ConstructionSiteForm({
   return (
     <div className="ConstructionSiteForm">
       {/* Icone to close popup and refresh page */}
-      <Icon
-        className="ConstructionSiteForm__icon"
-        icon={faWindowClose}
-        onClick={() => window.location.reload()}
-      />
-      <div className="ConstructionSiteForm__header">
-        <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
+      <div className="ConstructionSiteForm__icon__div--Container">
+        <span className="ConstructionSiteForm__icon--Container">
+          <Icon
+            className="ConstructionSiteForm__icon"
+            icon={faTimes}
+            onClick={() => window.location.reload()}
+          />
+        </span>
+        <div className="ConstructionSiteForm__header">
+          <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
+        </div>
       </div>
       <div className="ConstructionSiteForm__content">
         <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
           <div className={page === 0 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
-            <label className="has-float-label" htmlFor="name">
-              <input type="text" name="name" id="name" value={name} required className="ConstructionSiteForm__input" placeholder="Autoroute A6" onChange={(e) => setName(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="name">
               <span>Nom du chantier</span>
+              <input type="text" name="name" id="name" value={name} required className="ConstructionSiteForm__input" placeholder="Autoroute A6" onChange={(e) => setName(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="status">
+              <span>Status</span>
               <select className={status === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-                <option value="1" disabled>Etat du chantier</option>
+                <option value="1" disabled>Selectionnez une valeur</option>
                 {stateConstruction.map((data) => (
                   <option key={data} value={data}>
                     {data}
@@ -108,6 +113,7 @@ function ConstructionSiteForm({
               </select>
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="year">
+              <span>Année des travaux</span>
               <select className={year === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="year" id="year" value={year} onChange={(e) => setYear(e.target.value)}>
                 <option value="1" disabled>Année</option>
                 {yearsList.map((data) => (
@@ -117,28 +123,35 @@ function ConstructionSiteForm({
                 ))}
               </select>
             </label>
-            <label className="has-float-label" htmlFor="buyer">
-              <input className="ConstructionSiteForm__input" type="text" name="buyer" id="buyer" placeholder="EDF" required value={buyer} onChange={(e) => setBuyer(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="buyer">
               <span>Demandeur</span>
+              <input className="ConstructionSiteForm__input" type="text" name="buyer" id="buyer" placeholder="EDF" required value={buyer} onChange={(e) => setBuyer(e.target.value)} />
             </label>
-            <button type="button" onClick={() => nextPage()}>+</button>
+            <div>
+
+              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                {`Suivant `}
+                < Icon icon={faCaretRight} ></Icon>
+              </span>
+            </div>
           </div>
 
           <div className={page === 1 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
 
-            <label className="has-float-label" htmlFor="contact">
-              <input className="ConstructionSiteForm__input" placeholder="M. Thomas" type="text" name="contact" required id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
+            <label htmlFor="contact">
               <span>Contact</span>
+              <input className="ConstructionSiteForm__input" placeholder="M. Thomas" type="text" name="contact" required id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="numConv">
-              <input className="ConstructionSiteForm__input" placeholder="21" type="text" name="num_conv" required id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="numConv">
               <span> Numéro de convention </span>
+              <input className="ConstructionSiteForm__input" placeholder="21" type="text" name="num_conv" required id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="dateSign">
-              <input className="ConstructionSiteForm__input" placeholder="1964" type="text" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="dateSign">
               <span> date de signature </span>
+              <input className="ConstructionSiteForm__input" placeholder="1964" type="text" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="typeGrave">
+              <span> Type de grave </span>
               <select className={type_grave === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
                 <option value="1" disabled>Type grave</option>
                 {typeGraveList.map((data) => (
@@ -148,14 +161,24 @@ function ConstructionSiteForm({
                 ))}
               </select>
             </label>
-            <button type="button" onClick={() => prevPage()}>-</button>
-            <button type="button" onClick={() => nextPage()}>+</button>
+            <div className="ConstructionSiteForm__arrowContainer">
+              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+
+                <Icon icon={faCaretLeft} ></Icon>
+                {` Précédent`}
+              </span>
+              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                {`Suivant `}
+                <Icon icon={faCaretRight} ></Icon>
+              </span>
+            </div>
           </div>
           <div className={page === 2 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
 
             <label className="ConstructionSiteForm__label" htmlFor="typeUsage">
+              <span> Type d'usage</span>
               <select className={type_usage === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
-                <option value="1" disabled>Type d'usage</option>
+                <option value="1" disabled>Sélectionnez une valeur</option>
                 {typeUsageList.map((data) => (
                   <option key={data} value={data}>
                     {data}
@@ -163,40 +186,53 @@ function ConstructionSiteForm({
                 ))}
               </select>
             </label>
-            <label className="has-float-label" htmlFor="departement">
-              <input className="ConstructionSiteForm__input" placeholder="66" type="text" name="departement" id="departement" required value={departement} onChange={(e) => setDepartement(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="departement">
               <span> Département</span>
+              <input className="ConstructionSiteForm__input" placeholder="66" type="text" name="departement" id="departement" required value={departement} onChange={(e) => setDepartement(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="projectManager">
-              <input className="ConstructionSiteForm__input" placeholder="M.Thomas" type="text" name="project_manager" required id="projectManager" value={project_manager} onChange={(e) => setProjectManager(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="projectManager">
               <span>Maître d'ouvrage</span>
+              <input className="ConstructionSiteForm__input" placeholder="M.Thomas" type="text" name="project_manager" required id="projectManager" value={project_manager} onChange={(e) => setProjectManager(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="commentary">
-              <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="commentary">
               <span>Commentaires</span>
+              <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
-            <button type="button" onClick={() => prevPage()}>-</button>
-            <button type="button" onClick={() => nextPage()}>+</button>
+            <div className="ConstructionSiteForm__arrowContainer">
+              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon icon={faCaretLeft} ></Icon>
+                {` Précédent`}
+              </span>
+              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                {`Suivant `}
+                <Icon icon={faCaretRight} ></Icon>
+              </span>
+            </div>
           </div>
           <div className={page === 3 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
 
-            <label className="has-float-label" htmlFor="area">
-              <input className="ConstructionSiteForm__input" placeholder="2.3" type="text" name="area" id="area" required value={area} onChange={(e) => setArea(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="area">
               <span>Surface</span>
+              <input className="ConstructionSiteForm__input" placeholder="2.3" type="text" name="area" id="area" required value={area} onChange={(e) => setArea(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="photo">
-              <input className="ConstructionSiteForm__input" placeholder="http://google.fr" type="text" name="photo" required id="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
+            <label className="ConstructionSiteForm__label" htmlFor="photo">
               <span>Photo</span>
+              <input className="ConstructionSiteForm__input" placeholder="http://google.fr" type="text" name="photo" required id="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
             </label>
-            <label className="has-float-label" htmlFor="lot">
+            <label className="ConstructionSiteForm__label" htmlFor="lot">
               <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="lots" id="lot" required value={lots} onChange={(e) => setLots(e.target.value)} />
               <span>lot</span>
             </label>
-            <label className="has-float-label" htmlFor="tonnage">
+            <label className="ConstructionSiteForm__label" htmlFor="tonnage">
               <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
               <span>Tonnage</span>
             </label>
-            <button type="button" onClick={() => prevPage()}>-</button>
+            <div>
+              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon icon={faCaretLeft} ></Icon>
+                {` Précédent`}
+              </span>
+            </div>
             <button className="ConstructionSiteForm__submit" type="submit">
               Valider
             </button>
@@ -204,7 +240,7 @@ function ConstructionSiteForm({
           </div>
         </form>
       </div>
-    </div>
+    </div >
   );
 }
 
