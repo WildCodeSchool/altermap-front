@@ -1,19 +1,7 @@
-.PdfExport {
-  background-color: #fff;
-  width: 30px;
-  height: 30px;
-  border: solid 2px var(--primary-color);
-  border-radius: 5px;
-  font-size: 16px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  position: relative;
-  outline: none;
+.PdfExport:hover {
+  background-color: #ddd;
 }
-
-.PdfExport__load {
-  position: absolute;
+.PdfExport__load{
   right: 0;
   top: 0;
   z-index: 10;
@@ -33,6 +21,7 @@
 .PdfExport__icon--loader {
   animation: loader 1s forwards infinite;
 }
+
 
 @keyframes loader {
   from {

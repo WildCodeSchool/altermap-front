@@ -1,8 +1,7 @@
 .Layers {
-  min-width: 30px;
-  min-height: 30px;
-  background-color: #fff;
-  border: solid 2px var(--primary-color);
+  min-width: 32px;
+  min-height: 32px;
+  background-color: rgb(3, 3, 10);
   border-radius: 5px;
   text-align: center;
   display: flex;
@@ -25,6 +24,8 @@
   background-color: transparent;
   border: none;
   z-index: 1;
+  color: white;
+  cursor: pointer;
 }
 
 .Layers__button {
@@ -48,8 +49,8 @@
 
 .show {
   visibility: visible;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
 }
 
 .Layers__load {
@@ -57,9 +58,9 @@
   left: 0;
   top: -5px;
   z-index: 10;
-  background-color: #fff;
-  width: 26px;
-  height: 26px;
+  background-color: rgb(3, 3, 10);
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 5px;
   font-size: 20px;
@@ -68,6 +69,7 @@
   margin-left: auto;
   padding: 0;
   outline: none;
+  color: white;
 }
 
 .Layers__icon--loader {
@@ -86,7 +88,6 @@
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }

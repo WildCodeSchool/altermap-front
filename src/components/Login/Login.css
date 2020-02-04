@@ -1,66 +1,93 @@
 .Login {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .Login__form {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: auto;
   padding: 20px;
 }
 
 .Login__logo {
-  width: 250px;
+  width: 7.5rem;
   height: auto;
-  margin-bottom: 50px;
 }
 
-.has-float-label {
-  width: 250px;
-  margin-bottom: 25px;
-  margin-top: 25px;
-  color: var(--primary-color);
+.Login__form--label {
+  width: 70%;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: 'Rubik', sans-serif;
+  color: rgb(3, 3, 10);
+}
+
+.Login__form--label span {
+  padding-left: 0.5rem;
 }
 
 .Login__form--input {
+  box-shadow: 0px 0.0625rem 0.125rem 1px rgba(0, 0, 0, .12);
+  border: none;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: rgb(166, 166, 166);
   width: 100%;
-  padding-left: 5px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  outline: none;
 }
 
 .Login__form--input::placeholder {
-  color: var(--secondary-color);
+  color: rgb(166, 166, 166);
 }
 
 .Login__form--submit {
-  margin-top: 50px;
-  padding: 15px;
-  background-color: #fff;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
   border: none;
-  width: 100%;
+  width: 70%;
   color: var(--primary-color);
-  font-size: 24px;
+  font-size: 0.875rem;
+  color: white;
   text-align: center;
   outline: none;
+  font-family: 'Rubik', sans-serif;
+  border-radius: 4px;
 }
 
 #snackbar {
   visibility: hidden;
   min-width: 250px;
-  margin-left: -125px;
   background-color: #333;
   color: #fff;
   text-align: center;
-  border-radius: 2px;
-  padding: 16px;
+  border-radius: 4px;
   position: fixed;
   z-index: 1;
   left: 50%;
+  transform: translateX(-50%);
   bottom: 30px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+}
+
+#snackbar span {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px;
 }
 
 #snackbar.show {
@@ -74,7 +101,6 @@
     bottom: 0;
     opacity: 0;
   }
-
   to {
     bottom: 30px;
     opacity: 1;
@@ -86,9 +112,20 @@
     bottom: 30px;
     opacity: 1;
   }
-
   to {
     bottom: 0;
     opacity: 0;
+  }
+}
+
+@media(min-width:992px) {
+  .Login__form {
+    width: 50%;
+  }
+  .Login__form--label, .Login__form--input, .Login__form--submit {
+    font-size: 18px;
+  }
+  .Login__logo {
+    width: 160px;
   }
 }

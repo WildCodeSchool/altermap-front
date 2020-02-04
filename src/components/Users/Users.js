@@ -1,35 +1,40 @@
 import React from 'react';
 import {
-  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar, SaveButton,
+  List, Datagrid, Edit, Create, SimpleForm, EmailField, TextField, EditButton, TextInput, Toolbar,
+  SaveButton, email, SelectInput, BooleanInput, FormDataConsumer,
 } from 'react-admin';
+
+const validateEmail = email();
 
 export const UserList = (props) => (
   <List title="Altermap" {...props}>
     <Datagrid>
-      <TextField source="id" />
       <TextField source="lastname" />
-      <TextField source="company" />
+      <TextField source="role" />
       <EmailField source="email" />
       <EditButton />
     </Datagrid>
   </List>
 );
 
-// const UserTitle = ({ record }) => (
-//   <span>
-// Post
-//     {' '}
-//     {record ? `"${record.title}"` : ''}
-//   </span>
-// );
-
 export const UserEdit = (props) => (
   <Edit title="Editer un utilisateur" {...props}>
     <SimpleForm>
-      <TextInput disabled source="id" />
       <TextInput source="lastname" />
-      <TextInput source="company" />
-      <TextInput source="email" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: '1', name: 'Lecture seul' },
+          { id: '2', name: 'Chef' },
+          { id: '3', name: 'Superadmin' },
+        ]}
+      />
+      <TextInput source="email" validate={validateEmail} />
+      <BooleanInput source="editPassword" />
+      <FormDataConsumer>
+        {({ formData, ...rest }) => formData.editPassword
+          && <TextInput source="password" {...rest} />}
+      </FormDataConsumer>
     </SimpleForm>
   </Edit>
 );
@@ -49,8 +54,15 @@ export const UserCreate = (props) => (
   <Create title="Créer un utilisateur" {...props}>
     <SimpleForm toolbar={<UserCreateToolbar />}>
       <TextInput source="lastname" />
-      <TextInput source="company" />
-      <TextInput source="email" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: '1', name: 'Lecture seul' },
+          { id: '2', name: 'Chef' },
+          { id: '3', name: 'Super Admin' },
+        ]}
+      />
+      <TextInput source="email" validate={validateEmail} />
       <TextInput source="password" />
     </SimpleForm>
   </Create>
