@@ -204,12 +204,10 @@ function ConstructionSiteForm({
                 Précédent
               </button>
               <span>2/4</span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <button className="ConstructionSiteForm__arrowSpaceText">
-                  Suivant
+              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                Suivant
                   <Icon icon={faCaretRight} />
-                </button>
-              </span>
+              </button>
             </div>
           </div>
 
@@ -238,23 +236,17 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="En collaboration avec GRDF" type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span>
-                  <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
-              </span>
+              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon icon={faCaretLeft} />
+                Précédent
+              </button>
               <span>
                 3/4
                 </span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <button className="ConstructionSiteForm__arrowSpaceText">
-                  Suivant
+              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                Suivant
                   <Icon icon={faCaretRight} />
-                </button>
-              </span>
+              </button>
             </div>
           </div>
 
@@ -276,12 +268,10 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="2" type="number" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <button>
-                  <Icon icon={faCaretLeft} />
-                  Précédent
-                </button>
-              </span>
+              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon icon={faCaretLeft} />
+                Précédent
+              </button>
               <span>4/4</span>
             </div>
             <button className={allFields() ? "ConstructionSiteForm__submit" : "ConstructionSiteForm__submit disable"} disabled={allFields() ? false : true} type="submit">
