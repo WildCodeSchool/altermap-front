@@ -117,7 +117,10 @@ function Mapper({
 
   const coordsOfPolygonUpdate = () => {
     axios.get(`/api/v1/construction-sites/${polygonToUpdate}`)
-      .then((res) => setEditConstructionSite(res.data));
+      .then((res) => {
+        setEditConstructionSite(res.data);
+        !tempCoords && setTempCoords(res.data.coords)
+      });
   };
 
   if (polygonToUpdate && !editConstructionSite) {
@@ -160,8 +163,8 @@ function Mapper({
                       (point) => [point.lng, point.lat],
                     );
                     // Set id of modified polygons
-                    setPolygonToUpdate(id);
                     setTempCoords(coords);
+                    setPolygonToUpdate(id);
                   });
                 }}
 
@@ -211,11 +214,8 @@ function Mapper({
             />
           )}
       </Map>
-      {tempCoords && (
-        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
-      )}
-      {polygonToUpdate && editConstructionSite && (
-        <ConstructionSiteForm id={polygonToUpdate} constructionSite={editConstructionSite} />
+      {tempCoords && editConstructionSite && (
+        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} id={polygonToUpdate} constructionSite={editConstructionSite} />
       )}
       {
         popup && deletionEvent && (
