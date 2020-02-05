@@ -214,6 +214,9 @@ function Mapper({
             />
           )}
       </Map>
+      {tempCoords && !editConstructionSite && (
+        <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} />
+      )}
       {tempCoords && editConstructionSite && (
         <ConstructionSiteForm coords={tempCoords} refreshCoords={setTempCoords} id={polygonToUpdate} constructionSite={editConstructionSite} />
       )}
