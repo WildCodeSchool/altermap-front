@@ -141,8 +141,12 @@ function ConstructionSiteForm({
             <div className="ConstructionSiteForm__arrowContainer">
               <span>1/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                {`Suivant `}
-                < Icon icon={faCaretRight} ></Icon>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {`Suivant `}
+                </span>
+                <span className="ConstructionSiteForm__arrowPosition">
+                  < Icon icon={faCaretRight} />
+                </span>
               </span>
             </div>
           </div>
@@ -174,14 +178,21 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-
-                <Icon icon={faCaretLeft} ></Icon>
-                {` Précédent`}
+                <span>
+                  <Icon icon={faCaretLeft} />
+                </span>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {` Précédent`}
+                </span>
               </span>
               <span>2/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                {`Suivant `}
-                <Icon icon={faCaretRight} ></Icon>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {`Suivant `}
+                </span>
+                <span className="ConstructionSiteForm__arrowPosition">
+                  <Icon icon={faCaretRight} />
+                </span>
               </span>
             </div>
           </div>
@@ -212,13 +223,23 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <Icon icon={faCaretLeft} ></Icon>
-                {` Précédent`}
+                <span>
+                  <Icon icon={faCaretLeft} />
+                </span>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {` Précédent`}
+                </span>
               </span>
-              <span>3/4</span>
+              <span>
+                3/4
+                </span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                {`Suivant `}
-                <Icon icon={faCaretRight} ></Icon>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {`Suivant `}
+                </span>
+                <span className="ConstructionSiteForm__arrowPosition">
+                  <Icon icon={faCaretRight} />
+                </span>
               </span>
             </div>
           </div>
@@ -242,8 +263,12 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <Icon icon={faCaretLeft} ></Icon>
-                {` Précédent`}
+                <span >
+                  <Icon icon={faCaretLeft} />
+                </span>
+                <span className="ConstructionSiteForm__arrowSpaceText">
+                  {` Précédent`}
+                </span>
               </span>
               <span>4/4</span>
             </div>
