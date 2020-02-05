@@ -7,14 +7,10 @@ import './ConstructionSiteForm.css';
 function ConstructionSiteForm({
   id, constructionSite, coords, refreshCoords,
 }) {
-
-  console.log({ id, constructionSite, coords, refreshCoords })
-
   const stateConstruction = ['Prospection', 'En cours', 'Annulé', 'Terminé'];
   const typeUsageList = ['V1', 'V2', 'V1 et V2', 'Autre'];
   const yearsList = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
   const typeGraveList = ['Machefer', 'Autre'];
-
   const [name, setName] = useState(constructionSite ? constructionSite.name : '');
   const [status, setStatus] = useState(constructionSite ? constructionSite.status : 1);
   const [year, setYear] = useState(constructionSite ? constructionSite.year : 1);
@@ -61,7 +57,6 @@ function ConstructionSiteForm({
     axios.post('/api/v1/construction-sites', {
       name, coords: coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
-      // Refresh de la page si l'envoie à fonctionné
       .then((res) => {
         if (res.status === 200) {
           refreshCoords(null);
@@ -73,16 +68,14 @@ function ConstructionSiteForm({
   };
 
   const editHandleSubmit = (event) => {
-    // Evite un refresh dont on a pas besoin et permet d'éxécuter les requêtes
     redirectField();
     event.preventDefault();
     axios.put(`/api/v1/construction-sites/${id}`, {
       name, coords: coords || constructionSite.coords, status, buyer, contact, num_conv, date_sign, type_grave, year, type_usage, departement, project_manager, commentary, area, photo, lots, tonnage,
     })
-
-      // Refresh page if request is OK
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
+
   const nextPage = () => {
     setPage(page + 1);
     if (precPage === page) {
@@ -91,16 +84,15 @@ function ConstructionSiteForm({
     } else {
       !constructionSite && redirectField()
     }
-
   };
 
   const prevPage = () => {
     setIsCompleted('')
     setPage(page - 1);
   };
+
   return (
     <div className="ConstructionSiteForm">
-      {/* Icone to close popup and refresh page */}
       <div className="ConstructionSiteForm__icon__div--Container">
         <span className="ConstructionSiteForm__icon--Container">
           <Icon
