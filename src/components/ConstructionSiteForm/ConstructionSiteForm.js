@@ -27,27 +27,23 @@ function ConstructionSiteForm({
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
   const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
   const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
-  const [isCompleted, setIsCompleted] = useState('')
+  const [isNotCompleted, setIsNotCompleted] = useState('')
   const [precPage, setPrecPage] = useState(1)
 
   const [page, setPage] = useState(0);
   const redirectField = () => {
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
       setPage(1);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
       setPage(2);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else {
       setPage(3);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     }
   };
 
@@ -78,16 +74,38 @@ function ConstructionSiteForm({
 
   const nextPage = () => {
     setPage(page + 1);
-    if (precPage === page) {
-      setIsCompleted('')
-      setPrecPage(page - 1)
-    } else {
-      !constructionSite && redirectField()
+    if (page === 0) {
+      if (buyer === '' || name === '' || year === 1 || status === 1) {
+        setIsNotCompleted('show')
+        redirectField()
+      }
     }
+    if (page === 1) {
+      if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    if (page === 3) {
+
+      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    if (page === 3) {
+
+      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    setPrecPage(page - 1)
+    !constructionSite && redirectField()
   };
 
   const prevPage = () => {
-    setIsCompleted('')
+    setIsNotCompleted('')
     setPage(page - 1);
   };
 
@@ -140,14 +158,10 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span>1/4</span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {`Suivant `}
-                </span>
-                <span className="ConstructionSiteForm__arrowPosition">
-                  < Icon icon={faCaretRight} />
-                </span>
-              </span>
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                Suivant
+                < Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
+              </button>
             </div>
           </div>
 
@@ -177,23 +191,15 @@ function ConstructionSiteForm({
               </select>
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span>
-                  <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
-              </span>
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
+                {` Précédent`}
+              </button>
               <span>2/4</span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {`Suivant `}
-                </span>
-                <span className="ConstructionSiteForm__arrowPosition">
-                  <Icon icon={faCaretRight} />
-                </span>
-              </span>
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                {`Suivant `}
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
+              </button>
             </div>
           </div>
           <div className={page === 2 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
@@ -222,25 +228,17 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span>
-                  <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
-              </span>
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
+                Précédent
+              </button>
               <span>
                 3/4
-                </span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {`Suivant `}
-                </span>
-                <span className="ConstructionSiteForm__arrowPosition">
-                  <Icon icon={faCaretRight} />
-                </span>
               </span>
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                Suivant
+                  <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
+              </button>
             </div>
           </div>
           <div className={page === 3 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
@@ -262,23 +260,18 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span >
-                  <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
-              </span>
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
+                Précédent
+              </button>
               <span>4/4</span>
             </div>
             <button className="ConstructionSiteForm__submit" type="submit">
               Valider
             </button>
-
           </div>
         </form>
-        <div id="ConstructionSiteForm__snackbar" className={isCompleted}>
+        <div id="ConstructionSiteForm__snackbar" className={isNotCompleted}>
           <span>Remplissez tous les champs</span>
         </div>
       </div>
