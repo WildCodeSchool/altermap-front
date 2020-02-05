@@ -10,7 +10,7 @@ import Info from './components/Info/Info';
 import Login from './components/Login/Login';
 import ShowTable from './components/ShowTable/ShowTable';
 
-const LazyAdmin = lazy(() => import('./components/Admin/Administrator'))
+const LazyAdmin = lazy(() => import('./components/Admin/Administrator'));
 
 function App() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -26,10 +26,14 @@ function App() {
   const closeForm = () => setIsFormOpen(!isFormOpen);
   const closeInfo = () => {
     setIsInfoOpen(!isInfoOpen);
+    setTableIsDisplay(false);
   };
   const waterLayerStatus = () => setShouldDisplayWaterLayer(!shouldDisplayWaterLayer);
   const limitsLayerStatus = () => setShouldDisplayLimitsLayer(!shouldDisplayLimitsLayer);
-  const closeTable = () => setTableIsDisplay(!tableIsDisplay);
+  const closeTable = () => {
+    setTableIsDisplay(!tableIsDisplay);
+    setIsInfoOpen(false);
+  };
   const disconnect = () => {
     localStorage.removeItem('altermap-token');
     setIsAuth(false);
