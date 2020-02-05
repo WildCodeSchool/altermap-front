@@ -4,6 +4,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faMap, faInfo, faListUl } from '@fortawesome/free-solid-svg-icons';
 import PdfExport from '../PdfExport/PdfExport';
 
+
 function NavBar({
   close, closeTable, isInfoOpen, tableIsDisplay,
 }) {
