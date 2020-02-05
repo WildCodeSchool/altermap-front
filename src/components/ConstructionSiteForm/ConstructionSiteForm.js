@@ -16,17 +16,17 @@ function ConstructionSiteForm({
   const [year, setYear] = useState(constructionSite ? constructionSite.year : 1);
   const [buyer, setBuyer] = useState(constructionSite ? constructionSite.buyer : '');
   const [contact, setContact] = useState(constructionSite ? constructionSite.contact : '');
-  const [num_conv, setNumConv] = useState(constructionSite ? constructionSite.num_conv : '');
-  const [date_sign, setDateSign] = useState(constructionSite ? constructionSite.date_sign : '');
+  const [num_conv, setNumConv] = useState(constructionSite ? constructionSite.num_conv : 0);
+  const [date_sign, setDateSign] = useState(constructionSite ? constructionSite.date_sign : 0);
   const [type_grave, setTypeGrave] = useState(constructionSite ? constructionSite.type_grave : 1);
   const [type_usage, setTypeUsage] = useState(constructionSite ? constructionSite.type_usage : 1);
-  const [departement, setDepartement] = useState(constructionSite ? constructionSite.departement : '');
+  const [departement, setDepartement] = useState(constructionSite ? constructionSite.departement : 0);
   const [project_manager, setProjectManager] = useState(constructionSite ? constructionSite.project_manager : '');
   const [commentary, setCommentary] = useState(constructionSite ? constructionSite.commentary : '');
-  const [area, setArea] = useState(constructionSite ? constructionSite.area : '');
+  const [area, setArea] = useState(constructionSite ? constructionSite.area : 0);
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
-  const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
-  const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
+  const [lots, setLots] = useState(constructionSite ? constructionSite.lots : 0);
+  const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : 0);
   const [isCompleted, setIsCompleted] = useState('')
   const [precPage, setPrecPage] = useState(1)
 
@@ -36,11 +36,11 @@ function ConstructionSiteForm({
       setPage(0);
       setIsCompleted('show')
       setTimeout(() => setIsCompleted(''), 3000);
-    } else if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
+    } else if (contact === '' || num_conv === 0 || date_sign === 0 || type_grave === 1) {
       setPage(1);
       setIsCompleted('show')
       setTimeout(() => setIsCompleted(''), 3000);
-    } else if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+    } else if (type_usage === 1 || departement === 0 || project_manager === '' || commentary === '') {
       setPage(2);
       setIsCompleted('show')
       setTimeout(() => setIsCompleted(''), 3000);
@@ -91,6 +91,31 @@ function ConstructionSiteForm({
     setPage(page - 1);
   };
 
+  const allFields = () => {
+    if (
+      buyer !== ''
+      && name !== ''
+      && year !== 1
+      && status !== 1
+      && contact !== ''
+      && num_conv !== 0
+      && date_sign !== 0
+      && type_grave !== 1
+      && type_usage !== 1
+      && departement !== 0
+      && project_manager !== ''
+      && commentary !== ''
+      && area !== 0
+      && lots !== 0
+      && tonnage !== 0
+      && photo !== ''
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
     <div className="ConstructionSiteForm">
 
@@ -108,7 +133,7 @@ function ConstructionSiteForm({
       </div>
 
       <div className="ConstructionSiteForm__content">
-        <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
+        <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit} onChange={allFields}>
           <div className={page === 0 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
             <label className="ConstructionSiteForm__label" htmlFor="name">
               <span>Nom du chantier</span>
@@ -142,10 +167,10 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span>1/4</span>
-              <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                {`Suivant `}
+              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                Suivant
                 <Icon icon={faCaretRight} className="carret-right" ></Icon>
-              </span>
+              </button>
             </div>
           </div>
 
@@ -174,22 +199,16 @@ function ConstructionSiteForm({
               </select>
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span>
-                  <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
-              </span>
+              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon icon={faCaretLeft} />
+                Précédent
+              </button>
               <span>2/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {`Suivant `}
-                </span>
-                <span className="ConstructionSiteForm__arrowPosition">
+                <button className="ConstructionSiteForm__arrowSpaceText">
+                  Suivant
                   <Icon icon={faCaretRight} />
-                </span>
+                </button>
               </span>
             </div>
           </div>
@@ -231,12 +250,10 @@ function ConstructionSiteForm({
                 3/4
                 </span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {`Suivant `}
-                </span>
-                <span className="ConstructionSiteForm__arrowPosition">
+                <button className="ConstructionSiteForm__arrowSpaceText">
+                  Suivant
                   <Icon icon={faCaretRight} />
-                </span>
+                </button>
               </span>
             </div>
           </div>
@@ -260,16 +277,14 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <span >
+                <button>
                   <Icon icon={faCaretLeft} />
-                </span>
-                <span className="ConstructionSiteForm__arrowSpaceText">
-                  {` Précédent`}
-                </span>
+                  Précédent
+                </button>
               </span>
               <span>4/4</span>
             </div>
-            <button className="ConstructionSiteForm__submit" type="submit">
+            <button className={allFields() ? "ConstructionSiteForm__submit" : "ConstructionSiteForm__submit disable"} disabled={allFields() ? false : true} type="submit">
               Valider
             </button>
           </div>
