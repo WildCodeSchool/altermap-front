@@ -38,6 +38,7 @@
 .ConstructionSiteForm__arrowContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 20px
 }
 
@@ -52,7 +53,7 @@
   font-size: 20px;
   float: right;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .ConstructionSiteForm__arrowSizeNext:hover {
