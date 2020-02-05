@@ -213,3 +213,11 @@
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
   bottom: 60px;
 }
+
+.carret-right {
+  margin-left: 4px;
+}
+
+.ConstructionSiteForm__header-title {
+  font-family: "Rubik", sans-serif;
+}

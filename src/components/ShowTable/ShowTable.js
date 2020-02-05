@@ -8,6 +8,10 @@ import {
   faSpinner, faPencilAlt, faTrashAlt, faSearch, faCrosshairs, faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../Popup/Popup';
+import blackPellet from "./black-pellet.svg";
+import greenPellet from "./green-pellet.svg";
+import greenCirclePellet from "./green-circle-pellet.svg";
+import redPellet from "./red-pellet.svg";
 
 export default function ShowTable({
   setPopupStatus, popup, setPolygonToUpdate, tableIsDisplay, setTableIsDisplay, setZoom, setPosition,
@@ -48,16 +52,16 @@ export default function ShowTable({
 
   const setPellet = (status) => {
     if (status === "En cours") {
-      return 'images/icons/green-pellet.svg';
+      return greenPellet;
     }
     if (status === "Prospection") {
-      return 'images/icons/green-circle-pellet.svg';
+      return greenCirclePellet;
     }
     if (status === "Terminé") {
-      return 'images/icons/black-pellet.svg';
+      return blackPellet;
     }
     if (status === "Annulé") {
-      return 'images/icons/red-pellet.svg';
+      return redPellet;
     }
   }
 

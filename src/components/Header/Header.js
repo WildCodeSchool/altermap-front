@@ -3,6 +3,7 @@ import './Header.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import logo from './logo.png';
 
 function Header({ disconnect, setZoom, setPosition }) {
   const [searchResult, setSearchResult] = useState([]);
@@ -20,7 +21,7 @@ function Header({ disconnect, setZoom, setPosition }) {
     <div>
       <header className="Header">
         <div className="Header__logo">
-          <img className="Header__logo-image" src="/images/logo.png" alt="logo" />
+          <img className="Header__logo-image" src={logo} alt="logo" />
         </div>
 
         <SearchBar setZoom={setZoom} setPosition={setPosition} setSearchResult={setSearchResult} setShowResult={setShowResult} search={search} setSearch={setSearch} />

@@ -144,7 +144,7 @@ function ConstructionSiteForm({
               <span>1/4</span>
               <span onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 {`Suivant `}
-                <Icon icon={faCaretRight} ></Icon>
+                <Icon icon={faCaretRight} className="carret-right" ></Icon>
               </span>
             </div>
           </div>
