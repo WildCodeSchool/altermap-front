@@ -16,29 +16,28 @@ function ConstructionSiteForm({
   const [year, setYear] = useState(constructionSite ? constructionSite.year : 1);
   const [buyer, setBuyer] = useState(constructionSite ? constructionSite.buyer : '');
   const [contact, setContact] = useState(constructionSite ? constructionSite.contact : '');
-  const [num_conv, setNumConv] = useState(constructionSite ? constructionSite.num_conv : 0);
-  const [date_sign, setDateSign] = useState(constructionSite ? constructionSite.date_sign : 0);
+  const [num_conv, setNumConv] = useState(constructionSite ? constructionSite.num_conv : '');
+  const [date_sign, setDateSign] = useState(constructionSite ? constructionSite.date_sign : '');
   const [type_grave, setTypeGrave] = useState(constructionSite ? constructionSite.type_grave : 1);
   const [type_usage, setTypeUsage] = useState(constructionSite ? constructionSite.type_usage : 1);
-  const [departement, setDepartement] = useState(constructionSite ? constructionSite.departement : 0);
+  const [departement, setDepartement] = useState(constructionSite ? constructionSite.departement : '');
   const [project_manager, setProjectManager] = useState(constructionSite ? constructionSite.project_manager : '');
   const [commentary, setCommentary] = useState(constructionSite ? constructionSite.commentary : '');
-  const [area, setArea] = useState(constructionSite ? constructionSite.area : 0);
+  const [area, setArea] = useState(constructionSite ? constructionSite.area : '');
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
-  const [lots, setLots] = useState(constructionSite ? constructionSite.lots : 0);
-  const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : 0);
-  const [isNotCompleted, setIsNotCompleted] = useState('')
-  const [precPage, setPrecPage] = useState(1);
+  const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
+  const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
+  const [isNotCompleted, setIsNotCompleted] = useState('');
 
   const [page, setPage] = useState(0);
   const redirectField = () => {
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
       setTimeout(() => setIsNotCompleted(''), 3000);
-    } else if (contact === '' || num_conv === 0 || date_sign === 0 || type_grave === 1) {
+    } else if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
       setPage(1);
       setTimeout(() => setIsNotCompleted(''), 3000);
-    } else if (type_usage === 1 || departement === 0 || project_manager === '' || commentary === '') {
+    } else if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
       setPage(2);
       setTimeout(() => setIsNotCompleted(''), 3000);
     } else {
@@ -71,60 +70,41 @@ function ConstructionSiteForm({
     })
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-
+  // add redirect option on each click on Next Page
   const nextPage = () => {
     setPage(page + 1);
     if (page === 0) {
       if (buyer === '' || name === '' || year === 1 || status === 1) {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     if (page === 1) {
       if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     if (page === 3) {
 
       if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
-    !constructionSite && redirectField()
+    if (page === 3) {
+
+      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+        setIsNotCompleted('show');
+        redirectField();
+      }
+    }
+    !constructionSite && redirectField();
   };
 
   const prevPage = () => {
-    setIsNotCompleted('')
-    setPage(page - 1);
+    setIsNotCompleted('');
   };
-
-  const allFields = () => {
-    if (
-      buyer !== ''
-      && name !== ''
-      && year !== 1
-      && status !== 1
-      && contact !== ''
-      && num_conv !== 0
-      && date_sign !== 0
-      && type_grave !== 1
-      && type_usage !== 1
-      && departement !== 0
-      && project_manager !== ''
-      && commentary !== ''
-      && area !== 0
-      && lots !== 0
-      && tonnage !== 0
-      && photo !== ''
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   return (
     <div className="ConstructionSiteForm slider">
@@ -140,9 +120,8 @@ function ConstructionSiteForm({
           <h1 className="ConstructionSiteForm__header-title">{id ? 'Édition de chantier' : 'Création de chantier'}</h1>
         </div>
       </div>
-
       <div className="ConstructionSiteForm__content">
-        <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit} onChange={allFields}>
+        <form className="ConstructionSiteForm__form" onSubmit={id ? editHandleSubmit : addHandleSubmit}>
           <div className={page === 0 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
             <label className="ConstructionSiteForm__label" htmlFor="name">
               <span>Nom du chantier</span>
@@ -151,7 +130,7 @@ function ConstructionSiteForm({
             <label className="ConstructionSiteForm__label" htmlFor="status">
               <span>Status</span>
               <select className={status === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-                <option value="1" disabled>Sélectionnez une valeur</option>
+                <option value="1" disabled>Selectionnez une valeur</option>
                 {stateConstruction.map((data) => (
                   <option key={data} value={data}>
                     {data}
@@ -184,20 +163,21 @@ function ConstructionSiteForm({
           </div>
 
           <div className={page === 1 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
+
             <label htmlFor="contact">
               <span>Contact</span>
               <input className="ConstructionSiteForm__input" placeholder="M. Thomas" type="text" name="contact" required id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="numConv">
-              <span>Numéro de convention</span>
-              <input className="ConstructionSiteForm__input" placeholder="21" type="number" name="num_conv" required id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
+              <span> Numéro de convention </span>
+              <input className="ConstructionSiteForm__input" placeholder="21" type="text" name="num_conv" required id="numConv" value={num_conv} onChange={(e) => setNumConv(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="dateSign">
-              <span>Date de signature</span>
-              <input className="ConstructionSiteForm__input" placeholder="1964" type="number" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
+              <span>Date de signature </span>
+              <input className="ConstructionSiteForm__input" placeholder="1964" type="date" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="typeGrave">
-              <span>Type de grave</span>
+              <span> Type de grave </span>
               <select className={type_grave === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="type_grave" id="typeGrave" value={type_grave} onChange={(e) => setTypeGrave(e.target.value)}>
                 <option value="1" disabled>Type grave</option>
                 {typeGraveList.map((data) => (
@@ -208,21 +188,21 @@ function ConstructionSiteForm({
               </select>
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <Icon icon={faCaretLeft} />
-                Précédent
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
+                {` Précédent`}
               </button>
               <span>2/4</span>
-              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
-                Suivant
-                  <Icon icon={faCaretRight} />
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+                {`Suivant `}
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
               </button>
             </div>
           </div>
-
           <div className={page === 2 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
+
             <label className="ConstructionSiteForm__label" htmlFor="typeUsage">
-              <span>Type d'usage</span>
+              <span> Type d'usage</span>
               <select className={type_usage === 1 ? 'ConstructionSiteForm__select' : 'ConstructionSiteForm__select--value'} required type="text" name="type_usage" id="typeUsage" value={type_usage} onChange={(e) => setTypeUsage(e.target.value)}>
                 <option value="1" disabled>Sélectionnez une valeur</option>
                 {typeUsageList.map((data) => (
@@ -233,8 +213,8 @@ function ConstructionSiteForm({
               </select>
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="departement">
-              <span>Département</span>
-              <input className="ConstructionSiteForm__input" placeholder="66" type="number" name="departement" id="departement" required value={departement} onChange={(e) => setDepartement(e.target.value)} />
+              <span> Département</span>
+              <input className="ConstructionSiteForm__input" placeholder="66" type="text" name="departement" id="departement" required value={departement} onChange={(e) => setDepartement(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="projectManager">
               <span>Maître d'ouvrage</span>
@@ -242,25 +222,27 @@ function ConstructionSiteForm({
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="commentary">
               <span>Commentaires</span>
-              <input className="ConstructionSiteForm__input" placeholder="En collaboration avec GRDF" type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
                 <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
                 Précédent
               </button>
-              <span>3/4</span>
+              <span>
+                3/4
+              </span>
               <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 Suivant
                   <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
               </button>
             </div>
           </div>
-
           <div className={page === 3 ? 'ConstructionSiteForm__page--active' : 'ConstructionSiteForm__page--inactive'}>
+
             <label className="ConstructionSiteForm__label" htmlFor="area">
               <span>Surface</span>
-              <input className="ConstructionSiteForm__input" placeholder="2.3" type="number" name="area" id="area" required value={area} onChange={(e) => setArea(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="2.3" type="text" name="area" id="area" required value={area} onChange={(e) => setArea(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="photo">
               <span>Photo</span>
@@ -268,11 +250,11 @@ function ConstructionSiteForm({
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="lot">
               <span>lot</span>
-              <input className="ConstructionSiteForm__input" placeholder="2" type="number" name="lots" id="lot" required value={lots} onChange={(e) => setLots(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="lots" id="lot" required value={lots} onChange={(e) => setLots(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="tonnage">
               <span>Tonnage</span>
-              <input className="ConstructionSiteForm__input" placeholder="2" type="number" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="2" type="text" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
@@ -281,7 +263,7 @@ function ConstructionSiteForm({
               </button>
               <span>4/4</span>
             </div>
-            <button className={allFields() ? "ConstructionSiteForm__submit" : "ConstructionSiteForm__submit disable"} disabled={allFields() ? false : true} type="submit">
+            <button className="ConstructionSiteForm__submit" type="submit">
               Valider
             </button>
           </div>
