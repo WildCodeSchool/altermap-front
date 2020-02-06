@@ -42,6 +42,7 @@ export default function PdfExport() {
       })
       .catch((error) => {
         alert('Une erreur est survenue !');
+        console.log(error)
       });
   };
 
