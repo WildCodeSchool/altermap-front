@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import './Login.css';
+import logo from './logo.png';
 
 
 function Login({ setIsAuth }) {
@@ -28,7 +29,7 @@ function Login({ setIsAuth }) {
             });
         }}
       >
-        <img src="/images/logo.png" className="Login__logo" alt="Logo Altermap" />
+        <img src={logo} className="Login__logo" alt="Logo Altermap" />
         <label htmlFor="email" className="Login__form--label">
           <span>Email</span>
           <input

@@ -13,7 +13,7 @@
 
 .Header__exitButton {
     margin-left: auto;
-    margin-right: 1vw;
+    margin-right: 0.25rem;
     color: black;
     text-align: center;
     padding: 0.875rem 1rem;
@@ -21,6 +21,7 @@
     background-color: transparent;
     border: none;
     outline: none;
+    line-height: 1;
 }
 
 .SearchBar__result {
@@ -48,8 +49,7 @@
     height: 32px;
 }
 
-.SearchBar__button:hover,
-.SearchBar__button:active {
+.SearchBar__button:hover, .SearchBar__button:active {
     background-color: rgba(23, 154, 56, .1);
 }
 
@@ -72,7 +72,6 @@
     .Header {
         justify-content: flex-start;
     }
-
     .SearchBar__result {
         left: calc(var(--NavBar-height) + 28px);
         width: 45%;
