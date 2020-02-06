@@ -27,8 +27,7 @@ function ConstructionSiteForm({
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
   const [lots, setLots] = useState(constructionSite ? constructionSite.lots : '');
   const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : '');
-  const [isNotCompleted, setIsNotCompleted] = useState('')
-  const [precPage, setPrecPage] = useState(1)
+  const [isNotCompleted, setIsNotCompleted] = useState('');
 
   const [page, setPage] = useState(0);
   const redirectField = () => {
@@ -76,37 +75,36 @@ function ConstructionSiteForm({
     setPage(page + 1);
     if (page === 0) {
       if (buyer === '' || name === '' || year === 1 || status === 1) {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     if (page === 1) {
       if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     if (page === 3) {
 
       if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     if (page === 3) {
 
       if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
-        setIsNotCompleted('show')
-        redirectField()
+        setIsNotCompleted('show');
+        redirectField();
       }
     }
     setPrecPage(page - 1)
-    !constructionSite && redirectField()
+    !constructionSite && redirectField();
   };
 
   const prevPage = () => {
-    setIsNotCompleted('')
-    setPage(page - 1);
+    setIsNotCompleted('');
   };
 
   return (
