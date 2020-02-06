@@ -71,7 +71,7 @@ function ConstructionSiteForm({
     })
       .then((res) => (res.status === 200 ? window.location.reload() : alert('Error on request')));
   };
-
+  // add redirect option on each click on Next Page
   const nextPage = () => {
     setPage(page + 1);
     if (page === 0) {
