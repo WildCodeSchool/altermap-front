@@ -28,9 +28,8 @@ function ConstructionSiteForm({
   const [lots, setLots] = useState(constructionSite ? constructionSite.lots : 0);
   const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : 0);
   const [isNotCompleted, setIsNotCompleted] = useState('')
-  const [precPage, setPrecPage] = useState(1);
-
   const [page, setPage] = useState(0);
+
   const redirectField = () => {
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
@@ -194,7 +193,7 @@ function ConstructionSiteForm({
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="dateSign">
               <span>Date de signature</span>
-              <input className="ConstructionSiteForm__input" placeholder="1964" type="number" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="1964" type="date" name="date_sign" required id="dateSign" value={date_sign} onChange={(e) => setDateSign(e.target.value)} />
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="typeGrave">
               <span>Type de grave</span>
@@ -281,7 +280,7 @@ function ConstructionSiteForm({
               </button>
               <span>4/4</span>
             </div>
-            <button className={allFields() ? "ConstructionSiteForm__submit" : "ConstructionSiteForm__submit disable"} disabled={allFields() ? false : true} type="submit">
+            <button className={allFields() ? "ConstructionSiteForm__submit" : "ConstructionSiteForm__submit disable"} type="submit">
               Valider
             </button>
           </div>
