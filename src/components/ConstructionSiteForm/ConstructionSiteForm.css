@@ -3,16 +3,13 @@
   background-color: white;
   align-items: center;
   position: absolute;
-  bottom: var(--NavBar-height);
   z-index: 9;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100vh - var(--Header-height) - var(--NavBar-height));
+  height: calc(100vh - var(--NavBar-height) - var(--NavBar-height) + 2px);
   font-size: 1rem;
   width: 100vw;
-  animation: scale-up-ver-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000);
   display: flex;
-  top: 58px;
 }
 
 .ConstructionSiteForm__header-title {
@@ -51,8 +48,8 @@
   display: flex;
   align-items: center;
   padding-left: 4px;
-  border:none;
-  background-color:transparent;
+  border: none;
+  background-color: transparent;
   padding: 0;
   margin: 0;
   cursor: pointer;
@@ -91,30 +88,6 @@
 .ConstructionSiteForm__icon__div--Container {
   display: flex;
   flex-direction: column;
-}
-
-@media (min-width: 62em) {
-  .ConstructionSiteForm {
-    top: calc(var(--Header-height));
-    height: calc(100vh - var(--Header-height));
-    width: calc(50vw);
-    padding-left: 60px;
-  }
-  .ConstructionSiteForm__icon {
-    position: fixed;
-    left: calc(50vw - 5rem);
-  }
-  .ConstructionSiteForm__form {
-    margin-top: 0;
-  }
-  .ConstructionSiteForm__icon--Container {
-    align-self: flex-end;
-    position: absolute;
-    z-index: 40;
-    right: 20px;
-    margin-top: 32px;
-    font-size: 24px;
-  }
 }
 
 .ConstructionSiteForm__label {
@@ -246,4 +219,69 @@
 
 .disable {
   background-color: gray;
+}
+
+.slider {
+  animation: slide-up .3s forwards;
+}
+
+@keyframes slide-up {
+  from {
+    bottom: calc(-100vh - var(--NavBar-height) - var(--Header-height));
+  }
+  to {
+    bottom: var(--NavBar-height);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    bottom: var(--NavBar-height);
+  }
+  to {
+    bottom: calc(-100vh - var(--NavBar-height) - var(--Header-height));
+  }
+}
+
+@media (min-width: 640px) {
+  .ConstructionSiteForm {
+    height: calc(100vh - var(--NavBar-height) + 2px) !important;
+  }
+}
+
+@media (min-width: 62em) {
+  .ConstructionSiteForm {
+    top: calc(var(--Header-height));
+    height: calc(100vh - var(--NavBar-height) + 2px) !important;
+    width: calc(50vw);
+    padding-left: 60px;
+  }
+  .ConstructionSiteForm__icon {
+    position: fixed;
+    left: calc(50vw - 5rem);
+  }
+  .ConstructionSiteForm__form {
+    margin-top: 0;
+  }
+  .ConstructionSiteForm__icon--Container {
+    align-self: flex-end;
+    position: absolute;
+    z-index: 40;
+    right: 20px;
+    margin-top: 32px;
+    font-size: 24px;
+  }
+  .slider {
+    animation: slide-right .3s forwards;
+  }
+  @keyframes slide-right {
+    from {
+      bottom: 0;
+      left: -100%;
+    }
+    to {
+      bottom: 0;
+      left: 0;
+    }
+  }
 }

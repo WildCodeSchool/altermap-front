@@ -27,8 +27,8 @@ function ConstructionSiteForm({
   const [photo, setPhoto] = useState(constructionSite ? constructionSite.photo : '');
   const [lots, setLots] = useState(constructionSite ? constructionSite.lots : 0);
   const [tonnage, setTonnage] = useState(constructionSite ? constructionSite.tonnage : 0);
-  const [isCompleted, setIsCompleted] = useState('')
-  const [precPage, setPrecPage] = useState(1)
+  const [isNotCompleted, setIsNotCompleted] = useState('')
+  const [precPage, setPrecPage] = useState(1);
 
   const [page, setPage] = useState(0);
   const redirectField = () => {
@@ -93,14 +93,6 @@ function ConstructionSiteForm({
         redirectField()
       }
     }
-    if (page === 3) {
-
-      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
-        setIsNotCompleted('show')
-        redirectField()
-      }
-    }
-    setPrecPage(page - 1)
     !constructionSite && redirectField()
   };
 
@@ -135,8 +127,7 @@ function ConstructionSiteForm({
   }
 
   return (
-    <div className="ConstructionSiteForm">
-
+    <div className="ConstructionSiteForm slider">
       <div className="ConstructionSiteForm__icon__div--Container">
         <span className="ConstructionSiteForm__icon--Container">
           <Icon
