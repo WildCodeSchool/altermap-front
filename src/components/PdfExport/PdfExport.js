@@ -14,6 +14,7 @@ export default function PdfExport() {
     setIsLoading(true);
     await domtoimage.toPng(document.getElementById('Map'), { width: window.innerWidth, height: window.innerHeight })
       .then(async (dataUrl) => {
+        console.log(dataUrl)
         const currentDate = new Date().toISOString().split('T')[0].split('-').map((x) => Number(x)).join('-');
         const pdfDoc = await PDFDocument.create();
         const page = pdfDoc.addPage();
