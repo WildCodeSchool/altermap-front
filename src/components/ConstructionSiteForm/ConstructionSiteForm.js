@@ -34,20 +34,16 @@ function ConstructionSiteForm({
   const redirectField = () => {
     if (buyer === '' || name === '' || year === 1 || status === 1) {
       setPage(0);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else if (contact === '' || num_conv === 0 || date_sign === 0 || type_grave === 1) {
       setPage(1);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else if (type_usage === 1 || departement === 0 || project_manager === '' || commentary === '') {
       setPage(2);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     } else {
       setPage(3);
-      setIsCompleted('show')
-      setTimeout(() => setIsCompleted(''), 3000);
+      setTimeout(() => setIsNotCompleted(''), 3000);
     }
   };
 
@@ -78,16 +74,38 @@ function ConstructionSiteForm({
 
   const nextPage = () => {
     setPage(page + 1);
-    if (precPage === page) {
-      setIsCompleted('')
-      setPrecPage(page - 1)
-    } else {
-      !constructionSite && redirectField()
+    if (page === 0) {
+      if (buyer === '' || name === '' || year === 1 || status === 1) {
+        setIsNotCompleted('show')
+        redirectField()
+      }
     }
+    if (page === 1) {
+      if (contact === '' || num_conv === '' || date_sign === '' || type_grave === 1) {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    if (page === 3) {
+
+      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    if (page === 3) {
+
+      if (type_usage === 1 || departement === '' || project_manager === '' || commentary === '') {
+        setIsNotCompleted('show')
+        redirectField()
+      }
+    }
+    setPrecPage(page - 1)
+    !constructionSite && redirectField()
   };
 
   const prevPage = () => {
-    setIsCompleted('')
+    setIsNotCompleted('')
     setPage(page - 1);
   };
 
@@ -167,9 +185,9 @@ function ConstructionSiteForm({
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <span>1/4</span>
-              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 Suivant
-                <Icon icon={faCaretRight} className="carret-right" ></Icon>
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
               </button>
             </div>
           </div>
@@ -236,16 +254,14 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="En collaboration avec GRDF" type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <Icon icon={faCaretLeft} />
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
                 Précédent
               </button>
-              <span>
-                3/4
-                </span>
-              <button onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
+              <span>3/4</span>
+              <button type="button" onClick={() => nextPage()} className="ConstructionSiteForm__arrowSizeNext">
                 Suivant
-                  <Icon icon={faCaretRight} />
+                  <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretRight} />
               </button>
             </div>
           </div>
@@ -268,8 +284,8 @@ function ConstructionSiteForm({
               <input className="ConstructionSiteForm__input" placeholder="2" type="number" name="tonnage" required id="tonnage" value={tonnage} onChange={(e) => setTonnage(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
-              <button onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
-                <Icon icon={faCaretLeft} />
+              <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
+                <Icon className="ConstructionSiteForm__arrowSpaceText" icon={faCaretLeft} />
                 Précédent
               </button>
               <span>4/4</span>
@@ -279,7 +295,7 @@ function ConstructionSiteForm({
             </button>
           </div>
         </form>
-        <div id="ConstructionSiteForm__snackbar" className={isCompleted}>
+        <div id="ConstructionSiteForm__snackbar" className={isNotCompleted}>
           <span>Remplissez tous les champs</span>
         </div>
       </div>
