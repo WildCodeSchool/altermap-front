@@ -51,11 +51,7 @@
   border-bottom-right-radius: 4px !important;
 }
 
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out,
-.leaflet-draw-draw-polygon,
-.leaflet-draw-edit-remove,
-.leaflet-draw-toolbar {
+.leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-draw-draw-polygon, .leaflet-draw-edit-remove, .leaflet-draw-toolbar {
   background-color: rgb(3, 3, 10) !important;
   border: none !important;
   box-shadow: none !important;
@@ -65,10 +61,9 @@
   border-radius: 0 !important;
 }
 
-
 .leaflet-draw-draw-polygon {
   padding: 0 !important;
-  background: url("/images/icons/draw-polygon-solid.svg") no-repeat center !important;
+  background: url("./draw-polygon-solid.svg") no-repeat center !important;
   background-size: 60% !important;
   border-bottom: 2px solid rgba(255, 255, 255, .4) !important;
 }
@@ -88,7 +83,7 @@
 }
 
 #box-zoom-button {
-  background: url("/images/icons/square-regular.svg") no-repeat center !important;
+  background: url("./square-regular.svg") no-repeat center !important;
   background-size: 60% !important;
   background-color: rgb(3, 3, 10) !important;
   width: 32px !important;
@@ -101,27 +96,25 @@
 }
 
 .leaflet-draw-edit-remove {
-  background: url("/images/icons/trash-alt-solid.svg") no-repeat center !important;
+  background: url("./trash-alt-solid.svg") no-repeat center !important;
   background-size: 45% !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
 .leaflet-draw-edit-edit {
-  background: url("/images/icons/pencil-alt-solid.svg") no-repeat center !important;
+  background: url("./pencil-alt-solid.svg") no-repeat center !important;
   background-size: 60% !important;
   border-bottom: 2px solid rgba(255, 255, 255, .4) !important;
 }
 
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out {
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
   width: 32px !important;
   height: 32px !important;
   border-bottom: 2px solid rgba(255, 255, 255, .4) !important;
 }
 
-.leaflet-control-zoom-in,
-.leaflet-draw-toolbar-top {
+.leaflet-control-zoom-in, .leaflet-draw-toolbar-top {
   border-top-left-radius: 4px !important;
   border-top-right-radius: 4px !important;
 }

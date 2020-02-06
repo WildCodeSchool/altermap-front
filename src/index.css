@@ -6,9 +6,12 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*:before,
-*:after {
+body {
+  line-height: 1.5;
+  font-family: "Rubik", sans-serif;
+}
+
+*, *:before, *:after {
   box-sizing: inherit;
 }
 
