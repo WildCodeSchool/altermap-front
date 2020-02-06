@@ -99,7 +99,6 @@ function ConstructionSiteForm({
         redirectField();
       }
     }
-    setPrecPage(page - 1)
     !constructionSite && redirectField();
   };
 
