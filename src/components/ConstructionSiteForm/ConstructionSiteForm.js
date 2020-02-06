@@ -222,7 +222,7 @@ function ConstructionSiteForm({
             </label>
             <label className="ConstructionSiteForm__label" htmlFor="commentary">
               <span>Commentaires</span>
-              <input className="ConstructionSiteForm__input" placeholder="l'espace ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
+              <input className="ConstructionSiteForm__input" placeholder="En collaboration avec GRDF ..." type="text" name="commentary" required id="commentary" value={commentary} onChange={(e) => setCommentary(e.target.value)} />
             </label>
             <div className="ConstructionSiteForm__arrowContainer">
               <button type="button" onClick={() => prevPage()} className="ConstructionSiteForm__arrowSizePrev">
